@@ -1,0 +1,27 @@
+<section class="trust-indicators" [attr.aria-label]="'Trust and security indicators'">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Why Choose Us</h2>
+      <p class="section-subtitle">
+        We're committed to delivering excellence in every aspect of your shopping experience
+      </p>
+    </div>
+
+    <div class="indicators-grid">
+      <div
+        *ngFor="let indicator of indicators(); let i = index"
+        class="indicator-card"
+        [style.--delay]="(i * 0.1) + 's'"
+        role="article"
+        [attr.aria-label]="indicator.title">
+
+        <div class="indicator-icon">
+          <i [class]="'pi ' + indicator.icon"></i>
+        </div>
+
+        <h3 class="indicator-title">{{ indicator.title }}</h3>
+        <p class="indicator-description">{{ indicator.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>

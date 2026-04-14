@@ -1,0 +1,158 @@
+.trust-indicators {
+  width: 100%;
+  padding: 3rem 1rem;
+  background: white;
+}
+
+@media (min-width: 768px) {
+  .trust-indicators {
+    padding: 4rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .trust-indicators {
+    padding: 5rem 3rem;
+  }
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-title {
+    font-size: 2.5rem;
+  }
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.indicators-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .indicators-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .indicators-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.indicator-card {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: fadeInUp 0.6s ease-out forwards;
+  animation-delay: var(--delay, 0s);
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.indicator-card:hover {
+  background: #f8fafc;
+  transform: translateY(-0.5rem);
+}
+
+.indicator-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e0f2fe 0%, #f0e7ff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  color: #0f6fc6;
+  transition: all 0.3s ease-out;
+}
+
+.indicator-card:hover .indicator-icon {
+  background: linear-gradient(135deg, #0f6fc6 0%, #8b5cf6 100%);
+  color: white;
+  transform: scale(1.1) rotate(5deg);
+}
+
+.indicator-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0.5rem 0;
+}
+
+.indicator-description {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin: 0.5rem 0 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .indicator-card {
+    animation: none;
+    opacity: 1;
+  }
+
+  .indicator-card:hover .indicator-icon {
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .trust-indicators {
+    background: #1e293b;
+  }
+
+  .section-title {
+    color: #f8fafc;
+  }
+
+  .section-subtitle {
+    color: #cbd5e1;
+  }
+
+  .indicator-card:hover {
+    background: #334155;
+  }
+
+  .indicator-icon {
+    background: rgba(15, 111, 198, 0.1);
+  }
+}

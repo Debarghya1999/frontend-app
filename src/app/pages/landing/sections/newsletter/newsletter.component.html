@@ -1,0 +1,50 @@
+<section class="newsletter" [attr.aria-label]="'Newsletter subscription'">
+  <div class="container">
+    <div class="newsletter-content">
+      <div class="newsletter-text">
+        <h2 class="newsletter-title">Stay Updated</h2>
+        <p class="newsletter-subtitle">
+          Subscribe to our newsletter for exclusive offers, new arrivals, and styling tips delivered directly to your inbox.
+        </p>
+      </div>
+
+      <form class="newsletter-form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input
+            type="email"
+            class="email-input"
+            placeholder="Your email address"
+            [(ngModel)]="userEmail"
+            name="email"
+            required
+            aria-label="Enter your email address">
+
+          <button
+            type="submit"
+            class="submit-btn"
+            [disabled]="isSubmitting()"
+            aria-label="Subscribe to newsletter">
+            <span *ngIf="!isSubmitting()">Subscribe</span>
+            <span *ngIf="isSubmitting()">
+              <i class="pi pi-spin pi-spinner"></i>
+            </span>
+          </button>
+        </div>
+
+        <div *ngIf="successMessage()" class="success-message" role="status">
+          <i class="pi pi-check-circle"></i>
+          {{ successMessage() }}
+        </div>
+
+        <div *ngIf="errorMessage()" class="error-message" role="alert">
+          <i class="pi pi-exclamation-circle"></i>
+          {{ errorMessage() }}
+        </div>
+
+        <p class="form-disclaimer">
+          We respect your privacy. Unsubscribe at any time. <a href="#privacy" class="privacy-link">Read our privacy policy</a>.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>

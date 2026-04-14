@@ -1,0 +1,85 @@
+<section class="featured-products" [attr.aria-label]="'Featured products section'">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Featured Collection</h2>
+      <p class="section-subtitle">
+        Handpicked selections showcasing the best of our exclusive boutique
+      </p>
+    </div>
+
+    <div class="products-grid">
+      <div
+        *ngFor="let product of products(); let i = index"
+        class="product-card"
+        [class.fade-in]="true"
+        [style.--delay]="(i * 0.1) + 's'"
+        [attr.role]="'article'"
+        [attr.aria-label]="product.name">
+
+        <div class="product-image-wrapper">
+          <div class="product-image">
+            <img
+              [src]="product.image"
+              [alt]="product.name"
+              loading="lazy"
+              decoding="async"
+              class="product-img">
+
+            <div *ngIf="product.badge" class="product-badge">
+              {{ product.badge }}
+            </div>
+
+            <div class="product-overlay">
+              <button
+                class="btn-add-cart"
+                [attr.aria-label]="'Add ' + product.name + ' to cart'">
+                <i class="pi pi-shopping-bag"></i>
+                <span>View Details</span>
+              </button>
+            </div>
+          </div>
+
+          <button
+            class="btn-wishlist"
+            [attr.aria-label]="'Add ' + product.name + ' to wishlist'"
+            (click)="toggleWishlist($event)">
+            <i class="pi pi-heart"></i>
+          </button>
+        </div>
+
+        <div class="product-info">
+          <div class="product-category">{{ product.category }}</div>
+          <h3 class="product-name">{{ product.name }}</h3>
+
+          <div class="product-rating">
+            <div class="stars">
+              <i
+                *ngFor="let star of [1,2,3,4,5]"
+                class="pi pi-star-fill"
+                [class.filled]="star <= Math.floor(product.rating)">
+              </i>
+            </div>
+            <span class="rating-text">({{ product.reviews }} reviews)</span>
+          </div>
+
+          <div class="product-price">
+            <span *ngIf="product.originalPrice" class="original-price">
+              ${{ product.originalPrice.toFixed(2) }}
+            </span>
+            <span class="current-price">${{ product.price.toFixed(2) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-footer">
+      <button
+        class="btn btn-view-all"
+        routerLink="/shop"
+        aria-label="View all products">
+        <span>View All Products</span>
+        <i class="pi pi-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+</section>

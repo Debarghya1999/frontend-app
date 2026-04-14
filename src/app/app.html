@@ -1,0 +1,102 @@
+<!-- Boutique Landing Page Application -->
+<div class="app-container">
+  <!-- Navigation Header -->
+  <header class="app-header" role="banner">
+    <div class="header-container">
+      <div class="logo-section">
+        <a routerLink="/" class="logo" [attr.aria-label]="'Boutique home'">
+          <i class="pi pi-heart-fill"></i>
+          <span>Boutique</span>
+        </a>
+      </div>
+
+      <nav class="nav-menu" role="navigation" [attr.aria-label]="'Main navigation'">
+        <a routerLink="/" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="nav-link">
+          Home
+        </a>
+        <a routerLink="/shop" routerLinkActive="active" class="nav-link">
+          Shop
+        </a>
+        <a href="#" class="nav-link">About</a>
+        <a href="#" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn-search" aria-label="Search products" title="Search">
+          <i class="pi pi-search"></i>
+        </button>
+        <button class="btn-account" aria-label="Account" title="Account">
+          <i class="pi pi-user"></i>
+        </button>
+        <button class="btn-cart" aria-label="Shopping cart" title="Cart">
+          <i class="pi pi-shopping-cart"></i>
+          <span class="cart-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="app-main" role="main">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer" role="contentinfo">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <!-- Company Info -->
+        <div class="footer-section">
+          <h3 class="footer-title">About Us</h3>
+          <p class="footer-text">
+            Premium boutique fashion for the modern individual. Curated collections of exclusive, high-quality pieces.
+          </p>
+          <div class="social-links">
+            <a href="#" aria-label="Instagram" title="Instagram" class="social-link"><i class="pi pi-instagram"></i></a>
+            <a href="#" aria-label="Facebook" title="Facebook" class="social-link"><i class="pi pi-facebook"></i></a>
+            <a href="#" aria-label="Twitter" title="Twitter" class="social-link"><i class="pi pi-twitter"></i></a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-section">
+          <h3 class="footer-title">Shop</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">New Arrivals</a></li>
+            <li><a href="#" class="footer-link">Sale</a></li>
+            <li><a href="#" class="footer-link">Collections</a></li>
+            <li><a href="#" class="footer-link">Best Sellers</a></li>
+          </ul>
+        </div>
+
+        <!-- Customer Service -->
+        <div class="footer-section">
+          <h3 class="footer-title">Support</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Contact Us</a></li>
+            <li><a href="#" class="footer-link">Shipping Info</a></li>
+            <li><a href="#" class="footer-link">Returns</a></li>
+            <li><a href="#" class="footer-link">FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div class="footer-section">
+          <h3 class="footer-title">Legal</h3>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+            <li><a href="#" class="footer-link">Terms & Conditions</a></li>
+            <li><a href="#" class="footer-link">Shipping Policy</a></li>
+            <li><a href="#" class="footer-link">Cookies</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2024 Premium Boutique. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+

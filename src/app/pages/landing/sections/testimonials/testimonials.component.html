@@ -1,0 +1,60 @@
+<section class="testimonials" id="testimonials" [attr.aria-label]="'Customer testimonials'">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Loved by Our Customers</h2>
+      <p class="section-subtitle">
+        See what our satisfied customers have to say about their experience
+      </p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div
+        *ngFor="let testimonial of testimonials(); let i = index"
+        class="testimonial-card"
+        [style.--delay]="(i * 0.1) + 's'"
+        [@slideIn]="'visible'"
+        role="article"
+        [attr.aria-label]="'Testimonial from ' + testimonial.name">
+
+        <div class="testimonial-rating">
+          <i
+            *ngFor="let star of [1,2,3,4,5]"
+            class="pi pi-star-fill"
+            [class.outlined]="star > testimonial.rating"
+            [attr.aria-hidden]="true">
+          </i>
+        </div>
+
+        <p class="testimonial-text">
+          "{{ testimonial.text }}"
+        </p>
+
+        <div class="testimonial-author">
+          <img
+            [src]="testimonial.image"
+            [alt]="testimonial.name + ' photo'"
+            class="author-image"
+            loading="lazy"
+            decoding="async">
+
+          <div class="author-info">
+            <h4 class="author-name">{{ testimonial.name }}</h4>
+            <p class="author-role">{{ testimonial.role }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials Carousel Navigation -->
+    <div class="carousel-nav">
+      <button
+        class="nav-dot"
+        *ngFor="let item of testimonials(); let i = index"
+        [class.active]="i === currentIndex()"
+        (click)="goToTestimonial(i)"
+        [attr.aria-label]="'Go to testimonial ' + (i + 1)"
+        [attr.aria-current]="i === currentIndex() ? 'page' : 'false'">
+      </button>
+    </div>
+  </div>
+</section>

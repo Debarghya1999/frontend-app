@@ -1,0 +1,69 @@
+<section class="hero-section" [attr.aria-label]="'Hero section'">
+  <div class="hero-background">
+    <div class="gradient-blob blob-1"></div>
+    <div class="gradient-blob blob-2"></div>
+    <div class="gradient-blob blob-3"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-text-container">
+      <h1 class="hero-title" [@fadeInUp]="'visible'">
+        Discover Premium Boutique Fashion
+      </h1>
+
+      <p class="hero-subtitle" [@fadeInUp]="'visible'">
+        Curated collections of exclusive, high-quality pieces designed for the modern individual.
+        Elevate your style with timeless elegance.
+      </p>
+
+      <div class="hero-cta-buttons">
+        <button
+          class="btn btn-primary"
+          routerLink="/shop"
+          [queryParams]="{ featured: true }"
+          [@fadeInUp]="'visible'"
+          aria-label="Browse featured collection">
+          <span class="btn-icon">
+            <i class="pi pi-shopping-bag"></i>
+          </span>
+          Browse Collection
+        </button>
+
+        <button
+          class="btn btn-secondary"
+          (click)="scrollToSection('testimonials')"
+          [@fadeInUp]="'visible'"
+          aria-label="Scroll to testimonials">
+          <span class="btn-icon">
+            <i class="pi pi-star"></i>
+          </span>
+          See Reviews
+        </button>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item" *ngFor="let stat of stats()" [@fadeInUp]="'visible'">
+          <span class="stat-number">{{ stat.number }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-image-container">
+      <div class="hero-image" [@fadeInScale]="'visible'">
+        <img
+          src="https://images.unsplash.com/photo-1520763160298-1b434c919abe?w=600&h=700&fit=crop&q=80"
+          alt="Premium boutique fashion collection showcase"
+          loading="lazy"
+          decoding="async">
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll Indicator -->
+  <div class="scroll-indicator" aria-hidden="true">
+    <span class="scroll-icon">
+      <i class="pi pi-chevron-down"></i>
+    </span>
+  </div>
+</section>

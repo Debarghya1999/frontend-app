@@ -1,0 +1,54 @@
+.landing-page {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0f6fc6 0%, #3b82f6 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 12px rgba(15, 111, 198, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(1rem);
+}
+
+.scroll-to-top:hover {
+  transform: translateY(-0.25rem);
+  box-shadow: 0 8px 20px rgba(15, 111, 198, 0.6);
+  background: linear-gradient(135deg, #0a47a1 0%, #0f6fc6 100%);
+}
+
+.scroll-to-top:active {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .scroll-to-top {
+    width: 3.5rem;
+    height: 3.5rem;
+    bottom: 2.5rem;
+    right: 2.5rem;
+  }
+}
+
+/* Ensure button is visible when active */
+:host ::ng-deep .scroll-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
