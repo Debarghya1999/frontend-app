@@ -1,9 +1,14 @@
 <section class="testimonials" id="testimonials" [attr.aria-label]="'Customer testimonials'">
   <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Loved by Our Customers</h2>
+    <div
+      class="section-header"
+      [srAnimation]="'tilt-in'"
+      [srDelay]="0"
+      [srDuration]="1600">
+      <span class="section-eyebrow">Client Stories</span>
+      <h2 class="section-title">Loved Across India</h2>
       <p class="section-subtitle">
-        See what our satisfied customers have to say about their experience
+        Real voices from our community — handloom lovers, everyday wearers &amp; style connoisseurs who love Bengali cottons
       </p>
     </div>
 
@@ -11,8 +16,11 @@
       <div
         *ngFor="let testimonial of testimonials(); let i = index"
         class="testimonial-card"
-        [style.--delay]="(i * 0.1) + 's'"
-        [@slideIn]="'visible'"
+        [srAnimation]="'zoom-drift'"
+        [srDelay]="i * 300"
+        [srDuration]="1600"
+        [srThreshold]="0.08"
+        [style.--delay]="(i * 0.12) + 's'"
         role="article"
         [attr.aria-label]="'Testimonial from ' + testimonial.name">
 
@@ -32,10 +40,11 @@
         <div class="testimonial-author">
           <img
             [src]="testimonial.image"
-            [alt]="testimonial.name + ' photo'"
+            [alt]="testimonial.name + ' — verified customer'"
             class="author-image"
             loading="lazy"
-            decoding="async">
+            decoding="async"
+            (error)="onAvatarError($event)">
 
           <div class="author-info">
             <h4 class="author-name">{{ testimonial.name }}</h4>
@@ -45,15 +54,16 @@
       </div>
     </div>
 
-    <!-- Testimonials Carousel Navigation -->
-    <div class="carousel-nav">
+    <!-- Carousel Navigation -->
+    <div class="carousel-nav" role="tablist" [attr.aria-label]="'Testimonial navigation'">
       <button
         class="nav-dot"
         *ngFor="let item of testimonials(); let i = index"
         [class.active]="i === currentIndex()"
         (click)="goToTestimonial(i)"
+        role="tab"
         [attr.aria-label]="'Go to testimonial ' + (i + 1)"
-        [attr.aria-current]="i === currentIndex() ? 'page' : 'false'">
+        [attr.aria-selected]="i === currentIndex()">
       </button>
     </div>
   </div>

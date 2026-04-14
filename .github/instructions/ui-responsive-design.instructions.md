@@ -9,6 +9,9 @@ When generating UI components and styling for this repository:
 3. **Codebase Patterns**: Follow established component styling and layout patterns
 4. **Architectural Consistency**: Maintain mobile-first responsive design approach
 5. **Code Quality**: Prioritize accessibility, performance, and maintainability
+6. **Design System**: All UI work MUST follow **"The Heritage Modernist"** design language defined below
+
+---
 
 ## Technology Version Detection
 
@@ -27,461 +30,259 @@ When generating UI components and styling for this repository:
 - CSS variables for theming
 - No CSS frameworks except PrimeNG
 
-## Design System
+---
 
-### 1. Color Palette - Modern Sleek Themes
+## Design System: The Heritage Modernist
 
-#### Theme 1: Modern Minimalist (Recommended for E-Commerce)
+### Creative North Star: "The Modern Atelier"
+
+This design system rejects the "e-commerce template" look in favour of a high-end editorial lookbook aesthetic. The digital space is treated like a physical boutique — spacious, tactile, and curated. Rigid, boxed-in layouts are replaced by **Intentional Asymmetry** and **Tonal Depth**. By overlapping high-fashion photography with sophisticated serif typography and subtle ethnic motifs, we create "Luxury in Motion."
+
+The user must feel they are browsing a **bespoke collection**, not a product database.
+
+---
+
+### 1. Color Palette — Tonal Richness & The "No-Line" Rule
+
+The palette is rooted in the deep, soulful reds of Indian heritage, balanced by the warmth of cream and the prestige of gold.
+
+#### Brand Color Tokens
 ```css
-/* Primary Colors - Cool Blue Gradient */
---color-primary: #0f6fc6;           /* Deep Professional Blue */
---color-primary-light: #3b82f6;     /* Bright Accent Blue */
---color-primary-dark: #0a47a1;      /* Deep Blue for hover */
---color-primary-ultra-light: #e0f2fe; /* Ultra light background */
-
-/* Secondary Colors - Teal Accent */
---color-secondary: #00d4aa;         /* Fresh Teal */
---color-secondary-light: #5eead4;   /* Soft Teal */
---color-secondary-dark: #0d9488;    /* Deep Teal */
-
-/* Tertiary Accent - Purple for highlights */
---color-accent: #8b5cf6;            /* Vibrant Purple */
---color-accent-light: #c4b5fd;      /* Light Purple */
-
-/* Status Colors - High Contrast */
---color-success: #10b981;           /* Emerald Green - vibrant */
---color-warning: #f59e0b;           /* Amber - refined orange */
---color-danger: #ef4444;            /* Red - bold but professional */
---color-info: #0ea5e9;              /* Sky Blue */
-
-/* Neutral Colors - Clean & Modern */
---color-light: #f8fafc;             /* Almost white with cool tone */
---color-light-gray: #f1f5f9;        /* Very light neutral */
---color-medium-gray: #cbd5e1;       /* Medium neutral */
---color-dark-gray: #475569;         /* Dark but not black */
---color-dark: #1e293b;              /* Deep navy-black */
---color-white: #ffffff;             /* Pure white */
-
-/* Text Colors */
---text-primary: #1e293b;            /* Deep blue-black */
---text-secondary: #64748b;          /* Muted slate */
---text-light: #94a3b8;              /* Light gray-blue */
---text-white: #ffffff;              /* Pure white */
-
-/* Background Gradients */
---gradient-primary: linear-gradient(135deg, #0f6fc6 0%, #3b82f6 100%);
---gradient-accent: linear-gradient(135deg, #00d4aa 0%, #0f6fc6 100%);
---gradient-subtle: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%);
-```
-
-#### Theme 2: Dark Mode (Premium Alternative)
-```css
-/* Dark Mode - Sophisticated */
---dark-bg-primary: #0f172a;         /* Deep dark background */
---dark-bg-secondary: #1e293b;       /* Slightly lighter for cards */
---dark-bg-tertiary: #334155;        /* Lighter for hover states */
---dark-primary: #00d4aa;            /* Vibrant teal on dark */
---dark-primary-light: #5eead4;      /* Accent teal */
---dark-accent: #8b5cf6;             /* Purple accent */
---dark-text-primary: #f8fafc;       /* Near white text */
---dark-text-secondary: #cbd5e1;     /* Muted text */
-
-/* Dark Mode Status */
---dark-success: #10b981;
---dark-warning: #f59e0b;
---dark-danger: #ef4444;
---dark-info: #0ea5e9;
-```
-
-#### Theme 3: Gradient Accent (Modern & Eye-catching)
-```css
-/* Vibrant with Gradients */
---color-vibrant-primary: #5B4EFF;   /* Vivid Purple */
---color-vibrant-secondary: #FF006E; /* Hot Pink */
---color-vibrant-accent: #00D9FF;    /* Cyan */
---gradient-vibrant: linear-gradient(135deg, #5B4EFF 0%, #FF006E 50%, #00D9FF 100%);
---gradient-popular: linear-gradient(135deg, #FF006E 0%, #5B4EFF 100%);
-```
-
-### 2. Theme Selection Guidelines
-
-**For E-Commerce Product Catalog**: Use Theme 1 (Modern Minimalist)
-- Professional, trustworthy appearance
-- High contrast for product images
-- Cool blues with teal accents feel modern and refreshing
-
-**For Admin Dashboard**: Use Theme 1 or 2 (Dark Mode)
-- Reduces eye strain during extended use
-- Professional appearance
-- Clear visual hierarchy with vibrant accents
-
-**For Premium/Luxury Products**: Use Theme 2 (Dark Mode)
-- Sophisticated and elegant
-- Draws attention to product imagery
-- Teal accents create premium feel
-
-**For Dynamic/Fashion Products**: Use Theme 3 (Gradient Accent)
-- Modern and eye-catching
-- Vibrant, energetic feel
-- Perfect for trendy e-commerce
-
-### 3. Typography
-```css
-/* Font Family */
---font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
---font-mono: 'Monaco', 'Courier New', monospace;
-
-/* Font Sizes */
---text-h1: 2.5rem;   /* 40px */
---text-h2: 2rem;     /* 32px */
---text-h3: 1.5rem;   /* 24px */
---text-h4: 1.25rem;  /* 20px */
---text-h5: 1.125rem; /* 18px */
---text-h6: 1rem;     /* 16px */
---text-base: 1rem;   /* 16px */
---text-sm: 0.875rem; /* 14px */
---text-xs: 0.75rem;  /* 12px */
-
-/* Font Weights */
---font-light: 300;
---font-normal: 400;
---font-medium: 500;
---font-semibold: 600;
---font-bold: 700;
-```
-
-### 4. Spacing System (8px base unit)
-```css
---spacing-xs: 4px;    /* 0.5 unit */
---spacing-sm: 8px;    /* 1 unit */
---spacing-md: 16px;   /* 2 units */
---spacing-lg: 24px;   /* 3 units */
---spacing-xl: 32px;   /* 4 units */
---spacing-2xl: 48px;  /* 6 units */
---spacing-3xl: 64px;  /* 8 units */
-```
-
-### 5. Elevation (Shadow System)
-```css
---shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
---shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
---shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
---shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
---shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.15);
-
-/* Hover elevation */
---shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.15);
-```
-
-### 6. Border Radius
-```css
---radius-none: 0;
---radius-sm: 4px;
---radius-md: 8px;
---radius-lg: 12px;
---radius-full: 9999px;
-```
-
-## Motion Design & Animation Libraries
-
-### Recommended Free Libraries for Angular 21
-
-#### 1. **Animate.css** (Pure CSS, 100% Free)
-- **Installation**: `npm install animate.css`
-- **Best For**: Quick, modern animations with minimal setup
-- **Animations Included**: Attention seekers, entrances, exits, bouncing, fading, flipping, rotating, sliding, zooming, specials
-- **Usage**:
-```html
-<!-- In component template -->
-<div [ngClass]="{'animate__animated': isAnimating, 'animate__fadeInUp': isAnimating}">
-  Content
-</div>
-
-<!-- In component CSS -->
-<style>
-  .animate__animated {
-    --animate-duration: 0.5s;
-  }
-</style>
-```
-- **Pros**: Easy to use, well-documented, lightweight
-- **Cons**: CSS-based only (not for JS control)
-
-#### 2. **AOS (Animate On Scroll)** (100% Free)
-- **Installation**: `npm install aos`
-- **Best For**: Element animations triggered by scroll position
-- **Features**: Smooth scroll-triggered animations, intersection observer API
-- **Usage**:
-```typescript
-// In component TypeScript
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-
-ngOnInit() {
-  AOS.init();
-}
-
-// In component template
-<div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
-  Animates when scrolling into view
-</div>
-```
-- **Pros**: Lightweight, performant with intersection observer, great for lazy loading
-- **Cons**: Limited customization for complex animations
-
-#### 3. **Angular Animations** (Built-in, No Installation Needed)
-- **Best For**: Component lifecycle animations, state transitions
-- **Features**: Native Angular animation API, TypeScript-based
-- **Usage**:
-```typescript
-import { trigger, state, style, transition, animate } from '@angular/animations';
-
-@Component({
-  selector: 'app-fade-demo',
-  template: `<div [@fadeInOut]="isVisible ? 'visible' : 'hidden'">Content</div>`,
-  animations: [
-    trigger('fadeInOut', [
-      state('visible', style({ opacity: 1 })),
-      state('hidden', style({ opacity: 0 })),
-      transition('visible <=> hidden', animate('500ms ease-in-out'))
-    ])
-  ]
-})
-export class FadeDemoComponent {
-  isVisible = true;
-}
-```
-- **Pros**: Built into Angular, type-safe, performance optimized
-- **Cons**: Steeper learning curve for complex animations
-
-#### 4. **GSAP (GreenSock) - Community Edition** (Free Tier)
-- **Installation**: `npm install gsap`
-- **Best For**: Advanced, complex animations and timelines
-- **Features**: Timeline control, easing, morphing, staggering effects
-- **Usage**:
-```typescript
-import gsap from 'gsap';
-
-ngAfterViewInit() {
-  gsap.to('.element', {
-    duration: 1,
-    x: 100,
-    rotation: 360,
-    ease: 'back.out'
-  });
-}
-```
-- **Pros**: Powerful, smooth animations, excellent easing functions
-- **Cons**: Larger bundle size compared to alternatives
-
-#### 5. **Lottie-Web** (100% Free, Perfect for Complex Animations)
-- **Installation**: `npm install lottie-web`
-- **Best For**: Complex vector animations from design tools (Figma, Adobe XD, After Effects)
-- **Features**: Play animations created in Figma or Lottie Editor
-- **Usage**:
-```typescript
-import lottie from 'lottie-web';
-
-ngAfterViewInit() {
-  lottie.loadAnimation({
-    container: this.animationContainer.nativeElement,
-    renderer: 'svg',
-    loop: true,
-    autoplay: true,
-    path: 'assets/animations/loading.json'
-  });
-}
-```
-- **Pros**: Designer-friendly, complex animations, small file sizes
-- **Cons**: Requires JSON animation files from design tools
-- **Free Resources**: https://lottiefiles.com (thousands of free animations)
-
-#### 6. **Motion** (Angular-specific, Alternative to Framer Motion)
-- **Installation**: `npm install @angular/animations`
-- **Best For**: Staggered list animations, complex sequences
-- **Usage with GSAP for Stagger**:
-```typescript
-gsap.to('.list-item', {
-  duration: 0.5,
-  opacity: 1,
-  y: 0,
-  stagger: 0.1,
-  ease: 'power2.out'
-});
-```
-
-### Recommended Combinations for E-Commerce
-
-**For Product Catalog Page**:
-- **Animate.css** for entry animations
-- **AOS** for scroll-triggered fade-ins
-- **Angular Animations** for product hover states
-
-**For Checkout Page**:
-- **Angular Animations** for form step transitions
-- **GSAP** for complex checkout flow animations
-
-**For Loading States**:
-- **Lottie-Web** with animations from https://lottiefiles.com
-- **Skeletons with Animate.css shimmer effect**
-
-**For Micro-interactions**:
-- **Angular Animations** for button clicks
-- **CSS Transitions** (native, no library needed) for hover states
-
-### Performance-Optimized Animation Pattern
-
-```typescript
-// animations.config.ts
-export const ANIMATIONS = {
-  fadeIn: {
-    duration: 300,
-    easing: 'ease-in-out'
-  },
-  slideUp: {
-    duration: 500,
-    easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
-  },
-  scaleHover: {
-    duration: 200,
-    easing: 'ease-out'
-  }
-};
-
-// Use with Animate.css
-<div 
-  class="animate__animated animate__fadeInUp"
-  style="--animate-duration: 0.5s">
-  Optimized animation
-</div>
-```
-
-### Free Resources & Libraries
-- **Animate.css**: https://animate.style/
-- **Lottie Files**: https://lottiefiles.com/ (thousands of free animations)
-- **AOS Documentation**: https://michalsnik.github.io/aos/
-- **GSAP Free Docs**: https://greensock.com/
-- **SVG Animation Tool**: https://www.svgator.com/ (free tier available)
-
-## Responsive Breakpoints
-
-### Breakpoint Strategy (Mobile-First)
-```css
-/* Mobile First */
-@media (min-width: 520px) { /* Early mobile fixes */ }
-@media (min-width: 640px) { /* Tablets - landscape phone */ }
-@media (min-width: 768px) { /* Tablets */ }
-@media (min-width: 1024px) { /* Desktop */ }
-@media (min-width: 1280px) { /* Large desktop */ }
-@media (min-width: 1536px) { /* Extra large desktop */ }
-```
-
-### Device Breakpoints Map
-```css
---breakpoint-xs: 320px;   /* Small phone */
---breakpoint-sm: 520px;   /* Large phone */
---breakpoint-md: 768px;   /* Tablet */
---breakpoint-lg: 1024px;  /* Desktop */
---breakpoint-xl: 1280px;  /* Large desktop */
---breakpoint-2xl: 1536px; /* Extra large desktop */
-
-/* Usage */
-@media (min-width: var(--breakpoint-md)) { }
-```
-
-## Global Styles Pattern
-
-### 1. Base CSS Setup
-```css
-/* styles.css */
 :root {
-  /* Colors */
-  --color-primary: #3399cc;
-  --color-success: #4caf50;
-  --color-warning: #ff9800;
-  --color-danger: #f44336;
-  
-  /* Typography */
-  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* Primary — Deep Maroon */
+  --primary:                 #570013;  /* High-impact brand authority */
+  --primary-container:       #800020;  /* Slightly lighter maroon for hover/depth */
+  --on-primary:              #ffffff;  /* Text/icons on primary background */
+
+  /* Secondary — Craft Gold */
+  --secondary:               #735c00;  /* Accent of craft; interactive highlights */
+  --secondary-container:     #f5e6a3;  /* Muted gold for Add-to-Cart backgrounds */
+  --secondary-fixed:         #c9a600;  /* Gold Inner Glow for primary buttons */
+  --on-secondary:            #ffffff;
+  --on-secondary-container:  #2b2000;  /* Dark text on gold container */
+
+  /* Surface — Warm Cream Canvas */
+  --surface:                 #fff8ef;  /* Main canvas — never use sterile white */
+  --surface-variant:         #f0e6d6;  /* Slightly deeper cream for hover/fill */
+  --surface-container-lowest: #fdf4e8; /* Elevated cards (lowest layer) */
+  --surface-container-low:   #f5ead8;  /* Section backgrounds */
+  --surface-container:       #eddfc8;  /* Mid-level containers */
+  --surface-container-high:  #e5d4b8;  /* Product card hover background */
+  --on-surface:              #1e1b13;  /* Primary text — warm near-black, NEVER #000 */
+  --on-surface-variant:      #4a3f30;  /* Secondary text / de-emphasised labels */
+
+  /* Outline — Ghost Tones Only */
+  --outline:                 rgba(74, 63, 48, 0.2);   /* Ghost border, inputs only */
+  --outline-variant:         rgba(74, 63, 48, 0.05);  /* Ethnic motif watermark tint */
+
+  /* Background */
+  --background:              #fff8ef;
+  --on-background:           #1e1b13;  /* NEVER use pure #000 for text */
+
+  /* Status — Heritage-tinted */
+  --color-success:           #2d6a4f;  /* Deep forest green */
+  --color-warning:           #b5620a;  /* Rust amber */
+  --color-danger:            #8b0000;  /* Deep crimson — consistent with brand */
+  --color-info:              #405780;  /* Muted sapphire */
+
+  /* Gradients */
+  --gradient-primary-silk:   linear-gradient(135deg, #570013 0%, #800020 100%);
+  --gradient-surface-warm:   linear-gradient(135deg, #fff8ef 0%, #f5ead8 100%);
+}
+```
+
+#### Color Usage Rules
+
+| Token | Use Case |
+| :--- | :--- |
+| `--primary` | CTAs, brand statement elements, active nav indicators |
+| `--primary-container` | Hover/pressed state on primary surfaces |
+| `--secondary` | Interactive cues, price highlights, floating labels on focus |
+| `--secondary-container` | "Add to Cart" / "Book Appointment" button backgrounds |
+| `--surface` | Page canvas — the default background |
+| `--surface-container-lowest` | Product cards (no shadow, no border) |
+| `--surface-container-low` | Section-level backgrounds |
+| `--surface-container-high` | Product card `:hover` state |
+| `--on-background` | ALL body text — never `#000000` |
+| `--outline` | Input underlines / ghost borders only (max 20% opacity) |
+| `--outline-variant` | Ethnic SVG watermark patterns at 5% opacity |
+
+#### The "No-Line" Rule — STRICTLY ENFORCED
+> **1px borders are PROHIBITED for sectioning content.** They read as "cheap" and "mechanical."
+
+- **Tonal Transitions**: Use background-color shifts between adjacent sections (`surface-container-low` → `surface`) to create soft architectural breaks.
+- **Layering Principle**: Treat the UI as stacked sheets of fine handmade paper. A `surface-container-lowest` card on a `surface-container-low` section creates a natural lift.
+- **Ghost Border Fallback**: If a border is required for accessibility (input fields), use `--outline` at 20% opacity. Never 100% opaque lines.
+- **Dividers**: NEVER use 1px `<hr>` or `border-bottom` as list dividers. Use 24px–32px vertical spacing instead.
+
+#### Glassmorphism Rule (Floating Elements)
+```css
+/* Applied to: sticky headers, product image overlays, floating nav */
+.glass {
+  background: rgba(255, 248, 239, 0.80); /* --surface at 80% */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+```
+
+#### Signature CTA Gradient
+```css
+/* Applied to all primary CTAs */
+.btn-primary {
+  background: var(--gradient-primary-silk); /* 135deg maroon silk sheen */
+  color: var(--on-primary);
+  box-shadow: inset 0 0 0 1px var(--secondary-fixed); /* Gold inner glow */
+}
+```
+
+---
+
+### 2. Typography — The Editorial Voice
+
+The typeface pairing bridges ancient craftsmanship with contemporary fashion.
+
+#### Google Fonts Import
+```html
+<!-- Always include in index.html <head> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+```
+
+#### Font Variables
+```css
+:root {
+  --font-display:  'Noto Serif', 'Georgia', serif;   /* Brand storytelling, product titles */
+  --font-body:     'Manrope', 'Segoe UI', sans-serif; /* UI, descriptions, price points */
+  --font-mono:     'Monaco', 'Courier New', monospace;
+}
+```
+
+#### Type Scale
+
+| Role | Font | Size | Weight | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| **display-lg** | Noto Serif | 3.5rem | 700 | letter-spacing: -0.02em — masthead feel |
+| **display-sm** | Noto Serif | 2.25rem | 700 | Mobile full-screen nav links |
+| **headline-md** | Noto Serif | 1.75rem | 600 | Section headings, product category titles |
+| **title-lg** | Manrope | 1.375rem | 600 | Product card names, sub-section headers |
+| **body-lg** | Manrope | 1rem | 400 | Product descriptions, paragraph copy |
+| **label-md** | Manrope | 0.75rem | 700 | Buttons, tags — UPPERCASE, 0.05em letter-spacing |
+
+```css
+:root {
+  /* Type sizes */
+  --text-display-lg: 3.5rem;
+  --text-display-sm: 2.25rem;
+  --text-headline-md: 1.75rem;
+  --text-title-lg: 1.375rem;
+  --text-body-lg: 1rem;
+  --text-label-md: 0.75rem;
+
+  /* Legacy size aliases (retained for compatibility) */
+  --text-h1: 3.5rem;
+  --text-h2: 1.75rem;
+  --text-h3: 1.375rem;
   --text-base: 1rem;
-  
-  /* Spacing */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 16px;
-  
-  /* Effects */
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --radius-md: 8px;
-}
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
 
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  /* Weights */
+  --font-normal:   400;
+  --font-medium:   500;
+  --font-semibold: 600;
+  --font-bold:     700;
 
-html {
-  font-size: 16px;
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font-family);
-  font-size: var(--text-base);
-  color: var(--text-primary);
-  background-color: var(--color-white);
-  line-height: 1.6;
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+  /* Letter spacing */
+  --tracking-display: -0.02em;  /* Display headings — high fashion */
+  --tracking-label:    0.05em;  /* Buttons/tags — luxury branding */
 }
 ```
 
-## Component Styling Pattern
+---
 
-### 1. Card Component
+### 3. Spacing System (8px base unit)
+
 ```css
-/* Card styling */
-.card {
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-md);
-  padding: var(--spacing-lg);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.card:hover {
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-2px);
-}
-
-/* Responsive card padding */
-@media (max-width: 768px) {
-  .card {
-    padding: var(--spacing-md);
-  }
+:root {
+  --spacing-xs:  4px;    /* 0.5 unit */
+  --spacing-sm:  8px;    /* 1 unit */
+  --spacing-md:  16px;   /* 2 units */
+  --spacing-lg:  24px;   /* 3 units — minimum gap between list items (No-Line Rule) */
+  --spacing-xl:  32px;   /* 4 units — preferred gap between list items */
+  --spacing-2xl: 48px;   /* 6 units */
+  --spacing-3xl: 64px;   /* 8 units — section breathing room */
+  --spacing-4xl: 96px;   /* 12 units — major hero sections */
 }
 ```
 
-### 2. Button Styling
+> **Whitespace First**: Luxury brands "breathe." Apply `--spacing-3xl` or `--spacing-4xl` as section padding.  
+> **NEVER** use `--spacing-sm` alone as the separator between list items — use `--spacing-lg` or `--spacing-xl`.
+
+---
+
+### 4. Elevation & Depth — "Felt, Not Seen"
+
+Depth must feel organic — like cloth layering on cloth. Avoid the standard harsh drop-shadow look.
+
 ```css
-/* Base button */
-.button {
+:root {
+  /* Ambient shadow — main floating element shadow */
+  --shadow-ambient: 0px 20px 40px rgba(88, 65, 65, 0.08);
+
+  /* Subtle lift — product cards, panels */
+  --shadow-lift:    0px 8px 24px rgba(88, 65, 65, 0.06);
+
+  /* Deep lift — modal, drawer overlays */
+  --shadow-deep:    0px 32px 64px rgba(88, 65, 65, 0.12);
+
+  /* Legacy aliases */
+  --shadow-sm:   0 1px 3px rgba(88, 65, 65, 0.06);
+  --shadow-md:   0 4px 12px rgba(88, 65, 65, 0.08);
+  --shadow-lg:   var(--shadow-lift);
+  --shadow-xl:   var(--shadow-ambient);
+  --shadow-2xl:  var(--shadow-deep);
+  --shadow-hover: var(--shadow-lift);
+}
+```
+
+> **Ethnic Motifs as Depth**: Use ultra-faint inline SVG (Mandana or Paisley) in `--outline-variant` (5% opacity) behind product card sections to create a "watermark" depth effect.
+
+---
+
+### 5. Border Radius — Tailored, Not Casual
+
+```css
+:root {
+  --radius-none: 0;
+  --radius-sm:   4px;
+  --radius-md:   6px;   /* PRIMARY radius — tailored, professional */
+  --radius-lg:   12px;
+  --radius-full: 9999px; /* AVOID — pill shapes feel too casual/tech */
+}
+```
+
+> **Rule**: Use `--radius-md` (6px) for all buttons, cards, and inputs. Never use `--radius-full` for CTAs.
+
+---
+
+### 6. Components
+
+#### Buttons — The Jewel Element
+
+```css
+/* ── Base button ── */
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
-  padding: 12px 24px;
-  font-size: var(--text-base);
-  font-weight: var(--font-semibold);
+  padding: 12px 28px;
+  font-family: var(--font-body);
+  font-size: var(--text-label-md);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
@@ -489,183 +290,254 @@ body {
   appearance: none;
 }
 
-/* Primary button */
-.button.primary {
-  background-color: var(--color-primary);
-  color: var(--color-white);
+/* ── Primary CTA (Maroon Silk) ── */
+.btn-primary {
+  background: var(--gradient-primary-silk);
+  color: var(--on-primary);
+  box-shadow: inset 0 0 0 1px var(--secondary-fixed); /* Gold inner glow */
 }
 
-.button.primary:hover {
-  background-color: var(--color-primary-dark);
-  box-shadow: var(--shadow-md);
+.btn-primary:hover {
+  filter: brightness(1.1);
+  box-shadow:
+    inset 0 0 0 1px var(--secondary-fixed),
+    var(--shadow-ambient);
 }
 
-.button.primary:active {
+.btn-primary:active {
   transform: scale(0.98);
 }
 
-.button.primary:disabled {
-  opacity: 0.5;
+.btn-primary:disabled {
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
-/* Size variants */
-.button.sm {
-  padding: 8px 16px;
-  font-size: var(--text-sm);
+/* ── Secondary (Gold Accent) — Add to Cart / Book Appointment ── */
+.btn-secondary {
+  background: var(--secondary-container);
+  color: var(--on-secondary-container);
+  box-shadow: none;
 }
 
-.button.lg {
-  padding: 16px 32px;
-  font-size: var(--text-h6);
+.btn-secondary:hover {
+  background: color-mix(in srgb, var(--secondary-container) 85%, var(--secondary));
+  box-shadow: var(--shadow-lift);
+}
+
+/* ── Size Variants ── */
+.btn-sm {
+  padding: 8px 18px;
+  font-size: calc(var(--text-label-md) * 0.9);
+}
+
+.btn-lg {
+  padding: 16px 40px;
+  font-size: var(--text-xs);
 }
 ```
 
-### 3. Grid Layout
+---
+
+#### Product Cards — The Curated Frame
+
 ```css
-/* Responsive grid */
-.grid {
+/* ── Card container — no borders, no shadows ── */
+.product-card {
+  background: var(--surface-container-lowest);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: none;
+  box-shadow: none;
+  transition: background 0.3s ease;
+  position: relative;
+}
+
+.product-card:hover {
+  background: var(--surface-container-high);
+}
+
+/* ── Image — Portrait 4:5, warm desaturation ── */
+.product-card__image {
+  width: 100%;
+  aspect-ratio: 4 / 5;       /* Portrait — mandatory */
+  overflow: hidden;
+  background: var(--surface-container-low);
+}
+
+.product-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.88) sepia(0.08); /* Warm desaturation */
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter 0.5s ease;
+}
+
+.product-card:hover .product-card__image img {
+  transform: scale(1.05); /* Subtle zoom — no divider between img and info */
+  filter: saturate(0.95) sepia(0.04);
+}
+
+/* ── Product Info — no divider line ── */
+.product-card__info {
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-lg);
+}
+
+.product-card__name {
+  font-family: var(--font-display);
+  font-size: var(--text-title-lg);
+  font-weight: var(--font-semibold);
+  color: var(--on-surface);
+  margin-bottom: var(--spacing-xs);
+}
+
+.product-card__price {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  font-weight: var(--font-semibold);
+  color: var(--secondary);
+}
+```
+
+> **Overlap Rule**: Allow product images to slightly "hang over" adjacent text containers using negative margins or absolute positioning for depth.
+
+---
+
+#### Product Grid Layout
+
+```css
+.product-grid {
   display: grid;
-  gap: var(--spacing-lg);
+  grid-template-columns: 1fr;                              /* Mobile: 1 col */
+  gap: var(--spacing-xl);
+  padding: var(--spacing-2xl) var(--spacing-lg);
 }
 
-/* Mobile first - 1 column */
-.grid-cols-1 {
-  grid-template-columns: 1fr;
-}
-
-/* Tablet - 2 columns */
-@media (min-width: 768px) {
-  .grid-cols-2 {
+@media (min-width: 640px) {
+  .product-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-/* Desktop - 3+ columns */
 @media (min-width: 1024px) {
-  .grid-cols-3 {
+  .product-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-2xl);
+    padding: var(--spacing-3xl) var(--spacing-2xl);
   }
-  
-  .grid-cols-4 {
+}
+
+@media (min-width: 1280px) {
+  .product-grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-
-/* Auto fit pattern for flexible grids */
-.grid-auto {
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
 ```
 
-### 4. Flexbox Layout
+---
+
+#### Inputs & Text Fields — Underline Style
+
 ```css
-/* Flex utilities */
-.flex {
-  display: flex;
+/* ── Input base — underline only, no full border ── */
+.input-field {
+  position: relative;
+  margin-bottom: var(--spacing-xl);
 }
 
-.flex-col {
-  flex-direction: column;
-}
-
-.flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.flex-between {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.gap-md {
-  gap: var(--spacing-md);
-}
-
-/* Responsive flex */
-@media (max-width: 768px) {
-  .flex-row-to-col {
-    flex-direction: column;
-  }
-}
-```
-
-## Form Styling Pattern
-
-### 1. Input Fields
-```css
-/* Input base */
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-input[type="date"],
-textarea,
-select {
+.input-field input,
+.input-field textarea,
+.input-field select {
   width: 100%;
-  padding: 12px;
-  font-family: inherit;
-  font-size: var(--text-base);
-  border: 1px solid var(--color-medium-gray);
-  border-radius: var(--radius-md);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Focus state */
-input:focus,
-textarea:focus,
-select:focus {
+  padding: 12px 0 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  color: var(--on-surface);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--outline); /* Ghost underline only */
+  border-radius: 0;
   outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(51, 153, 204, 0.1);
+  transition: border-color 0.3s ease;
 }
 
-/* Input error state */
-input.error,
-textarea.error {
-  border-color: var(--color-danger);
+/* Floating Label */
+.input-field label {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  color: var(--on-surface-variant);
+  pointer-events: none;
+  transition: top 0.25s ease, font-size 0.25s ease, color 0.25s ease;
 }
 
-input.error:focus {
-  box-shadow: 0 0 0 3px rgba(244, 67, 54, 0.1);
+/* Float label on focus or when filled */
+.input-field input:focus ~ label,
+.input-field input:not(:placeholder-shown) ~ label {
+  top: -12px;
+  font-size: var(--text-xs);
+  color: var(--secondary); /* Gold — craft accent */
 }
 
-/* Disabled state */
-input:disabled,
-textarea:disabled {
-  background-color: var(--color-light);
-  cursor: not-allowed;
-  opacity: 0.6;
+/* Underline expands from center on focus */
+.input-field::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--secondary);
+  transition: left 0.3s ease, width 0.3s ease;
+}
+
+.input-field:focus-within::after {
+  left: 0;
+  width: 100%;
+}
+
+/* Error state */
+.input-field.error input {
+  border-bottom-color: var(--color-danger);
+}
+
+.input-field.error::after {
+  background: var(--color-danger);
+}
+
+/* Filled/Surface variant alternative */
+.input-field--filled input {
+  background: var(--surface-variant);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  padding: 12px var(--spacing-md) 8px;
+  border-bottom: 1px solid var(--outline);
 }
 ```
 
-### 2. Form Layout
+---
+
+#### Form Layout
+
 ```css
 .form-group {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-sm);
-  margin-bottom: var(--spacing-md);
-}
-
-.form-group label {
-  font-weight: var(--font-medium);
-  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
 }
 
 .form-group small {
   font-size: var(--text-xs);
-  color: var(--text-light);
+  color: var(--on-surface-variant);
 }
 
 .form-group.error small {
   color: var(--color-danger);
 }
 
-/* Two-column form on desktop */
 .form-row {
   display: grid;
   grid-template-columns: 1fr;
@@ -679,136 +551,450 @@ textarea:disabled {
 }
 ```
 
-## Animation & Transition Pattern
+---
 
-### 1. Utility Animations
+#### Navigation — The Floating Silk
+
 ```css
-/* Fade animations */
+/* ── Desktop: Centered floating glassmorphism bar ── */
+.navbar {
+  position: sticky;
+  top: var(--spacing-md);
+  left: 0;
+  right: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--spacing-lg);
+}
+
+.navbar__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: rgba(255, 248, 239, 0.80); /* --surface at 80% */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  border: none; /* No-Line Rule */
+  box-shadow: var(--shadow-ambient);
+}
+
+.navbar__menu {
+  display: flex;
+  gap: var(--spacing-xl);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__menu a {
+  font-family: var(--font-body);
+  font-size: var(--text-label-md);
+  font-weight: var(--font-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--on-surface);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar__menu a:hover,
+.navbar__menu a.active {
+  color: var(--secondary); /* Gold — NEVER blue */
+}
+
+/* ── Mobile: Full-screen overlay with ethnic pattern ── */
+@media (max-width: 768px) {
+  .navbar__menu {
+    display: none;
+  }
+
+  .navbar__menu.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+    background: var(--surface);
+    background-image: url("data:image/svg+xml,..."); /* Paisley/Mandana SVG at 5% opacity */
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2xl);
+  }
+
+  .navbar__menu.mobile-open a {
+    font-family: var(--font-display);
+    font-size: var(--text-display-sm); /* display-sm */
+    font-weight: var(--font-bold);
+    color: var(--on-surface);
+    letter-spacing: var(--tracking-display);
+  }
+
+  .navbar__menu.mobile-open a:hover {
+    color: var(--secondary);
+  }
+}
+```
+
+---
+
+## Global Styles Pattern
+
+### Base CSS Setup
+
+```css
+/* styles.css */
+
+/* ── Import Heritage Modernist fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700&display=swap');
+
+:root {
+  /* — Color Tokens — */
+  --primary:                  #570013;
+  --primary-container:        #800020;
+  --on-primary:               #ffffff;
+  --secondary:                #735c00;
+  --secondary-container:      #f5e6a3;
+  --secondary-fixed:          #c9a600;
+  --on-secondary-container:   #2b2000;
+  --surface:                  #fff8ef;
+  --surface-variant:          #f0e6d6;
+  --surface-container-lowest: #fdf4e8;
+  --surface-container-low:    #f5ead8;
+  --surface-container:        #eddfc8;
+  --surface-container-high:   #e5d4b8;
+  --on-surface:               #1e1b13;
+  --on-surface-variant:       #4a3f30;
+  --outline:                  rgba(74, 63, 48, 0.20);
+  --outline-variant:          rgba(74, 63, 48, 0.05);
+  --background:               #fff8ef;
+  --on-background:            #1e1b13;
+  --color-success:            #2d6a4f;
+  --color-warning:            #b5620a;
+  --color-danger:             #8b0000;
+  --color-info:               #405780;
+  --gradient-primary-silk:    linear-gradient(135deg, #570013 0%, #800020 100%);
+
+  /* — Typography — */
+  --font-display:  'Noto Serif', 'Georgia', serif;
+  --font-body:     'Manrope', 'Segoe UI', sans-serif;
+  --font-mono:     'Monaco', 'Courier New', monospace;
+  --text-display-lg:  3.5rem;
+  --text-display-sm:  2.25rem;
+  --text-headline-md: 1.75rem;
+  --text-title-lg:    1.375rem;
+  --text-body-lg:     1rem;
+  --text-label-md:    0.75rem;
+  --text-sm:          0.875rem;
+  --text-xs:          0.75rem;
+  --font-normal:      400;
+  --font-medium:      500;
+  --font-semibold:    600;
+  --font-bold:        700;
+  --tracking-display: -0.02em;
+  --tracking-label:    0.05em;
+
+  /* — Spacing — */
+  --spacing-xs:  4px;
+  --spacing-sm:  8px;
+  --spacing-md:  16px;
+  --spacing-lg:  24px;
+  --spacing-xl:  32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 96px;
+
+  /* — Shadows — */
+  --shadow-ambient: 0px 20px 40px rgba(88, 65, 65, 0.08);
+  --shadow-lift:    0px 8px 24px rgba(88, 65, 65, 0.06);
+  --shadow-deep:    0px 32px 64px rgba(88, 65, 65, 0.12);
+  --shadow-sm:      0 1px 3px rgba(88, 65, 65, 0.06);
+  --shadow-md:      0 4px 12px rgba(88, 65, 65, 0.08);
+  --shadow-lg:      var(--shadow-lift);
+  --shadow-xl:      var(--shadow-ambient);
+  --shadow-2xl:     var(--shadow-deep);
+  --shadow-hover:   var(--shadow-lift);
+
+  /* — Border Radius — */
+  --radius-none: 0;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   12px;
+  --radius-full: 9999px;
+
+  /* — Breakpoints (reference only — use in @media) — */
+  --breakpoint-xs:  320px;
+  --breakpoint-sm:  520px;
+  --breakpoint-md:  768px;
+  --breakpoint-lg:  1024px;
+  --breakpoint-xl:  1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-body-lg);
+  color: var(--on-background);       /* Warm near-black — NEVER #000 */
+  background-color: var(--surface);  /* Cream canvas — NEVER #fff */
+  line-height: 1.6;
+}
+
+/* ── Headings — Noto Serif display voice ── */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--on-surface);
+}
+
+h1 { font-size: var(--text-display-lg); font-weight: var(--font-bold);     letter-spacing: var(--tracking-display); }
+h2 { font-size: var(--text-headline-md); font-weight: var(--font-semibold); }
+h3 { font-size: var(--text-title-lg);    font-weight: var(--font-semibold); }
+
+/* ── Links — NEVER blue; use gold or maroon ── */
+a {
+  color: var(--secondary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--primary);
+}
+
+/* ── Accessibility: reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+---
+
+## Responsive Breakpoints
+
+### Breakpoint Strategy (Mobile-First)
+```css
+/* Mobile First */
+@media (min-width: 520px)  { /* Early mobile fixes */ }
+@media (min-width: 640px)  { /* Landscape phone / small tablet */ }
+@media (min-width: 768px)  { /* Tablet */ }
+@media (min-width: 1024px) { /* Desktop */ }
+@media (min-width: 1280px) { /* Large desktop */ }
+@media (min-width: 1536px) { /* Extra large desktop */ }
+```
+
+---
+
+## Layout Patterns
+
+### Standard Grid
+```css
+.grid {
+  display: grid;
+  gap: var(--spacing-xl);
+}
+
+.grid-cols-1 { grid-template-columns: 1fr; }
+
+@media (min-width: 768px) {
+  .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+.grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+```
+
+### Flexbox Utilities
+```css
+.flex         { display: flex; }
+.flex-col     { flex-direction: column; }
+.flex-center  { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.gap-md       { gap: var(--spacing-md); }
+.gap-lg       { gap: var(--spacing-lg); }
+
+@media (max-width: 768px) {
+  .flex-row-to-col { flex-direction: column; }
+}
+```
+
+---
+
+## Animation & Motion Design
+
+### Heritage Animation Tokens
+```typescript
+// animations.config.ts
+export const ANIMATIONS = {
+  fadeInUp: {
+    duration: 500,
+    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'  /* Luxury deceleration */
+  },
+  scaleReveal: {
+    duration: 400,
+    easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'     /* Organic spring */
+  },
+  silk: {
+    duration: 300,
+    easing: 'ease-in-out'
+  }
+};
+```
+
+### Recommended Libraries for Angular 21
+
+#### 1. **AOS (Animate On Scroll)** — Scroll-triggered reveals
+```typescript
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+ngOnInit() {
+  AOS.init({ once: true, duration: 700, easing: 'ease-out' });
+}
+```
+```html
+<div data-aos="fade-up" data-aos-delay="100">Reveals on scroll</div>
+```
+
+#### 2. **Angular Animations** — State transitions
+```typescript
+import { trigger, state, style, transition, animate } from '@angular/animations';
+
+animations: [
+  trigger('fadeInUp', [
+    transition(':enter', [
+      style({ opacity: 0, transform: 'translateY(24px)' }),
+      animate('500ms cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        style({ opacity: 1, transform: 'translateY(0)' }))
+    ])
+  ])
+]
+```
+
+#### 3. **GSAP** — Complex sequences (hero, overlapping elements)
+```typescript
+import gsap from 'gsap';
+
+ngAfterViewInit() {
+  gsap.from('.product-card', {
+    duration: 0.7,
+    opacity: 0,
+    y: 32,
+    stagger: 0.1,
+    ease: 'power2.out'
+  });
+}
+```
+
+#### 4. **Lottie-Web** — Loading states & micro-animations
+```typescript
+import lottie from 'lottie-web';
+// Free animations: https://lottiefiles.com
+```
+
+### Utility Keyframes
+```css
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
-@keyframes fadeOut {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.3s ease-in;
-}
-
-/* Slide animations */
 @keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.slide-in-up {
-  animation: slideInUp 0.3s ease-out;
-}
-
-/* Scale animations */
 @keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
-.scale-in {
-  animation: scaleIn 0.3s ease-out;
-}
-
-/* Loading skeleton */
+/* Heritage shimmer skeleton */
 @keyframes shimmer {
-  0% {
-    background-position: -1000px 0;
-  }
-  100% {
-    background-position: 1000px 0;
-  }
+  0%   { background-position: -1000px 0; }
+  100% { background-position:  1000px 0; }
 }
 
 .skeleton {
   background: linear-gradient(
     90deg,
-    var(--color-light-gray) 25%,
-    var(--color-white) 50%,
-    var(--color-light-gray) 75%
+    var(--surface-container-low) 25%,
+    var(--surface-container-lowest) 50%,
+    var(--surface-container-low) 75%
   );
   background-size: 1000px 100%;
   animation: shimmer 2s infinite;
 }
+
+.fade-in    { animation: fadeIn    0.4s ease-in; }
+.slide-up   { animation: slideInUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.scale-in   { animation: scaleIn   0.4s ease-out; }
 ```
 
-## Utility Classes Pattern
+---
 
-### 1. Spacing Utilities
+## Utility Classes
+
+### Spacing
 ```css
-/* Margin utilities */
-.m-0 { margin: 0; }
+.m-0  { margin: 0; }
 .m-sm { margin: var(--spacing-sm); }
 .m-md { margin: var(--spacing-md); }
 .m-lg { margin: var(--spacing-lg); }
-
 .mx-auto { margin-left: auto; margin-right: auto; }
-.my-md { margin-top: var(--spacing-md); margin-bottom: var(--spacing-md); }
-
-/* Padding utilities */
-.p-0 { padding: 0; }
+.my-md   { margin-top: var(--spacing-md); margin-bottom: var(--spacing-md); }
+.p-0  { padding: 0; }
 .p-sm { padding: var(--spacing-sm); }
 .p-md { padding: var(--spacing-md); }
 .p-lg { padding: var(--spacing-lg); }
 ```
 
-### 2. Text Utilities
+### Text
 ```css
-/* Text alignment */
-.text-left { text-align: left; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
-
-/* Text color */
-.text-primary { color: var(--color-primary); }
+.text-left    { text-align: left; }
+.text-center  { text-align: center; }
+.text-right   { text-align: right; }
+.text-primary { color: var(--primary); }
 .text-success { color: var(--color-success); }
-.text-danger { color: var(--color-danger); }
-
-/* Text weight */
-.font-light { font-weight: var(--font-light); }
-.font-normal { font-weight: var(--font-normal); }
-.font-bold { font-weight: var(--font-bold); }
-
-/* Text transform */
-.uppercase { text-transform: uppercase; }
-.lowercase { text-transform: lowercase; }
-.capitalize { text-transform: capitalize; }
-
-/* Text overflow */
+.text-danger  { color: var(--color-danger); }
+.text-muted   { color: var(--on-surface-variant); }
+.font-display { font-family: var(--font-display); }
+.font-body    { font-family: var(--font-body); }
+.font-light   { font-weight: var(--font-normal); }
+.font-normal  { font-weight: var(--font-normal); }
+.font-bold    { font-weight: var(--font-bold); }
+.uppercase    { text-transform: uppercase; letter-spacing: var(--tracking-label); }
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -817,60 +1003,51 @@ textarea:disabled {
 }
 ```
 
-### 3. Visibility Utilities
+### Visibility
 ```css
-/* Display utilities */
-.hidden { display: none; }
-.block { display: block; }
-.inline { display: inline; }
+.hidden       { display: none; }
+.block        { display: block; }
+.inline       { display: inline; }
 .inline-block { display: inline-block; }
 
-/* Responsive visibility */
-@media (max-width: 768px) {
-  .hidden-mobile { display: none; }
-}
-
-@media (min-width: 769px) {
-  .hidden-desktop { display: none; }
-}
+@media (max-width: 768px)  { .hidden-mobile  { display: none; } }
+@media (min-width: 769px)  { .hidden-desktop { display: none; } }
 ```
+
+---
 
 ## Accessibility Guidelines
 
-### 1. Color Contrast
-```css
-/* WCAG AA Compliance (4.5:1 for normal text, 3:1 for large text) */
---contrast-aa: 4.5;
---contrast-aa-large: 3;
+### Color Contrast
+```
+WCAG AA Compliance: 4.5:1 for normal text, 3:1 for large text.
 
-/* Semantic color usage */
-.success { color: var(--color-success); } /* #4caf50 on white: 4.54:1 */
-.danger { color: var(--color-danger); }   /* #f44336 on white: 3.93:1 */
+Verified pairs:
+- --on-surface (#1e1b13) on --surface (#fff8ef):        ≥ 10:1 ✅
+- --on-primary (#ffffff) on --primary (#570013):         ≥ 10:1 ✅
+- --secondary (#735c00) on --surface (#fff8ef):          ≥ 4.5:1 ✅
+- --on-secondary-container (#2b2000) on --secondary-container (#f5e6a3): ≥ 7:1 ✅
 ```
 
-### 2. Focus States
+### Focus States
 ```css
-/* Visible focus indicator */
+/* Visible focus — gold underline cue, no blue */
 button:focus-visible,
 a:focus-visible,
 input:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  outline: 2px solid var(--secondary);
+  outline-offset: 3px;
 }
 
-/* Tab key navigation */
 :focus-visible {
-  outline: 2px dashed var(--color-primary);
+  outline: 2px dashed var(--secondary);
   outline-offset: 4px;
 }
 ```
 
-### 3. Skip Navigation
+### Skip Navigation
 ```html
-<!-- Add skip to main link -->
-<a href="#main-content" class="skip-to-main">
-  Skip to Main Content
-</a>
+<a href="#main-content" class="skip-to-main">Skip to Main Content</a>
 
 <style>
 .skip-to-main {
@@ -878,150 +1055,46 @@ input:focus-visible {
   left: -9999px;
   z-index: 999;
 }
-
 .skip-to-main:focus {
   left: 0;
   top: 0;
-  background: var(--color-primary);
-  color: var(--color-white);
+  background: var(--primary);
+  color: var(--on-primary);
   padding: var(--spacing-md);
+  font-family: var(--font-body);
+  font-size: var(--text-label-md);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
 }
 </style>
 ```
 
-## Component Styling Examples
-
-### 1. Navigation Component
-```css
-.navbar {
-  background: var(--color-white);
-  box-shadow: var(--shadow-md);
-  padding: var(--spacing-md) var(--spacing-lg);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.navbar-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.navbar-menu {
-  display: flex;
-  gap: var(--spacing-lg);
-  list-style: none;
-}
-
-.navbar-menu a {
-  color: var(--text-primary);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.navbar-menu a:hover {
-  color: var(--color-primary);
-}
-
-.navbar-menu a.active {
-  color: var(--color-primary);
-  border-bottom: 2px solid var(--color-primary);
-}
-
-/* Mobile menu */
-@media (max-width: 768px) {
-  .navbar-menu {
-    display: none;
-  }
-  
-  .navbar-menu.mobile-open {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--color-white);
-  }
-}
-```
-
-### 2. Product Grid Component
-```css
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: var(--spacing-lg);
-  padding: var(--spacing-lg);
-}
-
-.product-card {
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.product-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-}
-
-.product-image {
-  width: 100%;
-  height: 200px;
-  background: var(--color-light);
-  object-fit: cover;
-  overflow: hidden;
-}
-
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.product-info {
-  padding: var(--spacing-md);
-}
-
-/* Responsive grid */
-@media (max-width: 768px) {
-  .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: var(--spacing-md);
-  }
-}
-```
+---
 
 ## Performance Optimization
 
-### 1. Image Optimization
+### Image Optimization
 ```html
-<!-- Responsive images -->
-<img 
-  src="image-1024.jpg"
-  alt="Product"
-  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-  srcset="image-320.jpg 320w, image-640.jpg 640w, image-1024.jpg 1024w"
+<!-- Portrait 4:5 product images — lazy loaded -->
+<img
+  src="product-1024.jpg"
+  alt="Product name"
+  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+  srcset="product-320.jpg 320w, product-640.jpg 640w, product-1024.jpg 1024w"
   loading="lazy"
-  style="max-width: 100%; height: auto;">
+  style="width: 100%; aspect-ratio: 4/5; object-fit: cover;">
 
-<!-- Picture element for art direction -->
+<!-- Art direction — mobile crops -->
 <picture>
-  <source media="(max-width: 640px)" srcset="image-mobile.jpg">
-  <source media="(max-width: 1024px)" srcset="image-tablet.jpg">
-  <img src="image-desktop.jpg" alt="Product">
+  <source media="(max-width: 640px)"  srcset="product-mobile.jpg">
+  <source media="(max-width: 1024px)" srcset="product-tablet.jpg">
+  <img src="product-desktop.jpg" alt="Product">
 </picture>
 ```
 
-### 2. CSS Optimization
+### CSS Optimization
 ```css
-/* Reduce motion for better performance */
+/* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -1029,44 +1102,77 @@ input:focus-visible {
   }
 }
 
-/* Use CSS containment */
-.card {
+/* CSS containment for product cards */
+.product-card {
   contain: layout style paint;
 }
 
-/* Optimize repaints */
+/* GPU compositing for animated elements */
 .animated {
   will-change: transform;
   transform: translateZ(0);
 }
 ```
 
+---
+
+## Do's and Don'ts — Quick Reference
+
+### ✅ DO
+- **DO** use `--surface` (#fff8ef) as the page background — never sterile white
+- **DO** use `--on-background` (#1e1b13) for all text — never `#000000`
+- **DO** use `--secondary` (Gold) or `--primary` (Maroon) for all interactive cues — never blue
+- **DO** use whitespace aggressively — `--spacing-3xl` / `--spacing-4xl` between sections
+- **DO** overlap elements — let images hang over text containers for editorial depth
+- **DO** use "Cream on Maroon" (`--surface` text on `--primary` bg) for high-impact hero sections
+- **DO** apply the Glassmorphism rule to sticky nav bars and floating elements
+- **DO** use Noto Serif for headings and product names; Manrope for all UI text
+- **DO** apply `4:5` portrait aspect ratio to all primary product images
+- **DO** use `--radius-md` (6px) — never pill shapes for brand CTAs
+
+### ❌ DON'T
+- **DON'T** use pure black (`#000`) or pure white (`#fff`) anywhere
+- **DON'T** use 1px `border` or `border-bottom` to separate sections or list items
+- **DON'T** use `--radius-full` (pill shapes) for buttons — feels too casual/tech
+- **DON'T** use standard blue for links or interactive elements
+- **DON'T** use `<hr>` tags as visual dividers — use vertical spacing instead
+- **DON'T** use harsh, opaque shadows — only the warm ambient shadow spec
+
+---
+
 ## Code Quality Standards
 
 ### Naming Conventions
-- Classes: `.component-name`, `.component__element`, `.component--modifier`
-- Variables: `--property-name`
+- Classes: `.component-name`, `.component__element`, `.component--modifier` (BEM)
+- CSS Variables: `--semantic-token-name`
 - Utilities: `.text-center`, `.flex-col`, `.gap-md`
 
 ### Documentation Template
 ```css
 /**
- * Component: Card
- * Description: Reusable card component with shadow elevation
- * 
+ * Component: ProductCard
+ * Description: Curated product frame with portrait imagery and tonal hover.
+ *
  * Variants:
- * - .card (base)
- * - .card--elevated (with hover effect)
- * - .card--flat (no shadow)
- * 
+ * - .product-card (base)
+ * - .product-card--featured (overlapping image treatment)
+ *
+ * Rules:
+ * - No border, no shadow. Depth via background color shift only.
+ * - Image must be 4:5 portrait with warm desaturation filter.
+ *
  * Usage:
- * <div class="card card--elevated">
- *   Content here
+ * <div class="product-card">
+ *   <div class="product-card__image"><img ...></div>
+ *   <div class="product-card__info">...</div>
  * </div>
  */
 ```
 
+---
+
 ## Related Guidelines
-- See: src/styles.css for global styles
-- See: src/app/app.css for app shell styling
+- See: `src/styles.css` for global styles and Heritage Modernist CSS variable definitions
+- See: `src/app/app.css` for app shell styling
 - See: Individual component CSS files for component-specific styles
+- See: `.github/instructions/` for complementary Copilot instruction sets

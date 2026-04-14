@@ -1,82 +1,131 @@
 <section class="featured-products" [attr.aria-label]="'Featured products section'">
   <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">Featured Collection</h2>
+    <div
+      class="section-header"
+      [srAnimation]="'flip-up'"
+      [srDelay]="0"
+      [srDuration]="750">
+      <span class="section-eyebrow">The Bengal Handloom Edit</span>
+      <h2 class="section-title">Authentic Cotton Collection</h2>
       <p class="section-subtitle">
-        Handpicked selections showcasing the best of our exclusive boutique
+        Handwoven cottons, jamdani motifs &amp; master-crafted ethnic wear — celebrating the timeless artistry of Bengal
       </p>
     </div>
 
-    <div class="products-grid">
+    <!-- ── Carousel Shell ── -->
+    <div class="carousel-shell">
+      <!-- Prev Arrow -->
+      <button
+        class="carousel-arrow prev"
+        aria-label="Scroll products left"
+        (click)="scrollBy(-1)">
+        <i class="pi pi-angle-left"></i>
+      </button>
+
+      <!-- Scrollable Track -->
       <div
-        *ngFor="let product of products(); let i = index"
-        class="product-card"
-        [class.fade-in]="true"
-        [style.--delay]="(i * 0.1) + 's'"
-        [attr.role]="'article'"
-        [attr.aria-label]="product.name">
+        #carousel
+        class="carousel-track"
+        role="list"
+        aria-label="Featured products"
+        (scroll)="updateProgress()">
 
-        <div class="product-image-wrapper">
-          <div class="product-image">
-            <img
-              [src]="product.image"
-              [alt]="product.name"
-              loading="lazy"
-              decoding="async"
-              class="product-img">
+        <div
+          *ngFor="let product of products(); let i = index"
+          class="product-card"
+          role="listitem"
+          [srAnimation]="'zoom-drift'"
+          [srDelay]="i * 180"
+          [srDuration]="1600"
+          [srThreshold]="0.05"
+          [style.--delay]="(i * 0.08) + 's'"
+          [attr.aria-label]="product.name">
 
-            <div *ngIf="product.badge" class="product-badge">
-              {{ product.badge }}
+          <div class="product-image-wrapper">
+            <div class="product-image">
+              <img
+                [src]="product.image"
+                [alt]="product.name"
+                loading="lazy"
+                decoding="async"
+                class="product-img"
+                (error)="onImageError($event, product.fallbackBg)">
+
+              <div *ngIf="product.badge" class="product-badge">
+                {{ product.badge }}
+              </div>
+
+              <div class="product-overlay">
+                <button
+                  class="btn-add-cart"
+                  [attr.aria-label]="'View details for ' + product.name">
+                  <i class="pi pi-shopping-bag"></i>
+                  <span>View Details</span>
+                </button>
+              </div>
             </div>
 
-            <div class="product-overlay">
-              <button
-                class="btn-add-cart"
-                [attr.aria-label]="'Add ' + product.name + ' to cart'">
-                <i class="pi pi-shopping-bag"></i>
-                <span>View Details</span>
-              </button>
-            </div>
+            <button
+              class="btn-wishlist"
+              [attr.aria-label]="'Add ' + product.name + ' to wishlist'"
+              (click)="toggleWishlist($event)">
+              <i class="pi pi-heart"></i>
+            </button>
           </div>
 
-          <button
-            class="btn-wishlist"
-            [attr.aria-label]="'Add ' + product.name + ' to wishlist'"
-            (click)="toggleWishlist($event)">
-            <i class="pi pi-heart"></i>
-          </button>
-        </div>
+          <div class="product-info">
+            <div class="product-category">{{ product.category }}</div>
+            <h3 class="product-name">{{ product.name }}</h3>
 
-        <div class="product-info">
-          <div class="product-category">{{ product.category }}</div>
-          <h3 class="product-name">{{ product.name }}</h3>
-
-          <div class="product-rating">
-            <div class="stars">
-              <i
-                *ngFor="let star of [1,2,3,4,5]"
-                class="pi pi-star-fill"
-                [class.filled]="star <= Math.floor(product.rating)">
-              </i>
+            <div class="product-rating">
+              <div class="stars">
+                <i
+                  *ngFor="let star of [1,2,3,4,5]"
+                  class="pi pi-star-fill"
+                  [class.filled]="star <= Math.floor(product.rating)">
+                </i>
+              </div>
+              <span class="rating-text">({{ product.reviews }})</span>
             </div>
-            <span class="rating-text">({{ product.reviews }} reviews)</span>
-          </div>
 
-          <div class="product-price">
-            <span *ngIf="product.originalPrice" class="original-price">
-              ${{ product.originalPrice.toFixed(2) }}
-            </span>
-            <span class="current-price">${{ product.price.toFixed(2) }}</span>
+            <div class="product-price">
+              <span *ngIf="product.originalPrice" class="original-price">
+                &#8377;{{ product.originalPrice.toLocaleString('en-IN') }}
+              </span>
+              <span class="current-price">&#8377;{{ product.price.toLocaleString('en-IN') }}</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- Next Arrow -->
+      <button
+        class="carousel-arrow next"
+        aria-label="Scroll products right"
+        (click)="scrollBy(1)">
+        <i class="pi pi-angle-right"></i>
+      </button>
     </div>
 
-    <div class="section-footer">
+    <!-- ── Progress Bar ── -->
+    <div class="carousel-progress" aria-hidden="true">
+      <div class="progress-bar-fill"></div>
+    </div>
+
+    <!-- ── Scroll Hint ── -->
+    <p class="scroll-hint" aria-hidden="true">
+      <i class="pi pi-arrows-h"></i> Drag or use arrows to explore
+    </p>
+
+    <div
+      class="section-footer"
+      [srAnimation]="'fade-up'"
+      [srDelay]="100"
+      [srDuration]="600">
       <button
-        class="btn btn-view-all"
+        class="btn-view-all"
         routerLink="/shop"
-        aria-label="View all products">
+        aria-label="View all products in the collection">
         <span>View All Products</span>
         <i class="pi pi-arrow-right"></i>
       </button>

@@ -1,21 +1,122 @@
+/* ═══════════════════════════════════════════════════════════
+   Shop Page — Heritage Modernist
+   Full-page editorial coming-soon treatment
+   ═══════════════════════════════════════════════════════════ */
+
 .shop-page {
   width: 100%;
-  padding: 3rem 1rem;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface, #fff8ef);
+  padding: var(--spacing-3xl, 64px) var(--spacing-lg, 24px);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle tonal background texture */
+.shop-page::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='24' fill='none' stroke='%234a3f30' stroke-width='0.4' stroke-opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 60px 60px;
+  pointer-events: none;
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 640px;
   margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Gold eyebrow */
+.shop-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body, 'Manrope', sans-serif);
+  font-size: var(--text-label-md, 0.75rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label, 0.05em);
+  color: var(--secondary, #735c00);
+  margin-bottom: var(--spacing-lg, 24px);
+}
+
+.shop-eyebrow::before,
+.shop-eyebrow::after {
+  content: '';
+  display: inline-block;
+  width: 1.5rem;
+  height: 1px;
+  background: var(--secondary, #735c00);
 }
 
 h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #1e293b;
-  margin-bottom: 1rem;
+  font-family: var(--font-display, 'Noto Serif', serif);
+  font-size: clamp(2rem, 6vw, var(--text-display-lg, 3.5rem));
+  font-weight: 700;
+  color: var(--on-surface, #1e1b13);
+  letter-spacing: var(--tracking-display, -0.02em);
+  line-height: 1.1;
+  margin-bottom: var(--spacing-lg, 24px);
+}
+
+h1 em {
+  color: var(--primary, #570013);
+  font-style: italic;
 }
 
 p {
-  font-size: 1rem;
-  color: #64748b;
+  font-family: var(--font-body, 'Manrope', sans-serif);
+  font-size: var(--text-body-lg, 1rem);
+  color: var(--on-surface-variant, #4a3f30);
+  line-height: 1.7;
+  margin-bottom: var(--spacing-2xl, 48px);
+}
+
+/* Decorative maroon line */
+.shop-divider {
+  width: 3rem;
+  height: 2px;
+  background: var(--secondary, #735c00);
+  border-radius: 1px;
+  margin: var(--spacing-xl, 32px) auto;
+}
+
+/* Back to home CTA */
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm, 8px);
+  padding: 14px 32px;
+  background: var(--gradient-primary-silk, linear-gradient(135deg, #570013 0%, #800020 100%));
+  color: var(--on-primary, #ffffff);
+  border: none;
+  border-radius: var(--radius-md, 6px);
+  font-family: var(--font-body, 'Manrope', sans-serif);
+  font-size: var(--text-label-md, 0.75rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label, 0.05em);
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--secondary-fixed, #c9a600);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-back:hover {
+  filter: brightness(1.08);
+  box-shadow:
+    inset 0 0 0 1px var(--secondary-fixed, #c9a600),
+    var(--shadow-ambient, 0px 20px 40px rgba(88, 65, 65, 0.08));
+  color: var(--on-primary, #ffffff);
+}
+
+.btn-back:active {
+  transform: scale(0.98);
 }

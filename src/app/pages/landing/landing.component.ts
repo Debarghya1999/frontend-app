@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { HeroSectionComponent } from './sections/hero-section/hero-section.component';
 import { FeaturedProductsComponent } from './sections/featured-products/featured-products.component';
 import { TestimonialsComponent } from './sections/testimonials/testimonials.component';
-import { NewsletterComponent } from './sections/newsletter/newsletter.component';
 import { TrustIndicatorsComponent } from './sections/trust-indicators/trust-indicators.component';
 
 @Component({
@@ -16,7 +15,6 @@ import { TrustIndicatorsComponent } from './sections/trust-indicators/trust-indi
     HeroSectionComponent,
     FeaturedProductsComponent,
     TestimonialsComponent,
-    NewsletterComponent,
     TrustIndicatorsComponent,
   ],
   templateUrl: './landing.component.html',

@@ -3,14 +3,10 @@
   <app-featured-products></app-featured-products>
   <app-trust-indicators></app-trust-indicators>
   <app-testimonials></app-testimonials>
-  <app-newsletter></app-newsletter>
+  <!--<app-newsletter></app-newsletter>-->
 
   <!-- Scroll to Top Button -->
-  <button
-    *ngIf="showScrollButton()"
-    class="scroll-to-top"
-    (click)="scrollToTop()"
-    [attr.aria-label]="'Scroll to top'"
+  <button *ngIf="showScrollButton()" class="scroll-to-top" (click)="scrollToTop()" [attr.aria-label]="'Scroll to top'"
     title="Scroll to top">
     <i class="pi pi-arrow-up"></i>
   </button>

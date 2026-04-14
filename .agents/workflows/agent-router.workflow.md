@@ -1,6 +1,5 @@
 ---
-description: "Dynamic agent router and custom prompt framework for the E-Commerce Boutique application"
-tools: ['vscode', 'execute', 'read', 'agent', 'todo']
+description: Dynamic agent router and custom prompt framework for the E-Commerce Boutique application
 ---
 
 # Dynamic Agent Router & Custom Prompt Framework
@@ -365,4 +364,3 @@ To use this in VS Code's prompt system:
 - Add custom constraints for consistency
 - Combine agents for complex features
 - Reference this guide anytime you need assistance
-

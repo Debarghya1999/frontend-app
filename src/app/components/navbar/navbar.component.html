@@ -1,0 +1,44 @@
+<header class="app-header" role="banner">
+  <div class="header-container">
+
+    <!-- Logo -->
+    <div class="logo-section">
+      <a routerLink="/landing" class="logo" [attr.aria-label]="'The Boutique — home'">
+        <div class="logo-icon" aria-hidden="true">
+          <i class="pi pi-heart-fill"></i>
+        </div>
+        <span class="logo-wordmark">Boutique</span>
+      </a>
+    </div>
+
+    <!-- Nav Menu -->
+    <nav class="nav-menu" role="navigation" [attr.aria-label]="'Main navigation'" *ngIf="!isAuthPage">
+      <a routerLink="/landing" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="nav-link">
+        Home
+      </a>
+      <a routerLink="/shop" routerLinkActive="active" class="nav-link">
+        Collections
+      </a>
+      <a href="#" class="nav-link">New Arrivals</a>
+      <a href="#" class="nav-link">About</a>
+    </nav>
+
+    <!-- Action Icons -->
+    <div class="header-actions" *ngIf="!isAuthPage">
+      <button class="btn-search" aria-label="Search products" title="Search">
+        <i class="pi pi-search"></i>
+      </button>
+      <button class="btn-wishlist" aria-label="Wishlist" title="Wishlist">
+        <i class="pi pi-heart"></i>
+      </button>
+      <button class="btn-cart" aria-label="Shopping cart" title="Cart">
+        <i class="pi pi-shopping-bag"></i>
+        <span class="cart-badge" aria-label="0 items in cart">0</span>
+      </button>
+      <button class="btn-account" aria-label="Account" title="Account">
+        <i class="pi pi-user"></i>
+      </button>
+    </div>
+
+  </div>
+</header>

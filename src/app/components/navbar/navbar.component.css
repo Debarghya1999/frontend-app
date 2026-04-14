@@ -1,0 +1,186 @@
+/* ══════════════════════════════════
+   HEADER — The Floating Silk Bar
+   ══════════════════════════════════ */
+:host {
+  display: contents;
+}
+
+.app-header {
+  position: sticky;
+  top: var(--spacing-sm);
+  z-index: var(--z-sticky, 1020);
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--spacing-lg);
+  pointer-events: none; /* Let the inner div handle events */
+}
+
+.header-container {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1280px;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: rgba(255, 248, 239, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-lg);
+  border: none;                          /* No-Line Rule */
+  box-shadow: var(--shadow-ambient);
+  gap: var(--spacing-xl);
+  transition: all 0.4s ease;
+}
+
+@media (min-width: 768px) {
+  .header-container {
+    padding: var(--spacing-md) var(--spacing-xl);
+  }
+}
+
+/* ── Logo ── */
+.logo-section { flex-shrink: 0; }
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.logo-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: var(--tracking-display);
+  color: var(--primary);
+  line-height: 1;
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: var(--gradient-primary-silk);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 0 1px rgba(201, 166, 0, 0.4);
+  flex-shrink: 0;
+}
+
+.logo-icon i {
+  font-size: 1rem;
+  color: var(--on-primary);
+}
+
+.logo:hover { opacity: 0.8; }
+
+/* ── Navigation Menu ── */
+.nav-menu {
+  display: none;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xl);
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .nav-menu { display: flex; }
+}
+
+.nav-link {
+  font-family: var(--font-body);
+  font-size: var(--text-label-md, 0.75rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  position: relative;
+  padding: var(--spacing-xs) 0;
+  transition: color 0.3s ease;
+}
+
+/* Gold underline that expands from centre */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: var(--secondary);
+  transition: left 0.3s ease, width 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--secondary);      /* Gold — NEVER blue */
+}
+
+.nav-link.active::after,
+.nav-link:hover::after {
+  left: 0;
+  width: 100%;
+}
+
+/* ── Header Action Buttons ── */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.btn-search,
+.btn-wishlist,
+.btn-account,
+.btn-cart {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--radius-md);   /* Never pill — No-Line Rule */
+  background: transparent;
+  border: none;
+  color: var(--on-surface-variant);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.btn-search:hover,
+.btn-wishlist:hover,
+.btn-account:hover,
+.btn-cart:hover {
+  background: var(--surface-container);
+  color: var(--primary);
+}
+
+.btn-cart { position: relative; }
+
+.cart-badge {
+  position: absolute;
+  top: -0.2rem;
+  right: -0.2rem;
+  background: var(--gradient-primary-silk);
+  color: var(--on-primary);
+  font-size: 0.5rem;
+  font-weight: 700;
+  font-family: var(--font-body);
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--surface);
+}

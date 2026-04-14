@@ -7,22 +7,42 @@
 
   <div class="hero-content">
     <div class="hero-text-container">
-      <h1 class="hero-title" [@fadeInUp]="'visible'">
-        Discover Premium Boutique Fashion
+
+      <span
+        class="hero-eyebrow"
+        [srAnimation]="'fade-up'"
+        [srDelay]="200"
+        [srDuration]="1200"
+        aria-label="New Season">2025 Handcrafted Cotton Lookbook</span>
+
+      <h1
+        class="hero-title"
+        [srAnimation]="'tilt-in'"
+        [srDelay]="0"
+        [srDuration]="1600">
+        Discover <em class="highlight">Authentic</em><br>
+        Bengali Cotton Wear
       </h1>
 
-      <p class="hero-subtitle" [@fadeInUp]="'visible'">
-        Curated collections of exclusive, high-quality pieces designed for the modern individual.
-        Elevate your style with timeless elegance.
+      <p
+        class="hero-subtitle"
+        [srAnimation]="'fade-up'"
+        [srDelay]="300"
+        [srDuration]="1400">
+        Curated collections of handwoven cotton sarees, elegant kurtis, and classic panjabis
+        — celebrating authentic Bengal craftsmanship with everyday elegance.
       </p>
 
-      <div class="hero-cta-buttons">
+      <div
+        class="hero-cta-buttons"
+        [srAnimation]="'zoom-drift'"
+        [srDelay]="500"
+        [srDuration]="1400">
         <button
           class="btn btn-primary"
           routerLink="/shop"
           [queryParams]="{ featured: true }"
-          [@fadeInUp]="'visible'"
-          aria-label="Browse featured collection">
+          aria-label="Browse ethnic collection">
           <span class="btn-icon">
             <i class="pi pi-shopping-bag"></i>
           </span>
@@ -32,30 +52,39 @@
         <button
           class="btn btn-secondary"
           (click)="scrollToSection('testimonials')"
-          [@fadeInUp]="'visible'"
-          aria-label="Scroll to testimonials">
+          aria-label="Scroll to customer stories">
           <span class="btn-icon">
             <i class="pi pi-star"></i>
           </span>
-          See Reviews
+          Customer Stories
         </button>
       </div>
 
-      <div class="hero-stats">
-        <div class="stat-item" *ngFor="let stat of stats()" [@fadeInUp]="'visible'">
+      <div
+        class="hero-stats"
+        [srAnimation]="'fade-up'"
+        [srDelay]="700"
+        [srDuration]="1400">
+        <div class="stat-item" *ngFor="let stat of stats()">
           <span class="stat-number">{{ stat.number }}</span>
           <span class="stat-label">{{ stat.label }}</span>
         </div>
       </div>
     </div>
 
-    <div class="hero-image-container">
-      <div class="hero-image" [@fadeInScale]="'visible'">
+    <div
+      class="hero-image-container"
+      [srAnimation]="'slide-right'"
+      [srDelay]="150"
+      [srDuration]="2000"
+      [srThreshold]="0.05">
+      <div class="hero-image">
         <img
-          src="https://images.unsplash.com/photo-1520763160298-1b434c919abe?w=600&h=700&fit=crop&q=80"
-          alt="Premium boutique fashion collection showcase"
+          src="images/hero_image.png"
+          alt="Authentic Bengali cotton wear — handwoven sarees and panjabis"
           loading="lazy"
-          decoding="async">
+          decoding="async"
+          (error)="onHeroImageError($event)">
       </div>
     </div>
   </div>
@@ -66,4 +95,5 @@
       <i class="pi pi-chevron-down"></i>
     </span>
   </div>
+
 </section>
