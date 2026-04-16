@@ -1,10 +1,15 @@
 import { Routes } from '@angular/router';
-import { LandingComponent } from './pages/landing/landing.component';
+import { HomeComponent } from './pages/home/home.component';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/auth/auth.component').then(m => m.AuthComponent),
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent),
     data: {
       title: 'Sign In | The Artisan Boutique',
       description: 'Login or create an account to access our heritage collections.',
@@ -12,7 +17,7 @@ export const routes: Routes = [
   },
   {
     path: 'collections',
-    loadComponent: () => import('./pages/shop/shop.component').then(m => m.ShopComponent),
+    loadComponent: () => import('./pages/collections/collections.component').then(m => m.CollectionsComponent),
     data: {
       title: 'Collections | The Artisan Boutique',
       description: 'Browse our exclusive collection of designer fashion pieces.',
@@ -27,8 +32,8 @@ export const routes: Routes = [
     },
   },
   {
-    path: 'landing',
-    component: LandingComponent,
+    path: 'home',
+    component: HomeComponent,
     data: {
       title: 'The Artisan Boutique | Premium Bengali Ethnic Wear',
       description: 'Discover premium boutique fashion with exclusive, high-quality pieces. Curated collections for the modern individual.',

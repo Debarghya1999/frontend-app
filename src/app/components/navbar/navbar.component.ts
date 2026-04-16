@@ -11,13 +11,13 @@ import { filter } from 'rxjs/operators';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  isAuthPage = false;
+  isLoginPage = false;
 
   constructor(private router: Router) {
     this.router.events.pipe(
       filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
-      this.isAuthPage = event.urlAfterRedirects === '/' || event.urlAfterRedirects === '/auth';
+      this.isLoginPage = event.urlAfterRedirects === '/' || event.urlAfterRedirects === '/login';
     });
   }
 }

@@ -28,7 +28,7 @@ declare const gsap: any;
 declare const ScrollTrigger: any;
 
 // ── Product Model ──────────────────────────────────────────────────────────
-export interface ShopProduct {
+export interface CollectionProduct {
   id: string;
   name: string;
   subtitle: string;
@@ -46,14 +46,14 @@ export interface ShopProduct {
 }
 
 @Component({
-  selector: 'app-shop',
+  selector: 'app-collections',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule],
-  templateUrl: './shop.component.html',
-  styleUrl: './shop.component.css',
+  templateUrl: './collections.component.html',
+  styleUrl: './collections.component.css',
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class ShopComponent implements OnInit, AfterViewInit, OnDestroy {
+export class CollectionsComponent implements OnInit, AfterViewInit, OnDestroy {
   private cdr        = inject(ChangeDetectorRef);
   private destroyRef = inject(DestroyRef);
   private filterSvc  = inject(FilterOptionsService);
@@ -108,7 +108,7 @@ export class ShopComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   // ── Product Catalogue (static; swap with HTTP in ProductService) ────────
-  readonly allProducts: ShopProduct[] = [
+  readonly allProducts: CollectionProduct[] = [
     {
       id: '1', name: 'Royal Zardosi Lehenga', subtitle: 'Hand-woven Banarasi Silk',
       category: 'Saree', fabric: 'Banarasi Silk', price: 84500,
@@ -208,7 +208,7 @@ export class ShopComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   // ── Derived Getters ────────────────────────────────────────────────────
-  get filteredProducts(): ShopProduct[] {
+  get filteredProducts(): CollectionProduct[] {
     let products = [...this.allProducts];
 
     if (this.bestSellersOnly) {
@@ -243,7 +243,7 @@ export class ShopComponent implements OnInit, AfterViewInit, OnDestroy {
     return products;
   }
 
-  get paginatedProducts(): ShopProduct[] {
+  get paginatedProducts(): CollectionProduct[] {
     const start = this.currentPage * this.pageSize;
     return this.filteredProducts.slice(start, start + this.pageSize);
   }
@@ -308,7 +308,7 @@ export class ShopComponent implements OnInit, AfterViewInit, OnDestroy {
         this.animateFilterItems();
       },
       error: (err) => {
-        console.error('[ShopComponent] Failed to load filter options:', err);
+        console.error('[CollectionsComponent] Failed to load filter options:', err);
         this.filterOptionsLoading.set(false);
       },
     });
@@ -327,9 +327,9 @@ export class ShopComponent implements OnInit, AfterViewInit, OnDestroy {
 
         // ① Header sequence
         gsap.timeline({ defaults: { ease } })
-          .from('.shop-breadcrumb', { opacity: 0, y: -14, duration: 0.5 })
-          .from('.shop-headline',   { opacity: 0, y: 36, duration: 0.75 }, '-=0.2')
-          .from('.shop-meta',       { opacity: 0, y: 16, duration: 0.45 }, '-=0.3');
+          .from('.collections-breadcrumb', { opacity: 0, y: -14, duration: 0.5 })
+          .from('.collections-headline',   { opacity: 0, y: 36, duration: 0.75 }, '-=0.2')
+          .from('.collections-meta',       { opacity: 0, y: 16, duration: 0.45 }, '-=0.3');
 
         // ② Sidebar entrance
         gsap.from('.filter-sidebar', {
@@ -337,7 +337,7 @@ export class ShopComponent implements OnInit, AfterViewInit, OnDestroy {
         });
 
         // ③ Toolbar + grid cards stagger
-        gsap.from('.shop-toolbar', { opacity: 0, y: 14, duration: 0.4, ease, delay: 0.45 });
+        gsap.from('.collections-toolbar', { opacity: 0, y: 14, duration: 0.4, ease, delay: 0.45 });
         gsap.from('.product-card', {
           opacity: 0, y: 50, scale: 0.94,
           duration: 0.6, ease,
@@ -347,14 +347,14 @@ export class ShopComponent implements OnInit, AfterViewInit, OnDestroy {
 
         // ④ Pagination reveal on scroll
         if (typeof ScrollTrigger !== 'undefined') {
-          gsap.from('.shop-pagination', {
+          gsap.from('.collections-pagination', {
             opacity: 0, y: 28, duration: 0.6, ease,
-            scrollTrigger: { trigger: '.shop-pagination', start: 'top 92%' },
+            scrollTrigger: { trigger: '.collections-pagination', start: 'top 92%' },
           });
         }
       });
     } catch (e) {
-      console.warn('[ShopComponent] GSAP not available:', e);
+      console.warn('[CollectionsComponent] GSAP not available:', e);
     }
   }
 
@@ -454,7 +454,7 @@ export class ShopComponent implements OnInit, AfterViewInit, OnDestroy {
     return Array.from({ length: 5 }, (_, i) => i < Math.round(rating));
   }
 
-  trackByProductId(_: number, p: ShopProduct): string { return p.id; }
+  trackByProductId(_: number, p: CollectionProduct): string { return p.id; }
   trackById(_: number, item: { id: string }): string   { return item.id; }
 
   ngOnDestroy(): void {

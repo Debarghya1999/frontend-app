@@ -3,7 +3,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 /* ── Page Shell & Ambient Logic ── */
-.shop-page {
+.collections-page {
   min-height: 100vh;
   background: var(--background, #fff8ef);
   padding: 0 0 var(--spacing-4xl, 96px);
@@ -11,7 +11,7 @@
   overflow-x: hidden;
 }
 
-.shop-bg-motif {
+.collections-bg-motif {
   position: fixed;
   top: -10%;
   right: -15%;
@@ -23,7 +23,7 @@
   opacity: 0.45;
 }
 
-.shop-orb {
+.collections-orb {
   position: fixed;
   border-radius: 50%;
   pointer-events: none;
@@ -32,12 +32,12 @@
   opacity: 0.06;
   animation: orbDrift 20s ease-in-out infinite alternate;
 }
-.shop-orb--1 {
+.collections-orb--1 {
   width: 480px; height: 480px;
   background: var(--primary, #570013);
   top: -80px; left: -120px;
 }
-.shop-orb--2 {
+.collections-orb--2 {
   width: 360px; height: 360px;
   background: var(--secondary, #735c00);
   bottom: 10%; right: -80px;
@@ -51,7 +51,7 @@
 }
 
 /* ── Header Area ── */
-.shop-header-area {
+.collections-header-area {
   position: relative;
   z-index: 2;
   padding: var(--spacing-2xl, 48px) clamp(24px, 5vw, 64px) var(--spacing-xl, 32px);
@@ -60,7 +60,7 @@
   border-bottom: 1px solid rgba(74, 63, 48, 0.1);
 }
 
-.shop-breadcrumb {
+.collections-breadcrumb {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -78,7 +78,7 @@
 .bc-current { color: var(--secondary, #735c00); font-weight: 800; }
 .bc-sep { opacity: 0.25; }
 
-.shop-headline-block {
+.collections-headline-block {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -86,7 +86,7 @@
   flex-wrap: wrap;
 }
 
-.shop-headline {
+.collections-headline {
   font-family: var(--font-display, 'Noto Serif', serif);
   font-size: clamp(2rem, 4.5vw, 3.75rem);
   font-weight: 700;
@@ -95,12 +95,12 @@
   line-height: 1.08;
   margin: 0;
 }
-.shop-headline em {
+.collections-headline em {
   font-style: italic;
   color: var(--primary, #570013);
   position: relative;
 }
-.shop-headline em::after {
+.collections-headline em::after {
   content: '';
   position: absolute;
   bottom: -4px;
@@ -116,14 +116,14 @@
   margin-top: 10px;
 }
 
-.shop-meta {
+.collections-meta {
   display: flex;
   align-items: center;
   gap: var(--spacing-xl, 32px);
   flex-wrap: wrap;
 }
 
-.shop-count-badge {
+.collections-count-badge {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -189,7 +189,7 @@
 }
 
 /* ── Layout ── */
-.shop-layout {
+.collections-layout {
   position: relative;
   z-index: 1;
   display: grid;
@@ -205,12 +205,21 @@
 .filter-sidebar {
   position: sticky;
   top: var(--spacing-2xl, 48px);
-  background: rgba(255, 248, 239, 0.6);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(74, 63, 48, 0.09);
+  
+  /* Advanced Glassmorphism — Design Sync with Shop */
+  background: rgba(255, 248, 239, 0.45);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: var(--radius-lg, 12px);
+  box-shadow: 
+    var(--shadow-lift),
+    0 4px 12px rgba(88, 65, 65, 0.04),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+    
   overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar-title-row {
@@ -382,7 +391,7 @@
 
 /* ── Product Grid ── */
 .product-area { display: flex; flex-direction: column; gap: var(--spacing-2xl, 48px); }
-.shop-toolbar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid rgba(74, 63, 48, 0.1); }
+.collections-toolbar { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid rgba(74, 63, 48, 0.1); }
 .toolbar-count { font-family: var(--font-body); font-size: 0.8rem; color: var(--on-surface-variant); font-style: italic; opacity: 0.65; margin: 0; }
 .toolbar-count strong { font-weight: 700; opacity: 1; }
 .sort-label { font-family: var(--font-body); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; opacity: 0.5; margin-right: 8px; }
@@ -554,7 +563,7 @@
 .color-dot-more { font-size: 0.55rem; font-weight: 800; opacity: 0.65; margin-left: 5px; }
 
 /* ── Pagination ── */
-.shop-pagination { display: flex; align-items: center; justify-content: center; gap: 48px; padding-top: 48px; border-top: 1px solid rgba(74,63,48,0.08); }
+.collections-pagination { display: flex; align-items: center; justify-content: center; gap: 48px; padding-top: 48px; border-top: 1px solid rgba(74,63,48,0.08); }
 .page-btn { display: flex; align-items: center; gap: 7px; background: transparent; border: none; font-size: 0.62rem; font-weight: 700; text-transform: uppercase; color: var(--on-surface-variant); opacity: 0.4; cursor: pointer; transition: 0.18s; }
 .page-btn:not(:disabled):hover { opacity: 1; color: var(--primary); }
 .page-numbers { display: flex; gap: 32px; }
@@ -577,17 +586,17 @@
 .toggle-filter-badge { width: 20px; height: 20px; background: var(--secondary); border-radius: 50%; font-size: 0.62rem; display: flex; align-items: center; justify-content: center; }
 
 @media (max-width: 1280px) { .product-grid { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 1024px) { .shop-layout { grid-template-columns: 190px 1fr; } }
+@media (max-width: 1024px) { .collections-layout { grid-template-columns: 190px 1fr; } }
 @media (max-width: 768px) {
   .filter-toggle-btn { display: inline-flex; }
-  .shop-layout { grid-template-columns: 1fr; }
+  .collections-layout { grid-template-columns: 1fr; }
   .filter-sidebar { display: none; }
   .filter-sidebar--open { display: flex; flex-direction: column; }
   .product-grid { grid-template-columns: repeat(2, 1fr); }
-  .shop-meta { flex-direction: column; align-items: flex-end; }
+  .collections-meta { flex-direction: column; align-items: flex-end; }
   .drop-tabs { overflow-x: auto; padding-bottom: 8px; width: 100%; }
 }
 @media (max-width: 480px) {
-  .shop-header-area { padding: 32px 16px; }
+  .collections-header-area { padding: 32px 16px; }
   .product-grid { grid-template-columns: repeat(2, 1fr); gap: 14px 10px; }
 }

@@ -3,7 +3,7 @@
 
     <!-- Logo -->
     <div class="logo-section">
-      <a routerLink="/landing" class="logo" [attr.aria-label]="'The Boutique — home'">
+      <a routerLink="/home" class="logo" [attr.aria-label]="'The Boutique — home'">
         <div class="logo-icon" aria-hidden="true">
           <i class="pi pi-heart-fill"></i>
         </div>
@@ -12,8 +12,8 @@
     </div>
 
     <!-- Nav Menu -->
-    <nav class="nav-menu" role="navigation" [attr.aria-label]="'Main navigation'" *ngIf="!isAuthPage">
-      <a routerLink="/landing" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="nav-link">
+    <nav class="nav-menu" role="navigation" [attr.aria-label]="'Main navigation'" *ngIf="!isLoginPage">
+      <a routerLink="/home" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" class="nav-link">
         Home
       </a>
       <a routerLink="/collections" routerLinkActive="active" class="nav-link">
@@ -24,7 +24,7 @@
     </nav>
 
     <!-- Action Icons -->
-    <div class="header-actions" *ngIf="!isAuthPage">
+    <div class="header-actions" *ngIf="!isLoginPage">
       <button class="btn-search" aria-label="Search products" title="Search">
         <i class="pi pi-search"></i>
       </button>

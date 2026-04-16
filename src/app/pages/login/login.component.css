@@ -4,7 +4,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 /* ── Ambient Canvas ──────────────────────────────────────── */
-.auth-scene {
+.login-scene {
   min-height: 100dvh;
   display: flex;
   align-items: center;
@@ -67,7 +67,7 @@
 }
 
 /* ── Auth Card ─────────────────────────────────────────────── */
-.auth-card {
+.login-card {
   width: 100%;
   max-width: 1100px;
   display: grid;
@@ -86,7 +86,7 @@
 }
 
 @media (min-width: 768px) {
-  .auth-card {
+  .login-card {
     grid-template-columns: 1fr 1fr;
     min-height: 580px;
   }
@@ -367,7 +367,7 @@
 }
 
 /* ── Field Groups ─────────────────────────────────────────── */
-.auth-form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -858,7 +858,7 @@
     opacity: 1 !important;
   }
 
-  .auth-card,
+  .login-card,
   .mode-switcher,
   .form-header,
   .field-group,
@@ -878,12 +878,12 @@
 
 /* ── Responsive tweaks ───────────────────────────────────── */
 @media (max-width: 767px) {
-  .auth-scene {
+  .login-scene {
     padding: var(--spacing-sm);
     align-items: flex-end;
   }
 
-  .auth-card {
+  .login-card {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
     max-width: 100%;

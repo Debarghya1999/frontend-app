@@ -7,7 +7,7 @@ import { TestimonialsComponent } from './sections/testimonials/testimonials.comp
 import { TrustIndicatorsComponent } from './sections/trust-indicators/trust-indicators.component';
 
 @Component({
-  selector: 'app-landing',
+  selector: 'app-home',
   standalone: true,
   imports: [
     CommonModule,
@@ -17,10 +17,10 @@ import { TrustIndicatorsComponent } from './sections/trust-indicators/trust-indi
     TestimonialsComponent,
     TrustIndicatorsComponent,
   ],
-  templateUrl: './landing.component.html',
-  styleUrl: './landing.component.css',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css',
 })
-export class LandingComponent {
+export class HomeComponent {
   showScrollButton = signal(false);
 
   @HostListener('window:scroll')

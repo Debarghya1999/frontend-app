@@ -21,19 +21,19 @@ import {
 import gsap from 'gsap';
 
 @Component({
-  selector: 'app-auth',
+  selector: 'app-login',
   standalone: true,
   imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './auth.component.html',
-  styleUrl: './auth.component.css',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AuthComponent implements OnInit, AfterViewInit, OnDestroy {
+export class LoginComponent implements OnInit, AfterViewInit, OnDestroy {
   // ── State ──────────────────────────────────────────────
   isLoginMode   = true;
   isLoading     = false;
   showPassword  = false;
-  authForm!: FormGroup;
+  loginForm!: FormGroup;
 
   // ── ViewChild refs for GSAP targeting ─────────────────
   @ViewChild('authCard')     authCard!:     ElementRef<HTMLDivElement>;
@@ -99,7 +99,7 @@ export class AuthComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private _buildForm(): void {
     // name control always present in DOM; validator toggled on mode-switch
-    this.authForm = this.fb.group({
+    this.loginForm = this.fb.group({
       name:     ['', []],                                    // no validator in login mode
       email:    ['', [Validators.required]],
       password: ['', [Validators.required, Validators.minLength(8)]],
@@ -321,7 +321,7 @@ export class AuthComponent implements OnInit, AfterViewInit, OnDestroy {
   private _applyModeChange(toLogin: boolean): void {
     this.isLoginMode = toLogin;
     // Toggle name validator without rebuilding the form (prevents height jump)
-    const nameCtrl = this.authForm.get('name');
+    const nameCtrl = this.loginForm.get('name');
     if (nameCtrl) {
       if (toLogin) {
         nameCtrl.clearValidators();
@@ -331,8 +331,8 @@ export class AuthComponent implements OnInit, AfterViewInit, OnDestroy {
       }
       nameCtrl.updateValueAndValidity({ emitEvent: false });
     }
-    this.authForm.markAsPristine();
-    this.authForm.markAsUntouched();
+    this.loginForm.markAsPristine();
+    this.loginForm.markAsUntouched();
     this.cdr.markForCheck();
   }
 
@@ -346,8 +346,8 @@ export class AuthComponent implements OnInit, AfterViewInit, OnDestroy {
   // ── Form submission ────────────────────────────────────
 
   onSubmit(): void {
-    if (this.authForm.invalid) {
-      this.authForm.markAllAsTouched();
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
       this.cdr.markForCheck();
       this._shakeForm();
       return;
@@ -360,7 +360,7 @@ export class AuthComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       this.isLoading = false;
       this.cdr.markForCheck();
-      this.router.navigate(['/landing']);
+      this.router.navigate(['/home']);
     }, 1200);
   }
 

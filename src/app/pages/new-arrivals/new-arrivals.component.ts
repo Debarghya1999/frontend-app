@@ -21,7 +21,7 @@ import {
   FilterFabric,
   FilterColor,
   FilterSize,
-} from '../shop/filter-options.service';
+} from '../collections/filter-options.service';
 
 declare const gsap: any;
 declare const ScrollTrigger: any;
@@ -342,10 +342,10 @@ export class NewArrivalsComponent implements OnInit, AfterViewInit, OnDestroy {
 
         // ① Header Entrance
         gsap.timeline({ defaults: { ease } })
-          .from('.shop-breadcrumb', { opacity: 0, y: -10, duration: 0.5 })
-          .from('.shop-headline',   { opacity: 0, y: 30, duration: 0.7 }, '-=0.3')
+          .from('.collections-breadcrumb', { opacity: 0, y: -10, duration: 0.5 })
+          .from('.collections-headline',   { opacity: 0, y: 30, duration: 0.7 }, '-=0.3')
           .from('.headline-rule',   { scaleX: 0, transformOrigin: 'left', duration: 0.8 }, '-=0.4')
-          .from('.shop-meta',       { opacity: 0, y: 15, duration: 0.5 }, '-=0.5');
+          .from('.collections-meta',       { opacity: 0, y: 15, duration: 0.5 }, '-=0.5');
 
         // ② Sidebar & Grid
         gsap.from('.filter-sidebar', {
@@ -355,18 +355,18 @@ export class NewArrivalsComponent implements OnInit, AfterViewInit, OnDestroy {
           delay: 0.4
         });
 
-        gsap.from('.shop-toolbar', { opacity: 0, y: 20, duration: 0.5, ease, delay: 0.7 });
+        gsap.from('.collections-toolbar', { opacity: 0, y: 20, duration: 0.5, ease, delay: 0.7 });
         
         this.animateCards(0.8);
 
         // ⑤ Pagination
         if (typeof ScrollTrigger !== 'undefined') {
-          gsap.from('.shop-pagination', {
+          gsap.from('.collections-pagination', {
             opacity: 0, y: 30,
             duration: 0.8,
             ease,
             scrollTrigger: {
-              trigger: '.shop-pagination',
+              trigger: '.collections-pagination',
               start: 'top 95%',
             }
           });

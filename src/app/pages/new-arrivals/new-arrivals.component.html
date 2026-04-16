@@ -1,10 +1,10 @@
 <!-- ═══════════════════════════════════════════════════════
      New Arrivals — Heritage Modernist | The Artisan Boutique
      ═══════════════════════════════════════════════════════ -->
-<div class="shop-page">
+<div class="collections-page">
 
   <!-- ── Ambient Background ── -->
-  <div class="shop-bg-motif" aria-hidden="true">
+  <div class="collections-bg-motif" aria-hidden="true">
     <svg class="bg-motif-svg" viewBox="0 0 600 600" fill="none">
       <circle cx="300" cy="300" r="280" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.06" />
       <circle cx="300" cy="300" r="200" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.04" />
@@ -13,27 +13,27 @@
   </div>
 
   <!-- ── Floating orb decoration ── -->
-  <div class="shop-orb shop-orb--1" aria-hidden="true"></div>
-  <div class="shop-orb shop-orb--2" aria-hidden="true"></div>
+  <div class="collections-orb collections-orb--1" aria-hidden="true"></div>
+  <div class="collections-orb collections-orb--2" aria-hidden="true"></div>
 
   <!-- ── Page Header Area ── -->
-  <div class="shop-header-area">
-    <nav class="shop-breadcrumb" aria-label="Breadcrumb">
-      <a routerLink="/landing" class="bc-link">Home</a>
+  <div class="collections-header-area">
+    <nav class="collections-breadcrumb" aria-label="Breadcrumb">
+      <a routerLink="/home" class="bc-link">Home</a>
       <span class="bc-sep" aria-hidden="true">/</span>
       <span class="bc-current">New Arrivals</span>
     </nav>
 
-    <div class="shop-headline-block">
+    <div class="collections-headline-block">
       <div class="headline-left">
-        <h1 class="shop-headline">
+        <h1 class="collections-headline">
           The <em>New</em> Edit
         </h1>
         <div class="headline-rule" aria-hidden="true"></div>
       </div>
 
-      <div class="shop-meta">
-        <span class="shop-count-badge">
+      <div class="collections-meta">
+        <span class="collections-count-badge">
           <span class="count-number">{{ filteredProducts.length }}</span>
           <span class="count-label">hand-crafted pieces</span>
         </span>
@@ -55,7 +55,7 @@
   </button>
 
   <!-- ── Main Layout ── -->
-  <div class="shop-layout">
+  <div class="collections-layout">
 
     <!-- ══════════════════════════════════════
          FILTER SIDEBAR
@@ -224,7 +224,7 @@
          PRODUCT AREA
          ══════════════════════════════════════ -->
     <div class="product-area">
-      <div class="shop-toolbar">
+      <div class="collections-toolbar">
         <div class="toolbar-left">
           <p class="toolbar-count">
             Showing <strong>{{ filteredProducts.length }}</strong> pieces
@@ -318,7 +318,7 @@
       </ng-template>
 
       <!-- Pagination -->
-      <nav class="shop-pagination" *ngIf="totalPages > 1">
+      <nav class="collections-pagination" *ngIf="totalPages > 1">
         <button class="page-btn page-btn--prev" [disabled]="currentPage === 0" (click)="onPageChange(currentPage - 1)">
           <i class="pi pi-arrow-left"></i> Previous
         </button>
