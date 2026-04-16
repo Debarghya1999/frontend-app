@@ -1,10 +1,6 @@
 <section class="testimonials" id="testimonials" [attr.aria-label]="'Customer testimonials'">
   <div class="container">
-    <div
-      class="section-header"
-      [srAnimation]="'tilt-in'"
-      [srDelay]="0"
-      [srDuration]="1600">
+    <div class="section-header">
       <span class="section-eyebrow">Client Stories</span>
       <h2 class="section-title">Loved Across India</h2>
       <p class="section-subtitle">
@@ -16,11 +12,6 @@
       <div
         *ngFor="let testimonial of testimonials(); let i = index"
         class="testimonial-card"
-        [srAnimation]="'zoom-drift'"
-        [srDelay]="i * 300"
-        [srDuration]="1600"
-        [srThreshold]="0.08"
-        [style.--delay]="(i * 0.12) + 's'"
         role="article"
         [attr.aria-label]="'Testimonial from ' + testimonial.name">
 

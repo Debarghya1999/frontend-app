@@ -17,7 +17,9 @@ export type SrAnimation =
   | 'flip-up'
   | 'zoom-drift'
   | 'slide-left'
-  | 'slide-right';
+  | 'slide-right'
+  | 'spring-up'
+  | 'spring-scale';
 
 /**
  * ScrollRevealDirective — Cinematic GSAP Edition
@@ -314,6 +316,44 @@ export class ScrollRevealDirective implements AfterViewInit, OnDestroy {
           duration: dur * 0.4,
           ease: 'sine.inOut',
           clearProps: 'transformPerspective,transformOrigin',
+        });
+        break;
+      }
+
+      // ── spring-up ─────────────────────────────────────────────────────────
+      // Framer Motion-equivalent spring: rises with elastic overshoot, settles.
+      case 'spring-up': {
+        gsap.set(el, {
+          opacity: 0,
+          y: 50,
+          scale: 0.94,
+          transformPerspective: 1000,
+        });
+        tl.to(el, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: dur * 0.9,
+          ease: 'elastic.out(1, 0.55)',
+        });
+        break;
+      }
+
+      // ── spring-scale ──────────────────────────────────────────────────────
+      // Cards pop in from small → 1 with spring back-out — like Framer whileInView.
+      case 'spring-scale': {
+        gsap.set(el, {
+          opacity: 0,
+          scale: 0.80,
+          y: 30,
+          transformPerspective: 900,
+        });
+        tl.to(el, {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: dur * 0.85,
+          ease: 'back.out(1.7)',
         });
         break;
       }

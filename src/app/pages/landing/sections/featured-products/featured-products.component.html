@@ -1,10 +1,6 @@
 <section class="featured-products" [attr.aria-label]="'Featured products section'">
   <div class="container">
-    <div
-      class="section-header"
-      [srAnimation]="'flip-up'"
-      [srDelay]="0"
-      [srDuration]="750">
+    <div class="section-header">
       <span class="section-eyebrow">The Bengal Handloom Edit</span>
       <h2 class="section-title">Authentic Cotton Collection</h2>
       <p class="section-subtitle">
@@ -34,11 +30,6 @@
           *ngFor="let product of products(); let i = index"
           class="product-card"
           role="listitem"
-          [srAnimation]="'zoom-drift'"
-          [srDelay]="i * 180"
-          [srDuration]="1600"
-          [srThreshold]="0.05"
-          [style.--delay]="(i * 0.08) + 's'"
           [attr.aria-label]="product.name">
 
           <div class="product-image-wrapper">
@@ -124,7 +115,7 @@
       [srDuration]="600">
       <button
         class="btn-view-all"
-        routerLink="/shop"
+        routerLink="/collections"
         aria-label="View all products in the collection">
         <span>View All Products</span>
         <i class="pi pi-arrow-right"></i>

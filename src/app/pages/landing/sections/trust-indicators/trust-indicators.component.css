@@ -78,14 +78,16 @@
   padding: var(--spacing-xl, 32px) var(--spacing-lg, 24px);
   border-radius: var(--radius-md, 6px);
   background: transparent;
-  transition: background 0.35s ease;
+  transition: background 0.35s ease, box-shadow 0.4s ease;
+  will-change: transform;
 }
 
 .indicator-card:hover {
   background: var(--surface-container-low, #f5ead8);
+  box-shadow: var(--shadow-lift, 0px 8px 24px rgba(88, 65, 65, 0.06));
 }
 
-/* ── Icon Container — Gold container ── */
+/* ── Icon Container — Gold container — GSAP handles hover animation ── */
 .indicator-icon {
   width: 64px;
   height: 64px;
@@ -97,13 +99,13 @@
   justify-content: center;
   font-size: 1.75rem;
   color: var(--primary, #570013);
-  transition: background 0.35s ease, color 0.35s ease, transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition: background 0.35s ease, color 0.35s ease;
+  will-change: transform;
 }
 
 .indicator-card:hover .indicator-icon {
   background: var(--gradient-primary-silk, linear-gradient(135deg, #570013 0%, #800020 100%));
   color: var(--on-primary, #ffffff);
-  transform: translateY(-4px);
 }
 
 /* ── Text ── */
@@ -127,7 +129,16 @@
 @media (prefers-reduced-motion: reduce) {
   .indicator-card {
     animation: none;
-    opacity: 1;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .indicator-icon {
+    opacity: 1 !important;
+    transform: none !important;
   }
   .indicator-card:hover .indicator-icon { transform: none; }
+  .section-eyebrow,
+  .section-title,
+  .section-subtitle { opacity: 1 !important; transform: none !important; }
 }
+

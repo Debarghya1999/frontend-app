@@ -376,10 +376,52 @@
   z-index: 1;
 }
 
+/* ── CTA Button — Shimmer sweep on hover ── */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  transition: left 0s;
+  pointer-events: none;
+}
+
+.btn-primary:hover::after {
+  left: 160%;
+  transition: left 0.65s ease;
+}
+
+/* Stat number pulse when it finishes counting */
+.stat-number {
+  display: inline-block;
+}
+
 /* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
   .gradient-blob,
   .scroll-indicator { animation: none; }
   .hero-image, .hero-image img, .hero-image-container::after { transition: none; }
   .btn { transition: none; }
+  .btn-primary::after { display: none; }
+  /* Ensure GSAP-hidden elements are visible if motion is disabled */
+  .hero-eyebrow,
+  .hero-title,
+  .hero-subtitle,
+  .hero-cta-buttons,
+  .hero-stats { opacity: 1 !important; transform: none !important; }
 }
+

@@ -1,7 +1,15 @@
-import { Component, signal, AfterViewInit, ElementRef, inject, PLATFORM_ID } from '@angular/core';
+import {
+  Component,
+  signal,
+  AfterViewInit,
+  OnDestroy,
+  ElementRef,
+  inject,
+  PLATFORM_ID,
+} from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 interface Testimonial {
   id: number;
@@ -15,13 +23,14 @@ interface Testimonial {
 @Component({
   selector: 'app-testimonials',
   standalone: true,
-  imports: [CommonModule, ScrollRevealDirective],
+  imports: [CommonModule],
   templateUrl: './testimonials.component.html',
   styleUrl: './testimonials.component.css',
 })
-export class TestimonialsComponent implements AfterViewInit {
+export class TestimonialsComponent implements AfterViewInit, OnDestroy {
   private el = inject(ElementRef);
   private platformId = inject(PLATFORM_ID);
+  private scrollTriggerInstance?: ScrollTrigger;
 
   currentIndex = signal(0);
 
@@ -54,10 +63,105 @@ export class TestimonialsComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-    this.initCardTilt();
+    gsap.registerPlugin(ScrollTrigger);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        this.initSectionHeaderStagger();
+        this.initCardStaggerEntrance();
+        this.initCardTilt();
+      });
+    });
   }
 
-  /** Holographic card tilt — testimonial cards follow the mouse in 3D. */
+  ngOnDestroy(): void {
+    this.scrollTriggerInstance?.kill();
+  }
+
+  /**
+   * Section header — staggered entrance matching the other sections.
+   */
+  private initSectionHeaderStagger(): void {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    const children = [
+      this.el.nativeElement.querySelector('.section-eyebrow'),
+      this.el.nativeElement.querySelector('.section-title'),
+      this.el.nativeElement.querySelector('.section-subtitle'),
+    ].filter(Boolean);
+
+    gsap.set(children, { opacity: 0, y: 28, scale: 0.97 });
+
+    ScrollTrigger.create({
+      trigger: this.el.nativeElement.querySelector('.section-header'),
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        gsap.to(children, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.75,
+          stagger: 0.1,
+          ease: 'back.out(1.5)',
+        });
+      },
+    });
+  }
+
+  /**
+   * Testimonial cards — staggered zoom-spring entrance.
+   * Framer Motion equivalent: `initial={{ opacity: 0, scale: 0.9, y: 40 }}`
+   * `whileInView={{ opacity: 1, scale: 1, y: 0 }}` with `staggerChildren: 0.15`.
+   */
+  private initCardStaggerEntrance(): void {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    const grid = this.el.nativeElement.querySelector('.testimonials-grid') as HTMLElement;
+    if (!grid) return;
+    const cards: HTMLElement[] = Array.from(grid.querySelectorAll('.testimonial-card'));
+
+    gsap.set(cards, { opacity: 0, y: 48, scale: 0.9 });
+
+    this.scrollTriggerInstance = ScrollTrigger.create({
+      trigger: grid,
+      start: 'top 82%',
+      once: true,
+      onEnter: () => {
+        gsap.to(cards, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.15,           // 150ms stagger — deliberate editorial pace
+          ease: 'back.out(1.4)',   // spring overshoot — Framer Motion feel
+          clearProps: 'scale',
+        });
+
+        // Stars animate in with a cheerful elastic pop after the cards
+        const allStars: HTMLElement[] = Array.from(
+          grid.querySelectorAll('.testimonial-rating i')
+        );
+        gsap.fromTo(allStars,
+          { scale: 0, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: 0.4,
+            stagger: 0.04,
+            ease: 'elastic.out(1, 0.5)',
+            delay: 0.5,
+          }
+        );
+      },
+    });
+  }
+
+  /**
+   * Holographic card tilt — testimonial cards follow the mouse in 3D.
+   */
   private initCardTilt(): void {
     const cards: NodeListOf<HTMLElement> =
       this.el.nativeElement.querySelectorAll('.testimonial-card');
@@ -88,8 +192,37 @@ export class TestimonialsComponent implements AfterViewInit {
     });
   }
 
+  /**
+   * Navigate to a testimonial dot with a Framer Motion-style crossfade.
+   * The active card pulses with a fade-out/in + subtle scale.
+   */
   goToTestimonial(index: number): void {
-    this.currentIndex.set(index);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduceMotion) {
+      const cards: HTMLElement[] = Array.from(
+        this.el.nativeElement.querySelectorAll('.testimonial-card')
+      );
+      // Crossfade: fade all out, update index, fade back in
+      gsap.to(cards, {
+        opacity: 0.4,
+        scale: 0.97,
+        duration: 0.25,
+        ease: 'power2.in',
+        onComplete: () => {
+          this.currentIndex.set(index);
+          gsap.to(cards, {
+            opacity: 1,
+            scale: 1,
+            duration: 0.45,
+            stagger: 0.08,
+            ease: 'back.out(1.3)',
+          });
+        },
+      });
+    } else {
+      this.currentIndex.set(index);
+    }
   }
 
   onAvatarError(event: Event): void {

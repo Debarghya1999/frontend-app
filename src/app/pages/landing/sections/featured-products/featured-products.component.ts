@@ -11,6 +11,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 interface Product {
   id: number;
@@ -45,12 +46,84 @@ export class FeaturedProductsComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
-    // Delay to ensure DOM is painted
     setTimeout(() => {
+      this.initSectionHeaderStagger();
+      this.initCardCascade();
       this.initCardTilt();
       this.initDragScroll();
       this.updateProgress();
     }, 200);
+  }
+
+  /**
+   * Framer Motion-style stagger on section header children:
+   * eyebrow → title → subtitle enter sequentially.
+   */
+  private initSectionHeaderStagger(): void {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const headerEl = this.el.nativeElement.querySelector('.section-header');
+    if (!headerEl) return;
+    const children = [
+      headerEl.querySelector('.section-eyebrow'),
+      headerEl.querySelector('.section-title'),
+      headerEl.querySelector('.section-subtitle'),
+    ].filter(Boolean);
+
+    gsap.set(children, { opacity: 0, y: 32, scale: 0.97 });
+
+    ScrollTrigger.create({
+      trigger: headerEl,
+      start: 'top 85%',
+      once: true,
+      onEnter: () => {
+        gsap.to(children, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.75,
+          stagger: 0.1,
+          ease: 'back.out(1.5)',
+        });
+      },
+    });
+  }
+
+  /**
+   * Card stagger cascade: each product card enters with spring-scale physics,
+   * staggered 60ms apart — the GSAP equivalent of Framer Motion `whileInView`
+   * + `staggerChildren: 0.06`.
+   */
+  private initCardCascade(): void {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const track = this.el.nativeElement.querySelector('.carousel-track') as HTMLElement;
+    if (!track) return;
+    const cards: HTMLElement[] = Array.from(track.querySelectorAll('.product-card'));
+
+    // Set initial state — cards hidden below and compressed
+    gsap.set(cards, { opacity: 0, y: 50, scale: 0.88 });
+
+    ScrollTrigger.create({
+      trigger: track,
+      start: 'top 88%',
+      once: true,
+      onEnter: () => {
+        gsap.to(cards, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.65,
+          stagger: 0.06,         // 60ms offset — Framer staggerChildren rhythm
+          ease: 'back.out(1.6)', // Spring pop — Framer Motion default spring feel
+          clearProps: 'scale',
+        });
+      },
+    });
   }
 
   /** Holographic card tilt — each product card tracks the mouse cursor in 3D. */

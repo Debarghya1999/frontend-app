@@ -192,7 +192,7 @@
   margin: 0;
 }
 
-/* ── Carousel Nav Dots ── */
+/* ── Carousel Nav Dots — Active dot morphs to pill ── */
 .carousel-nav {
   display: flex;
   justify-content: center;
@@ -202,25 +202,58 @@
 
 .nav-dot {
   height: 6px;
-  border-radius: var(--radius-sm, 4px);
+  border-radius: 9999px;           /* Pill shape from the start */
   background: var(--surface-container-high, #e5d4b8);
   border: none;
   cursor: pointer;
-  transition: all 1.2s ease;
+  transition:
+    width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),  /* Spring: Framer stiffness=300 */
+    background 0.35s ease;
   padding: 0;
   width: 6px;
 }
 
 .nav-dot:hover {
   background: var(--on-surface-variant, #4a3f30);
+  width: 10px;
 }
 
 .nav-dot.active {
   background: var(--secondary, #735c00);
-  width: 2rem;
+  width: 2rem;                     /* Pill expansion — smooth Framer layoutId morph */
 }
 
-/* ── Avatar Fallback — initials monogram ── */
+/* ── Testimonial Card — Gold shimmer sweep on hover ── */
+.testimonial-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 166, 0, 0.07) 50%,
+    transparent 100%
+  );
+  transform: skewX(-15deg);
+  transition: left 0s;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.testimonial-card:hover::after {
+  left: 170%;
+  transition: left 0.8s ease;
+}
+
+/* Avatar Fallback */
 .author-avatar-fallback {
   width: 48px;
   height: 48px;
@@ -241,7 +274,14 @@
 /* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
   .testimonial-card {
-    opacity: 1;
+    opacity: 1 !important;
+    transform: none !important;
   }
+  .testimonial-card::after { display: none; }
+  .testimonial-rating i { opacity: 1 !important; transform: none !important; }
   .nav-dot { transition: none; }
+  .section-eyebrow,
+  .section-title,
+  .section-subtitle { opacity: 1 !important; transform: none !important; }
 }
+

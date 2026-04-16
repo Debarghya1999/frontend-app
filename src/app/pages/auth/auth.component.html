@@ -1,105 +1,255 @@
-<main class="auth-layout motif-bg">
+<main class="auth-scene" aria-label="Authentication page">
 
+  <!-- ── Ambient Background Canvas ── -->
+  <div class="ambient-canvas" aria-hidden="true">
+    <svg class="ambient-motif motif-1" viewBox="0 0 200 200" fill="none">
+      <path d="M100 10C100 10 130 40 130 100C130 160 100 190 100 190C100 190 70 160 70 100C70 40 100 10 100 10Z"
+        fill="currentColor" />
+    </svg>
+    <svg class="ambient-motif motif-2" viewBox="0 0 200 200" fill="none">
+      <path d="M100 10C100 10 130 40 130 100C130 160 100 190 100 190C100 190 70 160 70 100C70 40 100 10 100 10Z"
+        fill="currentColor" />
+    </svg>
+    <svg class="ambient-motif motif-3" viewBox="0 0 200 200" fill="none">
+      <circle cx="100" cy="100" r="60" stroke="currentColor" stroke-width="1" fill="none" />
+      <circle cx="100" cy="100" r="40" stroke="currentColor" stroke-width="1" fill="none" />
+    </svg>
+    <!-- Grain texture overlay -->
+    <div class="grain-overlay"></div>
+  </div>
 
-  <div class="auth-card">
-    <!-- Left Section: Image Cover -->
-    <div class="auth-cover">
-      <img 
-        src="/images/auth-bg.png" 
-        alt="Authentic Bengali Cotton Couture"
-        class="cover-image"
-      />
-      <div class="cover-overlay-multiply"></div>
-      <div class="cover-content">
-        <h2 class="cover-title">A Legacy of Handloom & Heritage</h2>
-        <p class="cover-text">Join our inner circle for exclusive access to authentic Bengali cotton collections and bespoke artisan services.</p>
+  <!-- ── Main Card ── -->
+  <div class="auth-card" #authCard>
+
+    <!-- ══ Left: Visual Immersion Panel ══ -->
+    <div class="visual-panel" #visualPanel aria-hidden="true">
+      <!-- Layered image with parallax target -->
+      <div class="visual-image-wrap" #visualImage>
+        <img src="/images/auth-bg.png" alt="" class="visual-img" loading="eager" />
+        <!-- Duotone gradient wash -->
+        <div class="visual-gradient"></div>
       </div>
+
+
+
+      <!-- Cover content -->
+      <div class="visual-content" #visualContent>
+        <!-- Brand mark -->
+        <div class="brand-mark" #brandMark>
+          <svg class="brand-icon" viewBox="0 0 32 32" fill="none">
+            <path d="M16 2C16 2 22 8 22 16C22 24 16 30 16 30C16 30 10 24 10 16C10 8 16 2 16 2Z"
+              fill="rgba(201,166,0,0.9)" />
+            <path d="M2 16C2 16 8 10 16 10C24 10 30 16 30 16C30 16 24 22 16 22C8 22 2 16 2 16Z"
+              fill="rgba(255,255,255,0.25)" />
+          </svg>
+          <span class="brand-name">तানु</span>
+        </div>
+
+        <div class="cover-copy">
+          <p class="cover-eyebrow" #eyebrow>Heritage Collection</p>
+          <h2 class="cover-headline" #headline>
+            A Legacy of<br />Handloom &amp;<br /><em>Heritage</em>
+          </h2>
+          <p class="cover-body" #coverBody>
+            Join our inner circle for exclusive access to authentic Bengali cotton collections and bespoke artisan
+            services.
+          </p>
+
+          <!-- Woven signal indicators -->
+          <div class="trust-signals" #trustSignals>
+            <div class="trust-signal">
+              <span class="signal-dot"></span>
+              <span>100% Handloom</span>
+            </div>
+            <div class="trust-signal">
+              <span class="signal-dot"></span>
+              <span>Artisan Certified</span>
+            </div>
+            <div class="trust-signal">
+              <span class="signal-dot"></span>
+              <span>Free Returns</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom progress bar — visual polish -->
+      <div class="visual-progress-bar" #progressBar></div>
     </div>
 
-    <!-- Right Section: Login Form -->
-    <div class="auth-form-container">
-      <div class="form-header">
-        <h1 class="form-title">{{ isLoginMode ? 'Welcome Back' : 'Join the Boutique' }}</h1>
-        <p class="form-subtitle">{{ isLoginMode ? 'Enter your details to continue your heritage journey.' : 'Register to get exclusive access to our collections.' }}</p>
+    <!-- ══ Right: Form Panel ══ -->
+    <div class="form-panel" #formPanel>
+
+      <!-- Mode indicator pills -->
+      <div class="mode-switcher" #modeSwitcher>
+        <button type="button" class="mode-pill" [class.mode-pill--active]="isLoginMode" (click)="switchToLogin()"
+          id="login-mode-btn" aria-pressed="{{isLoginMode}}">Sign In</button>
+        <button type="button" class="mode-pill" [class.mode-pill--active]="!isLoginMode" (click)="switchToSignup()"
+          id="signup-mode-btn" aria-pressed="{{!isLoginMode}}">Create Account</button>
+        <!-- sliding indicator -->
+        <div class="mode-slider" #modeSlider></div>
       </div>
 
-      <form class="auth-form" [formGroup]="authForm" (ngSubmit)="onSubmit()">
-        <!-- Name Input (Signup only) -->
-        <div class="form-group" *ngIf="!isLoginMode">
-          <label for="name" class="form-label">Full Name</label>
-          <input 
-            type="text" 
-            id="name" 
-            formControlName="name" 
-            placeholder="Jane Doe" 
-            class="form-input" 
-          />
-        </div>
+      <!-- Form header -->
+      <div class="form-header" #formHeader>
+        <h1 class="form-title" #formTitle>
+          {{ isLoginMode ? 'Welcome Back' : 'Join the Boutique' }}
+        </h1>
+        <p class="form-subtitle" #formSubtitle>
+          {{ isLoginMode
+          ? 'Enter your details to continue your heritage journey.'
+          : 'Register to get exclusive access to our collections.' }}
+        </p>
+      </div>
 
-        <!-- Email/Phone Input -->
-        <div class="form-group">
-          <label for="email" class="form-label">Email or Phone</label>
-          <input 
-            type="text" 
-            id="email" 
-            formControlName="email" 
-            placeholder="weavers@bengalcotton.com" 
-            class="form-input" 
-          />
-        </div>
-
-        <!-- Password Input -->
-        <div class="form-group">
-          <div class="password-label-container">
-            <label for="password" class="form-label">Password</label>
-            <a href="#" class="forgot-link" *ngIf="isLoginMode">Forgot?</a>
+      <!-- ── Auth Form ── -->
+      <form class="auth-form" [formGroup]="authForm" (ngSubmit)="onSubmit()" #formEl novalidate
+        aria-label="Authentication form">
+        <!-- Name field (signup) — always in DOM, collapsed via CSS when in login mode -->
+        <div class="field-group name-field-wrap" [class.name-field-wrap--visible]="!isLoginMode" #nameField>
+          <label for="name" class="field-label">Full Name <span class="required-star"
+              aria-hidden="true">*</span></label>
+          <div class="field-input-wrap"
+            [class.field-input-wrap--error]="authForm.get('name')?.invalid && authForm.get('name')?.touched">
+            <svg class="field-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <circle cx="10" cy="7" r="3" stroke="currentColor" stroke-width="1.4" />
+              <path d="M4 17c0-3.314 2.686-6 6-6s6 2.686 6 6" stroke="currentColor" stroke-width="1.4"
+                stroke-linecap="round" />
+            </svg>
+            <input type="text" id="name" formControlName="name" placeholder="Jane Doe" class="field-input"
+              autocomplete="name" [attr.aria-required]="!isLoginMode" [attr.tabindex]="isLoginMode ? -1 : 0" />
+            <div class="field-line"></div>
           </div>
-          <input 
-            type="password" 
-            id="password" 
-            formControlName="password" 
-            placeholder="••••••••" 
-            class="form-input" 
-          />
+          <span class="field-error" role="alert" aria-live="polite"
+            *ngIf="authForm.get('name')?.invalid && authForm.get('name')?.touched">
+            Please enter your full name
+          </span>
         </div>
 
-        <button type="submit" class="submit-btn silk-btn" [disabled]="!authForm.valid">
-          <span class="btn-text">{{ isLoginMode ? 'Sign In' : 'Create Account' }}</span>
-          <div class="btn-border"></div>
+
+        <!-- Email field -->
+        <div class="field-group" #emailField>
+          <label for="email" class="field-label">Email or Phone <span class="required-star"
+              aria-hidden="true">*</span></label>
+          <div class="field-input-wrap"
+            [class.field-input-wrap--error]="authForm.get('email')?.invalid && authForm.get('email')?.touched">
+            <svg class="field-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <rect x="2" y="5" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.4" />
+              <path d="M2 8l8 5 8-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+            </svg>
+            <input type="text" id="email" formControlName="email" placeholder="weavers@bengalcotton.com"
+              class="field-input" autocomplete="email" aria-required="true" />
+            <div class="field-line"></div>
+          </div>
+          <span class="field-error" role="alert" aria-live="polite"
+            *ngIf="authForm.get('email')?.invalid && authForm.get('email')?.touched">
+            Please enter a valid email or phone
+          </span>
+        </div>
+
+        <!-- Password field -->
+        <div class="field-group" #passwordField>
+          <div class="field-label-row">
+            <label for="password" class="field-label">Password <span class="required-star"
+                aria-hidden="true">*</span></label>
+            <a href="#" class="forgot-link" *ngIf="isLoginMode" tabindex="0">Forgot?</a>
+          </div>
+          <div class="field-input-wrap"
+            [class.field-input-wrap--error]="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+            <svg class="field-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <rect x="4" y="8" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4" />
+              <path d="M7 8V6a3 3 0 016 0v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+              <circle cx="10" cy="13" r="1.2" fill="currentColor" />
+            </svg>
+            <input [type]="showPassword ? 'text' : 'password'" id="password" formControlName="password"
+              placeholder="••••••••" class="field-input" autocomplete="current-password" aria-required="true" />
+            <button type="button" class="password-toggle" (click)="togglePassword()"
+              [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'">
+              <svg *ngIf="!showPassword" viewBox="0 0 20 20" fill="none" class="eye-icon">
+                <path d="M2 10s3.6-6 8-6 8 6 8 6-3.6 6-8 6-8-6-8-6z" stroke="currentColor" stroke-width="1.4" />
+                <circle cx="10" cy="10" r="2.5" stroke="currentColor" stroke-width="1.4" />
+              </svg>
+              <svg *ngIf="showPassword" viewBox="0 0 20 20" fill="none" class="eye-icon">
+                <path
+                  d="M3 3l14 14M8.46 8.53A2.5 2.5 0 0012.5 12.5m-5.34-6.97C4.8 6.9 3 10 3 10s3.6 6 7 6c1.16 0 2.22-.35 3.1-.94M16.94 13.47C17.71 12.5 17 10 17 10s-1.5-2.5-4-4"
+                  stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+              </svg>
+            </button>
+            <div class="field-line"></div>
+          </div>
+          <span class="field-error" role="alert" aria-live="polite"
+            *ngIf="authForm.get('password')?.invalid && authForm.get('password')?.touched">
+            Password must be at least 8 characters
+          </span>
+        </div>
+
+        <!-- Submit CTA -->
+        <button type="submit" class="cta-btn" [class.cta-btn--loading]="isLoading" [disabled]="isLoading"
+          id="auth-submit-btn" aria-label="{{ isLoginMode ? 'Sign in to your account' : 'Create your account' }}"
+          #submitBtn>
+          <span class="cta-text" *ngIf="!isLoading">
+            {{ isLoginMode ? 'Sign In' : 'Create Account' }}
+          </span>
+          <span class="cta-loader" *ngIf="isLoading" aria-hidden="true">
+            <span class="loader-dot"></span>
+            <span class="loader-dot"></span>
+            <span class="loader-dot"></span>
+          </span>
+          <!-- Shimmer sweep -->
+          <div class="cta-shimmer" aria-hidden="true"></div>
+          <!-- Arrow indicator -->
+          <svg class="cta-arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true" *ngIf="!isLoading">
+            <path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
         </button>
       </form>
 
-      <div class="auth-divider">
-        <span class="divider-line"></span>
-        <span class="divider-text">Or continue with</span>
+      <!-- ── Divider ── -->
+      <div class="or-divider" #divider>
+        <div class="divider-rule"></div>
+        <span class="divider-label">or continue with</span>
+        <div class="divider-rule"></div>
       </div>
 
-      <div class="social-login-grid">
-        <button type="button" class="social-btn">
-          <svg class="social-icon" viewBox="0 0 24 24">
-            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
-            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
-            <path d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z" fill="#FBBC05"></path>
-            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+      <!-- ── Social Buttons ── -->
+      <div class="social-row" #socialRow>
+        <button type="button" class="social-btn" id="google-btn" aria-label="Continue with Google">
+          <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              fill="#4285F4" />
+            <path
+              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              fill="#34A853" />
+            <path
+              d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z"
+              fill="#FBBC05" />
+            <path
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              fill="#EA4335" />
           </svg>
-          <span class="social-text">Google</span>
+          <span class="social-label">Google</span>
         </button>
-        <button type="button" class="social-btn">
-          <svg class="social-icon" style="fill: var(--primary);" viewBox="0 0 384 512">
-            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"></path>
+        <button type="button" class="social-btn" id="apple-btn" aria-label="Continue with Apple">
+          <svg class="social-icon" viewBox="0 0 384 512" aria-hidden="true">
+            <path
+              d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"
+              fill="currentColor" />
           </svg>
-          <span class="social-text">Apple</span>
+          <span class="social-label">Apple</span>
         </button>
       </div>
 
-      <div class="auth-footer">
-        <p class="footer-prompt">
-          {{ isLoginMode ? 'New to The Boutique?' : 'Already have an account?' }}
-          <a href="javascript:void(0)" class="create-account-link" (click)="toggleMode()">
-            {{ isLoginMode ? 'Create Account' : 'Sign In' }}
-          </a>
-        </p>
-      </div>
-    </div>
-  </div>
+      <!-- ── Footer toggle ── -->
+      <p class="form-footer" #formFooter>
+        {{ isLoginMode ? 'New to The Boutique?' : 'Already have an account?' }}
+        <button type="button" class="toggle-link" (click)="toggleMode()" id="toggle-mode-btn">
+          {{ isLoginMode ? 'Create Account' : 'Sign In' }}
+        </button>
+      </p>
+
+    </div><!-- /form-panel -->
+  </div><!-- /auth-card -->
+
 </main>

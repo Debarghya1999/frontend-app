@@ -1,10 +1,6 @@
 <section class="trust-indicators" [attr.aria-label]="'Our promise to you'">
   <div class="container">
-    <div
-      class="section-header"
-      [srAnimation]="'flip-up'"
-      [srDelay]="0"
-      [srDuration]="750">
+    <div class="section-header">
       <span class="section-eyebrow">Our Promise</span>
       <h2 class="section-title">Why Choose Us</h2>
       <p class="section-subtitle">
@@ -16,11 +12,6 @@
       <div
         *ngFor="let indicator of indicators(); let i = index"
         class="indicator-card"
-        [srAnimation]="i % 2 === 0 ? 'slide-left' : 'slide-right'"
-        [srDelay]="i * 130"
-        [srDuration]="720"
-        [srThreshold]="0.08"
-        [style.--delay]="(i * 0.12) + 's'"
         role="article"
         [attr.aria-label]="indicator.title">
 

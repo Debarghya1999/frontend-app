@@ -441,7 +441,11 @@
 
 /* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
-  .product-card { transform: none !important; transition: background 0.2s ease; }
+  .product-card { transform: none !important; transition: background 0.2s ease; opacity: 1 !important; }
   .product-img, .product-overlay { transition: none; }
   .scroll-hint  { animation: none; }
+  .section-eyebrow,
+  .section-title,
+  .section-subtitle { opacity: 1 !important; transform: none !important; }
 }
+
