@@ -6,43 +6,42 @@ import {
   inject,
   PLATFORM_ID,
   ViewChild,
+  OnInit,
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ScrollRevealDirective } from '../../../../shared/directives/scroll-reveal.directive';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  price: number;
-  originalPrice?: number;
-  image: string;
-  fallbackBg: string;
-  badge?: string;
-  rating: number;
-  reviews: number;
-}
+import { ProductService } from '../../../../core/services/product.service';
+import { Product } from '../../../../core/models/product.model';
+import { ProductCardComponent } from '../../../../shared/components/product-card/product-card.component';
 
 @Component({
   selector: 'app-featured-products',
   standalone: true,
-  imports: [CommonModule, RouterModule, ScrollRevealDirective],
+  imports: [CommonModule, RouterModule, ScrollRevealDirective, ProductCardComponent],
   templateUrl: './featured-products.component.html',
   styleUrl: './featured-products.component.css',
 })
-export class FeaturedProductsComponent implements AfterViewInit {
+export class FeaturedProductsComponent implements OnInit, AfterViewInit {
   Math = Math;
   private el = inject(ElementRef);
   private platformId = inject(PLATFORM_ID);
+  private productService = inject(ProductService);
 
   @ViewChild('carousel', { static: false }) carouselRef!: ElementRef<HTMLElement>;
 
   /** ─── Drag state ─── */
   private isDragging = false;
   private momentumTween: gsap.core.Tween | null = null;
+
+  products = signal<Product[]>([]);
+  wishlistIds = signal<Set<string>>(new Set());
+
+  ngOnInit(): void {
+    this.loadProducts();
+  }
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -52,7 +51,13 @@ export class FeaturedProductsComponent implements AfterViewInit {
       this.initCardTilt();
       this.initDragScroll();
       this.updateProgress();
-    }, 200);
+    }, 500); // Increased delay to ensure data is loaded and DOM rendered
+  }
+
+  private loadProducts(): void {
+    this.productService.getFeaturedProducts().subscribe((data) => {
+      this.products.set(data);
+    });
   }
 
   /**
@@ -266,138 +271,13 @@ export class FeaturedProductsComponent implements AfterViewInit {
     if (nextBtn) nextBtn.disabled = track.scrollLeft >= maxScroll - 1;
   }
 
-  toggleWishlist(event: Event): void {
-    event.preventDefault();
-    const btn = event.currentTarget as HTMLButtonElement;
-    btn.classList.toggle('active');
-  }
-
-  onImageError(event: Event, fallbackBg: string): void {
-    const img = event.target as HTMLImageElement;
-    img.style.display = 'none';
-    const wrapper = img.closest('.product-image') as HTMLElement;
-    if (wrapper) {
-      wrapper.style.background = fallbackBg;
-      const placeholder = document.createElement('div');
-      placeholder.className = 'img-placeholder';
-      placeholder.innerHTML = '<i class="pi pi-image"></i>';
-      wrapper.appendChild(placeholder);
+  toggleWishlist(productId: string): void {
+    const next = new Set(this.wishlistIds());
+    if (next.has(productId)) {
+      next.delete(productId);
+    } else {
+      next.add(productId);
     }
+    this.wishlistIds.set(next);
   }
-
-  products = signal<Product[]>([
-    {
-      id: 1,
-      name: 'Handwoven Jamdani Saree',
-      category: 'Sarees',
-      price: 3499,
-      originalPrice: 4599,
-      image: 'images/products/jamdani_cotton_saree.png',
-      fallbackBg: '#8b1a2e',
-      badge: 'Bestseller',
-      rating: 5,
-      reviews: 214,
-    },
-    {
-      id: 2,
-      name: 'Cotton Ethnic Kurti',
-      category: 'Kurtis',
-      price: 1299,
-      image: 'images/products/cotton_kurti.png',
-      fallbackBg: '#6b3d6e',
-      badge: 'New',
-      rating: 4.9,
-      reviews: 132,
-    },
-    {
-      id: 3,
-      name: 'Classic Bengal Panjabi',
-      category: 'Menswear',
-      price: 2199,
-      originalPrice: 2999,
-      image: 'images/products/bengal_panjabi.png',
-      fallbackBg: '#2e5c4a',
-      badge: 'Sale',
-      rating: 4.8,
-      reviews: 89,
-    },
-    {
-      id: 4,
-      name: 'Handcrafted Cotton Kurta',
-      category: 'Kurtas',
-      price: 1850,
-      image: 'images/products/cotton_kurta.png',
-      fallbackBg: '#1e3a5f',
-      rating: 4.9,
-      reviews: 67,
-    },
-    {
-      id: 5,
-      name: 'Tant Saree — Indigo Weave',
-      category: 'Sarees',
-      price: 2699,
-      originalPrice: 3200,
-      image: 'images/products/tant_saree_indigo.png',
-      fallbackBg: '#1b3458',
-      badge: 'Sale',
-      rating: 4.7,
-      reviews: 98,
-    },
-    {
-      id: 6,
-      name: 'Muslin Embroidered Kurta',
-      category: 'Kurtas',
-      price: 2450,
-      image: 'images/products/muslin_kurta.png',
-      fallbackBg: '#4a3322',
-      badge: 'New',
-      rating: 4.8,
-      reviews: 55,
-    },
-    {
-      id: 7,
-      name: 'Kantha Stitch Dupatta',
-      category: 'Accessories',
-      price: 999,
-      originalPrice: 1350,
-      image: 'images/products/kantha_dupatta.png',
-      fallbackBg: '#5c2b4a',
-      badge: 'Sale',
-      rating: 4.6,
-      reviews: 171,
-    },
-    {
-      id: 8,
-      name: 'Dhakai Jamdani Kurti',
-      category: 'Kurtis',
-      price: 1799,
-      image: 'images/products/dhakai_jamdani_kurti.png',
-      fallbackBg: '#3b4a2e',
-      badge: 'New',
-      rating: 5,
-      reviews: 43,
-    },
-    {
-      id: 9,
-      name: 'Silk Blend Lehenga',
-      category: 'Lehengas',
-      price: 5999,
-      originalPrice: 7500,
-      image: 'images/products/silk_lehenga.png',
-      fallbackBg: '#6e1a1a',
-      badge: 'Bestseller',
-      rating: 4.9,
-      reviews: 302,
-    },
-    {
-      id: 10,
-      name: 'Linen Kurta Pyjama Set',
-      category: 'Menswear',
-      price: 2999,
-      image: 'images/products/linen_kurta_pyjama.png',
-      fallbackBg: '#2c3e35',
-      rating: 4.7,
-      reviews: 78,
-    },
-  ]);
 }

@@ -6,17 +6,16 @@
   <!-- ── Ambient Background ── -->
   <div class="collections-bg-motif" aria-hidden="true">
     <svg class="bg-motif-svg" viewBox="0 0 600 600" fill="none">
-      <circle cx="300" cy="300" r="280" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.06" />
-      <circle cx="300" cy="300" r="200" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.04" />
-      <circle cx="300" cy="300" r="120" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.03" />
+      <path d="M300 20L310 290L580 300L310 310L300 580L290 310L20 300L290 290L300 20Z" stroke="currentColor"
+        stroke-width="0.5" stroke-opacity="0.06" />
+      <circle cx="300" cy="300" r="240" stroke="currentColor" stroke-width="0.5" stroke-opacity="0.04" />
     </svg>
   </div>
 
-  <!-- ── Floating orb decoration ── -->
   <div class="collections-orb collections-orb--1" aria-hidden="true"></div>
   <div class="collections-orb collections-orb--2" aria-hidden="true"></div>
 
-  <!-- ── Page Header Area ── -->
+  <!-- ── Page Header ── -->
   <div class="collections-header-area">
     <nav class="collections-breadcrumb" aria-label="Breadcrumb">
       <a routerLink="/home" class="bc-link">Home</a>
@@ -27,20 +26,18 @@
     <div class="collections-headline-block">
       <div class="headline-left">
         <h1 class="collections-headline">
-          The <em>New</em> Edit
+          The <em>Fresh</em> Edit
         </h1>
         <div class="headline-rule" aria-hidden="true"></div>
       </div>
-
       <div class="collections-meta">
         <span class="collections-count-badge">
           <span class="count-number">{{ filteredProducts.length }}</span>
-          <span class="count-label">hand-crafted pieces</span>
+          <span class="count-label">new masterpieces</span>
         </span>
-        <button *ngIf="hasActiveFilters" class="clear-all-btn" (click)="resetFilters()" type="button"
-          aria-label="Clear all filters">
+        <button *ngIf="hasActiveFilters" class="clear-all-btn" (click)="resetFilters()" type="button">
           <i class="pi pi-times-circle"></i>
-          Clear all
+          Clear Refinements
           <span class="active-filter-count">{{ activeFilterCount }}</span>
         </button>
       </div>
@@ -48,9 +45,10 @@
   </div>
 
   <!-- ── Mobile Filter Toggle ── -->
-  <button class="filter-toggle-btn" (click)="mobileFilterOpen.set(!mobileFilterOpen())" type="button">
+  <button class="filter-toggle-btn" (click)="mobileFilterOpen.set(!mobileFilterOpen())" type="button"
+    [attr.aria-expanded]="mobileFilterOpen()" aria-controls="filter-sidebar">
     <i class="pi pi-sliders-h"></i>
-    <span>{{ mobileFilterOpen() ? 'Hide Filters' : 'Show Filters' }}</span>
+    <span>{{ mobileFilterOpen() ? 'Hide Refinements' : 'Refine Results' }}</span>
     <span *ngIf="activeFilterCount > 0" class="toggle-filter-badge">{{ activeFilterCount }}</span>
   </button>
 
@@ -58,283 +56,88 @@
   <div class="collections-layout">
 
     <!-- ══════════════════════════════════════
-         FILTER SIDEBAR
+         FILTER SIDEBAR (Dynamic Component)
          ══════════════════════════════════════ -->
-    <aside id="filter-sidebar" class="filter-sidebar" [class.filter-sidebar--open]="mobileFilterOpen()"
-      aria-label="Product filters">
-
-      <div class="sidebar-title-row">
-        <span class="sidebar-title">Filters</span>
-        <button *ngIf="hasActiveFilters" class="sidebar-clear-btn" (click)="resetFilters()" type="button">
-          Reset
-        </button>
-      </div>
-
-      <!-- Loading Skeleton -->
-      <div class="filter-skeleton-wrap" *ngIf="filterOptionsLoading()">
-        <div class="filter-skeleton-group" *ngFor="let s of [1,2,3,4]">
-          <div class="skel skel--label"></div>
-          <div class="skel skel--item" *ngFor="let i of [1,2,3]"></div>
-        </div>
-      </div>
-
-      <!-- Actual Filters -->
-      <ng-container *ngIf="!filterOptionsLoading()">
-
-        <!-- 1. Best Sellers ─────────────────── -->
-        <div class="filter-group filter-group--solo">
-          <label class="best-sellers-label">
-            <input type="checkbox" class="filter-checkbox sr-only" [(ngModel)]="bestSellersOnly"
-              (ngModelChange)="onFilterChange()" id="best-sellers-filter" />
-            <span class="bs-custom-check" [class.bs-custom-check--on]="bestSellersOnly" aria-hidden="true">
-              <i class="pi pi-check"></i>
-            </span>
-            <span class="best-sellers-text">Best Sellers</span>
-            <span class="bs-sparkle-badge">✨</span>
-          </label>
-        </div>
-
-
-        <!-- 2. Price Range ──────────────────── -->
-        <div class="filter-group" [class.filter-group--collapsed]="isCollapsed('price')">
-          <button class="filter-group-header" (click)="toggleGroup('price')" type="button"
-            [attr.aria-expanded]="!isCollapsed('price')">
-            <span class="filter-label">Price Range</span>
-            <i class="pi pi-chevron-down filter-chevron" [class.filter-chevron--up]="!isCollapsed('price')"></i>
-          </button>
-          <div class="filter-group-body">
-            <div class="price-range-wrap">
-              <input type="range" class="price-slider" min="0" max="100000" step="500" [(ngModel)]="priceMax"
-                (ngModelChange)="onFilterChange()" [style.--slider-pct]="(priceMax / 100000 * 100) + '%'"
-                aria-label="Maximum price" />
-              <div class="price-labels">
-                <span>₹0</span>
-                <span class="price-current-val">{{ priceMaxLabel }}</span>
-                <span>₹1L+</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 3. Size ─────────────────────────── -->
-        <div class="filter-group" [class.filter-group--collapsed]="isCollapsed('size')">
-          <button class="filter-group-header" (click)="toggleGroup('size')" type="button"
-            [attr.aria-expanded]="!isCollapsed('size')">
-            <span class="filter-label">Size</span>
-            <span class="header-right-row">
-              <span *ngIf="selectedSizes.length > 0" class="group-active-dot"></span>
-              <i class="pi pi-chevron-down filter-chevron" [class.filter-chevron--up]="!isCollapsed('size')"></i>
-            </span>
-          </button>
-          <div class="filter-group-body">
-            <div class="size-grid">
-              <button *ngFor="let size of filterSizes; trackBy: trackById" class="size-btn"
-                [class.size-btn--active]="selectedSizes.includes(size.label)" (click)="toggleSize(size.label)"
-                [attr.aria-label]="'Size ' + size.label" [attr.aria-pressed]="selectedSizes.includes(size.label)"
-                type="button">
-                {{ size.label }}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4. Category ─────────────────────── -->
-        <div class="filter-group" [class.filter-group--collapsed]="isCollapsed('category')">
-          <button class="filter-group-header" (click)="toggleGroup('category')" type="button"
-            [attr.aria-expanded]="!isCollapsed('category')">
-            <span class="filter-label">Category</span>
-            <span class="header-right-row">
-              <span *ngIf="selectedCategories.length > 0" class="group-active-dot"></span>
-              <i class="pi pi-chevron-down filter-chevron" [class.filter-chevron--up]="!isCollapsed('category')"></i>
-            </span>
-          </button>
-          <div class="filter-group-body">
-            <div class="filter-options">
-              <label *ngFor="let cat of filterCategories; trackBy: trackById" class="filter-item"
-                [class.filter-item--active]="selectedCategories.includes(cat.name)">
-                <input type="checkbox" class="filter-checkbox sr-only" [checked]="selectedCategories.includes(cat.name)"
-                  (change)="toggleCategory(cat.name)" [attr.aria-label]="'Filter by ' + cat.name" />
-                <span class="filter-item-box" [class.filter-item-box--on]="selectedCategories.includes(cat.name)"
-                  aria-hidden="true">
-                  <i class="pi pi-check"></i>
-                </span>
-                <span class="filter-item-label">{{ cat.name }}</span>
-                <span class="filter-item-count">{{ cat.productCount }}</span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <!-- 5. Fabric ───────────────────────── -->
-        <div class="filter-group" [class.filter-group--collapsed]="isCollapsed('fabric')">
-          <button class="filter-group-header" (click)="toggleGroup('fabric')" type="button"
-            [attr.aria-expanded]="!isCollapsed('fabric')">
-            <span class="filter-label">Fabric</span>
-            <span class="header-right-row">
-              <span *ngIf="selectedFabrics.length > 0" class="group-active-dot"></span>
-              <i class="pi pi-chevron-down filter-chevron" [class.filter-chevron--up]="!isCollapsed('fabric')"></i>
-            </span>
-          </button>
-          <div class="filter-group-body">
-            <div class="filter-options">
-              <label *ngFor="let fabric of filterFabrics; trackBy: trackById" class="filter-item"
-                [class.filter-item--active]="selectedFabrics.includes(fabric.name)">
-                <input type="checkbox" class="filter-checkbox sr-only" [checked]="selectedFabrics.includes(fabric.name)"
-                  (change)="toggleFabric(fabric.name)" [attr.aria-label]="'Filter by ' + fabric.name" />
-                <span class="filter-item-box" [class.filter-item-box--on]="selectedFabrics.includes(fabric.name)"
-                  aria-hidden="true">
-                  <i class="pi pi-check"></i>
-                </span>
-                <span class="filter-item-label">{{ fabric.name }}</span>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6. Heritage Colors ──────────────── -->
-        <div class="filter-group filter-group--last" [class.filter-group--collapsed]="isCollapsed('colors')">
-          <button class="filter-group-header" (click)="toggleGroup('colors')" type="button"
-            [attr.aria-expanded]="!isCollapsed('colors')">
-            <span class="filter-label">Heritage Colors</span>
-            <span class="header-right-row">
-              <span *ngIf="selectedColors.length > 0" class="group-active-dot"></span>
-              <i class="pi pi-chevron-down filter-chevron" [class.filter-chevron--up]="!isCollapsed('colors')"></i>
-            </span>
-          </button>
-          <div class="filter-group-body">
-            <div class="color-options">
-              <button *ngFor="let color of filterColors; trackBy: trackById" class="color-swatch-btn"
-                [class.color-swatch-btn--active]="selectedColors.includes(color.name)" (click)="toggleColor(color.name)"
-                [attr.aria-label]="'Filter by ' + color.name" [attr.aria-pressed]="selectedColors.includes(color.name)"
-                type="button">
-                <span class="color-swatch" [style.background]="color.hex" [class.color-swatch--light]="color['light']">
-                  <i *ngIf="selectedColors.includes(color.name)" class="pi pi-check swatch-check"
-                    aria-hidden="true"></i>
-                </span>
-                <span class="color-name">{{ color.name }}</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </ng-container>
-    </aside>
+    <app-filter-sidebar [products]="allProducts" [activeFilters]="activeFilters" [isMobileOpen]="mobileFilterOpen()"
+      [showNewArrivalsOption]="false" (filtersChanged)="onFilterChange($event)" (reset)="resetFilters()"
+      (closeMobile)="mobileFilterOpen.set(false)">
+    </app-filter-sidebar>
 
     <!-- ══════════════════════════════════════
          PRODUCT AREA
          ══════════════════════════════════════ -->
     <div class="product-area">
-      <div class="collections-toolbar">
-        <div class="toolbar-left">
-          <p class="toolbar-count">
-            Showing <strong>{{ filteredProducts.length }}</strong> pieces
-          </p>
+
+      <!-- TOOLBAR: Sort + Timeline Chips -->
+      <div class="collections-toolbar" *ngIf="!productsLoading()">
+        <!-- Left: Timeline Chips -->
+        <div class="timeline-filters">
+          <span class="timeline-label">Timeline:</span>
+          <div class="timeline-chip-scroll">
+            <button *ngFor="let time of timelineOptions" class="timeline-chip"
+              [class.timeline-chip--active]="selectedTimelines.includes(time.id)" (click)="toggleTimeline(time.id)"
+              type="button">
+              {{ time.label }}
+            </button>
+          </div>
         </div>
 
-        <div class="toolbar-right">
-          <!-- Arrival Timeline Chips -->
-          <div class="toolbar-filters">
-            <span class="filters-label">Arrival:</span>
-            <div class="chips-row">
-              <button *ngFor="let opt of timelineOptions" 
-                      class="timeline-chip"
-                      [class.timeline-chip--active]="selectedTimelines.includes(opt.id)"
-                      (click)="toggleTimeline(opt.id)"
-                      type="button">
-                {{ opt.label }}
-              </button>
-            </div>
-          </div>
-
-          <div class="toolbar-sort">
-            <label for="sort-select" class="sort-label">Sort By:</label>
-            <select id="sort-select" class="sort-select" [(ngModel)]="sortBy" (ngModelChange)="onSortChange()">
-              <option *ngFor="let opt of sortOptions" [value]="opt.value">{{ opt.label }}</option>
-            </select>
-          </div>
+        <!-- Right: Sort -->
+        <div class="toolbar-sort">
+          <label for="sort-select" class="sort-label">Sort By:</label>
+          <select id="sort-select" class="sort-select" [(ngModel)]="sortBy" (ngModelChange)="onSortChange()">
+            <option *ngFor="let opt of sortOptions" [value]="opt.value">{{ opt.label }}</option>
+          </select>
         </div>
       </div>
 
-      <!-- Product Grid (Unified with Shop) -->
-      <div class="product-grid" *ngIf="paginatedProducts.length > 0; else emptyState">
-        <article *ngFor="let product of paginatedProducts; trackBy: trackByProductId" class="product-card">
+      <!-- Loading State -->
+      <div class="products-loading-state" *ngIf="productsLoading()">
+        <div class="loading-spinner"></div>
+        <p>Unveiling the latest creations...</p>
+      </div>
 
-          <div class="card-image-wrap">
-            <img [src]="product.image" [alt]="product.name" class="card-image" loading="lazy" />
-            <div class="card-image-overlay"></div>
+      <!-- Product Grid -->
+      <div class="product-grid" *ngIf="!productsLoading() && paginatedProducts.length > 0; else emptyState">
+        <app-product-card
+          *ngFor="let product of paginatedProducts; trackBy: trackByProductId"
+          [product]="product"
+          [isWishlisted]="wishlistIds.has(product.productId)"
+          (wishlistToggle)="toggleWishlist($event)">
+        </app-product-card>
 
-            <div class="card-badges">
-              <span *ngIf="product.isBestSeller" class="badge badge--bestseller">
-                <i class="pi pi-star-fill"></i> Best Seller
-              </span>
-            </div>
-
-            <button class="card-wishlist-btn" [class.card-wishlist-btn--active]="wishlistIds.has(product.id)"
-              (click)="toggleWishlist(product.id, $event)">
-              <i class="pi" [class.pi-heart]="!wishlistIds.has(product.id)"
-                [class.pi-heart-fill]="wishlistIds.has(product.id)"></i>
-            </button>
-
-            <!-- Quick-add matched to Shop hover action -->
-            <div class="card-hover-actions">
-              <button class="quick-add-btn" type="button">
-                <i class="pi pi-shopping-bag"></i>
-                Add to Bag
-              </button>
-            </div>
-
-            <div class="card-colors">
-              <span class="color-dot" [style.background]="product.accentColor"></span>
-              <span *ngIf="product.colors.length > 1" class="color-dot-more">+{{ product.colors.length - 1 }}</span>
-            </div>
-          </div>
-
-          <div class="card-info">
-            <div class="card-info-main">
-              <h2 class="card-name">{{ product.name }}</h2>
-              <span class="card-price">{{ formatPrice(product.price) }}</span>
-            </div>
-            <p class="card-subtitle">{{ product.subtitle }}</p>
-
-            <div class="card-footer">
-              <div class="card-rating">
-                <span *ngFor="let filled of starArray(product.rating)" class="star"
-                  [class.star--filled]="filled">★</span>
-                <span class="rating-count">({{ product.reviewCount }})</span>
-              </div>
-            </div>
-          </div>
-        </article>
       </div>
 
       <!-- Empty State -->
       <ng-template #emptyState>
-        <div class="empty-state">
-          <i class="pi pi-search empty-icon"></i>
-          <h3 class="empty-title">No new pieces found</h3>
-          <p class="empty-subtitle">Try adjusting your filters to see more arrivals.</p>
-          <button class="empty-reset-btn" (click)="resetFilters()">Reset All Filters</button>
+        <div class="empty-state" *ngIf="!productsLoading()">
+          <div class="empty-icon">✨</div>
+          <h3 class="empty-title">No new arrivals found</h3>
+          <p class="empty-subtitle">Try adjusting your timeline or filters to see more pieces.</p>
+          <button class="empty-reset-btn" (click)="resetFilters()">Reset All</button>
         </div>
       </ng-template>
 
       <!-- Pagination -->
-      <nav class="collections-pagination" *ngIf="totalPages > 1">
+      <nav class="collections-pagination" *ngIf="!productsLoading() && totalPages > 1" aria-label="New arrivals pages">
         <button class="page-btn page-btn--prev" [disabled]="currentPage === 0" (click)="onPageChange(currentPage - 1)">
-          <i class="pi pi-arrow-left"></i> Previous
+          <i class="pi pi-chevron-left"></i>
         </button>
 
         <div class="page-numbers">
           <button *ngFor="let page of pageNumbers" class="page-num" [class.page-num--active]="page === currentPage"
             (click)="onPageChange(page)">
-            {{ (page + 1).toString().padStart(2, '0') }}
+            {{ page + 1 }}
           </button>
         </div>
 
         <button class="page-btn page-btn--next" [disabled]="currentPage === totalPages - 1"
           (click)="onPageChange(currentPage + 1)">
-          Next <i class="pi pi-arrow-right"></i>
+          <i class="pi pi-chevron-right"></i>
         </button>
       </nav>
-    </div>
-  </div>
+
+    </div><!-- /product-area -->
+  </div><!-- /collections-layout -->
+
 </div>

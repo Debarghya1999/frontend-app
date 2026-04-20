@@ -1,0 +1,182 @@
+<aside [id]="'filter-sidebar'" class="filter-sidebar" [class.filter-sidebar--open]="isMobileOpen"
+  aria-label="Product filters">
+
+  <div class="sidebar-title-row">
+    <span class="sidebar-title">Filters</span>
+    <button *ngIf="activeFilters.selectedCategories.length > 0 || activeFilters.selectedFabrics.length > 0 || activeFilters.selectedColors.length > 0 || activeFilters.selectedSizes.length > 0 || activeFilters.bestSellersOnly || activeFilters.newArrivalsOnly || activeFilters.discountedOnly || activeFilters.priceMax < 100000" 
+      class="sidebar-clear-btn" (click)="resetFilters()" type="button">
+      Reset
+    </button>
+  </div>
+
+  <!-- ── Filters Content ── -->
+  <div class="filter-content-scroll">
+
+    <!-- 1. Best Sellers ─────────────────── -->
+    <div class="filter-group filter-group--solo">
+      <label class="best-sellers-label">
+        <input type="checkbox" class="filter-checkbox sr-only" [(ngModel)]="activeFilters.bestSellersOnly"
+          (ngModelChange)="onFilterChange()" id="best-sellers-filter" />
+        <span class="bs-custom-check" [class.bs-custom-check--on]="activeFilters.bestSellersOnly" aria-hidden="true">
+          <i class="pi pi-check"></i>
+        </span>
+        <span class="best-sellers-text">Best Sellers</span>
+        <span class="bs-sparkle-badge">✨</span>
+      </label>
+    </div>
+
+    <!-- 1b. New Arrivals (Optional) ──────── -->
+    <div class="filter-group filter-group--solo" *ngIf="showNewArrivalsOption">
+      <label class="best-sellers-label">
+        <input type="checkbox" class="filter-checkbox sr-only" [(ngModel)]="activeFilters.newArrivalsOnly"
+          (ngModelChange)="onFilterChange()" id="new-arrivals-filter" />
+        <span class="bs-custom-check" [class.bs-custom-check--on]="activeFilters.newArrivalsOnly" aria-hidden="true">
+          <i class="pi pi-check"></i>
+        </span>
+        <span class="best-sellers-text na-text">New Arrivals</span>
+        <span class="na-badge">NEW</span>
+      </label>
+    </div>
+
+    <!-- 1c. Discounted Only ──────────────── -->
+    <div class="filter-group filter-group--solo">
+      <label class="best-sellers-label">
+        <input type="checkbox" class="filter-checkbox sr-only" [(ngModel)]="activeFilters.discountedOnly"
+          (ngModelChange)="onFilterChange()" id="discounted-filter" />
+        <span class="bs-custom-check" [class.bs-custom-check--on]="activeFilters.discountedOnly" aria-hidden="true">
+          <i class="pi pi-check"></i>
+        </span>
+        <span class="best-sellers-text">On Sale</span>
+        <span class="bs-sparkle-badge">%</span>
+      </label>
+    </div>
+
+    <!-- 2. Price Range ──────────────────── -->
+    <div class="filter-group" [class.filter-group--collapsed]="isCollapsed('price')">
+      <button class="filter-group-header" (click)="toggleGroup('price')" type="button"
+        [attr.aria-expanded]="!isCollapsed('price')">
+        <span class="filter-label">Price Range</span>
+        <i class="pi pi-chevron-down filter-chevron" [class.filter-chevron--up]="!isCollapsed('price')"></i>
+      </button>
+      <div class="filter-group-body">
+        <div class="price-range-wrap">
+          <input type="range" class="price-slider" [min]="0" [max]="100000" step="500" [(ngModel)]="activeFilters.priceMax"
+            (ngModelChange)="onFilterChange()" [style.--slider-pct]="sliderPct"
+            aria-label="Maximum price" />
+          <div class="price-labels">
+            <span>₹0</span>
+            <span class="price-current-val">{{ priceMaxLabel }}</span>
+            <span>₹1L+</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Size ─────────────────────────── -->
+    <div class="filter-group" [class.filter-group--collapsed]="isCollapsed('size')" *ngIf="filterOptions().sizes.length">
+      <button class="filter-group-header" (click)="toggleGroup('size')" type="button"
+        [attr.aria-expanded]="!isCollapsed('size')">
+        <span class="filter-label">Size</span>
+        <span class="header-right-row">
+          <span *ngIf="activeFilters.selectedSizes.length > 0" class="group-active-dot"></span>
+          <i class="pi pi-chevron-down filter-chevron" [class.filter-chevron--up]="!isCollapsed('size')"></i>
+        </span>
+      </button>
+      <div class="filter-group-body">
+        <div class="size-grid">
+          <button *ngFor="let size of filterOptions().sizes; trackBy: trackBySize" class="size-btn"
+            [class.size-btn--active]="activeFilters.selectedSizes.includes(size)" (click)="toggleSize(size)"
+            [attr.aria-label]="'Size ' + size" [attr.aria-pressed]="activeFilters.selectedSizes.includes(size)"
+            type="button">
+            {{ size }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Category ─────────────────────── -->
+    <div class="filter-group" [class.filter-group--collapsed]="isCollapsed('category')" *ngIf="filterOptions().categories.length">
+      <button class="filter-group-header" (click)="toggleGroup('category')" type="button"
+        [attr.aria-expanded]="!isCollapsed('category')">
+        <span class="filter-label">Category</span>
+        <span class="header-right-row">
+          <span *ngIf="activeFilters.selectedCategories.length > 0" class="group-active-dot"></span>
+          <i class="pi pi-chevron-down filter-chevron" [class.filter-chevron--up]="!isCollapsed('category')"></i>
+        </span>
+      </button>
+      <div class="filter-group-body">
+        <div class="filter-options">
+          <label *ngFor="let cat of filterOptions().categories; trackBy: trackByName" class="filter-item"
+            [class.filter-item--active]="activeFilters.selectedCategories.includes(cat.name)">
+            <input type="checkbox" class="filter-checkbox sr-only" [checked]="activeFilters.selectedCategories.includes(cat.name)"
+              (change)="toggleCategory(cat.name)" [attr.aria-label]="'Filter by ' + cat.name" />
+            <span class="filter-item-box" [class.filter-item-box--on]="activeFilters.selectedCategories.includes(cat.name)"
+              aria-hidden="true">
+              <i class="pi pi-check"></i>
+            </span>
+            <span class="filter-item-label">{{ cat.name }}</span>
+            <span class="filter-item-count" *ngIf="cat.count">{{ cat.count }}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Fabric ───────────────────────── -->
+    <div class="filter-group" [class.filter-group--collapsed]="isCollapsed('fabric')" *ngIf="filterOptions().fabrics.length">
+      <button class="filter-group-header" (click)="toggleGroup('fabric')" type="button"
+        [attr.aria-expanded]="!isCollapsed('fabric')">
+        <span class="filter-label">Fabric</span>
+        <span class="header-right-row">
+          <span *ngIf="activeFilters.selectedFabrics.length > 0" class="group-active-dot"></span>
+          <i class="pi pi-chevron-down filter-chevron" [class.filter-chevron--up]="!isCollapsed('fabric')"></i>
+        </span>
+      </button>
+      <div class="filter-group-body">
+        <div class="filter-options">
+          <label *ngFor="let fabric of filterOptions().fabrics; trackBy: trackByName" class="filter-item"
+            [class.filter-item--active]="activeFilters.selectedFabrics.includes(fabric.name)">
+            <input type="checkbox" class="filter-checkbox sr-only" [checked]="activeFilters.selectedFabrics.includes(fabric.name)"
+              (change)="toggleFabric(fabric.name)" [attr.aria-label]="'Filter by ' + fabric.name" />
+            <span class="filter-item-box" [class.filter-item-box--on]="activeFilters.selectedFabrics.includes(fabric.name)"
+              aria-hidden="true">
+              <i class="pi pi-check"></i>
+            </span>
+            <span class="filter-item-label">{{ fabric.name }}</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Heritage Colors ──────────────── -->
+    <div class="filter-group filter-group--last" [class.filter-group--collapsed]="isCollapsed('colors')" *ngIf="filterOptions().colors.length">
+      <button class="filter-group-header" (click)="toggleGroup('colors')" type="button"
+        [attr.aria-expanded]="!isCollapsed('colors')">
+        <span class="filter-label">Heritage Colors</span>
+        <span class="header-right-row">
+          <span *ngIf="activeFilters.selectedColors.length > 0" class="group-active-dot"></span>
+          <i class="pi pi-chevron-down filter-chevron" [class.filter-chevron--up]="!isCollapsed('colors')"></i>
+        </span>
+      </button>
+      <div class="filter-group-body">
+        <div class="color-options">
+          <button *ngFor="let color of filterOptions().colors; trackBy: trackByName" class="color-swatch-btn"
+            [class.color-swatch-btn--active]="activeFilters.selectedColors.includes(color.name)" (click)="toggleColor(color.name)"
+            [attr.aria-label]="'Filter by ' + color.name" [attr.aria-pressed]="activeFilters.selectedColors.includes(color.name)"
+            type="button">
+            <span class="color-swatch" [style.background]="color.hex" [class.color-swatch--light]="color.light">
+              <i *ngIf="activeFilters.selectedColors.includes(color.name)" class="pi pi-check swatch-check"
+                aria-hidden="true"></i>
+            </span>
+            <span class="color-name">{{ color.name }}</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /filter-content-scroll -->
+
+  <!-- Mobile Close Button (at bottom of drawer) -->
+  <div class="mobile-close-area" *ngIf="isMobileOpen">
+    <button class="mobile-apply-btn" (click)="onCloseMobile()">Apply Filters</button>
+  </div>
+</aside>

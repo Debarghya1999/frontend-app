@@ -1,0 +1,64 @@
+<article class="product-card" [attr.aria-label]="product.productDescription + ', ' + formatPrice(product.price)">
+  <!-- ── Image Container ── -->
+  <div class="card-image-wrap">
+    <img *ngIf="!imageError"
+      [src]="product.image"
+      [alt]="product.productDescription"
+      class="card-image"
+      loading="lazy"
+      decoding="async"
+      (error)="onImageError()" />
+
+    <div *ngIf="imageError" class="card-image-fallback" [style.background]="product.accentColor || '#f5f0e8'">
+      <i class="pi pi-image text-4xl opacity-20"></i>
+    </div>
+    <div class="card-image-overlay"></div>
+
+    <!-- Badges Stack -->
+    <div class="card-badges">
+      <span *ngIf="product.isBestSeller" class="badge badge--bestseller">
+        <i class="pi pi-star-fill"></i> Best Seller
+      </span>
+      <span *ngIf="product.isNew" class="badge badge--new">New Arrival</span>
+      <span *ngIf="product.isOnSale" class="badge badge--sale">SALE</span>
+      <span *ngIf="product.discount" class="badge badge--discount">{{ product.discount }}% OFF</span>
+      <span *ngIf="product.badge && !product.isBestSeller && !product.isNew" class="badge">{{ product.badge }}</span>
+    </div>
+
+    <!-- Wishlist Action -->
+    <button 
+      class="card-wishlist-btn" 
+      [class.card-wishlist-btn--active]="isWishlisted"
+      (click)="onWishlistClick($event)"
+      [pTooltip]="isWishlisted ? 'Remove from Wishlist' : 'Add to Wishlist'"
+      tooltipPosition="left">
+      <i class="pi" [class.pi-heart]="!isWishlisted" [class.pi-heart-fill]="isWishlisted"></i>
+    </button>
+    
+  </div>
+
+  <!-- ── Product Details ── -->
+  <div class="card-info">
+    <div class="card-info-header">
+      <h2 class="card-name">{{ product.productDescription }}</h2>
+      <div class="card-price-block">
+        <span *ngIf="product.originalPrice && product.originalPrice > product.price" class="price--original">
+          {{ formatPrice(product.originalPrice) }}
+        </span>
+        <span class="price--current">{{ formatPrice(product.price) }}</span>
+      </div>
+    </div>
+    
+    <p class="card-subtitle">{{ product.subtitle || product.category }}</p>
+
+    <div class="card-footer">
+      <!-- Ratings -->
+      <div class="card-rating" [attr.aria-label]="product.rating + ' stars'">
+        <div class="stars">
+          <span *ngFor="let filled of starArray(product.rating)" class="star" [class.star--filled]="filled" aria-hidden="true">★</span>
+        </div>
+        <span class="rating-count">({{ product.reviews || 0 }})</span>
+      </div>
+    </div>
+  </div>
+</article>
