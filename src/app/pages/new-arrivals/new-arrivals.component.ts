@@ -19,6 +19,7 @@ import { ProductService } from '../../core/services/product.service';
 import { Product } from '../../core/models/product.model';
 import { FilterSidebarComponent } from '../../shared/components/filter-sidebar/filter-sidebar.component';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
+import { BreadcrumbComponent, BreadcrumbItem } from '../../shared/components/breadcrumb/breadcrumb.component';
 import { FilterState, getInitialFilterState } from '../../core/models/filter.model';
 
 declare const gsap: any;
@@ -27,7 +28,7 @@ declare const ScrollTrigger: any;
 @Component({
   selector: 'app-new-arrivals',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, FilterSidebarComponent, ProductCardComponent],
+  imports: [CommonModule, RouterModule, FormsModule, FilterSidebarComponent, ProductCardComponent, BreadcrumbComponent],
   templateUrl: './new-arrivals.component.html',
   styleUrl: './new-arrivals.component.css',
   changeDetection: ChangeDetectionStrategy.Default,
@@ -45,6 +46,11 @@ export class NewArrivalsComponent implements OnInit, AfterViewInit, OnDestroy {
   activeFilters: FilterState = getInitialFilterState();
   selectedTimelines:  string[] = [];
   sortBy = 'newest';
+
+  breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Home', url: '/home' },
+    { label: 'New Arrivals' }
+  ];
 
   // ── Pagination ─────────────────────────────────────────────────────────
   currentPage    = 0;
@@ -204,7 +210,7 @@ export class NewArrivalsComponent implements OnInit, AfterViewInit, OnDestroy {
 
         // ① Header Entrance
         gsap.timeline({ defaults: { ease } })
-          .from('.collections-breadcrumb', { opacity: 0, y: -10, duration: 0.5 })
+          .from('app-breadcrumb', { opacity: 0, y: -10, duration: 0.5 })
           .from('.collections-headline',   { opacity: 0, y: 30, duration: 0.7 }, '-=0.3')
           .from('.headline-rule',   { scaleX: 0, transformOrigin: 'left', duration: 0.8 }, '-=0.4')
           .from('.collections-meta',       { opacity: 0, y: 15, duration: 0.5 }, '-=0.5');

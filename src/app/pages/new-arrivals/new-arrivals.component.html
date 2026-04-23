@@ -17,11 +17,7 @@
 
   <!-- ── Page Header ── -->
   <div class="collections-header-area">
-    <nav class="collections-breadcrumb" aria-label="Breadcrumb">
-      <a routerLink="/home" class="bc-link">Home</a>
-      <span class="bc-sep" aria-hidden="true">/</span>
-      <span class="bc-current">New Arrivals</span>
-    </nav>
+    <app-breadcrumb [items]="breadcrumbItems"></app-breadcrumb>
 
     <div class="collections-headline-block">
       <div class="headline-left">

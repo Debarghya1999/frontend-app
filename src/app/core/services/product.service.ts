@@ -344,34 +344,54 @@ export class ProductService {
       },
   ];
 
+  /** Gallery images shared across products for demo purposes */
+  private readonly galleryImages: string[] = [
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuDZw7Tr4P7vZ6JMtCqe4qfi9DquaX9xN_FfWC57_jCZS_8ooPppLzruIwGdacp7AuKnKz1Z0k2vTokHqjPJlzHYV8sxapiaAzFCE48pQFxZIJLcFuV9R0RG2l-_afjNwPx5J6HRdNcjPHEgiAH8cfNit-RVPY1_DY1H7kuwgLWClu9Af1ad_HqPALts-Z4HMMUpahL3jBFmdf52VE1I4mLFlXjDbyTRFmkGhpykQE1DdypzTbnSEb89QgCQlPDA1X8HRCIv-mRBtnY0',
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuDyRwaKuXr-Ce7JIhNGiuZDuh_PWcXfgvD8L0PJ-O0csta4CUycMUcnsCGJD561VSvGS438Cu77Ld8aNQx7SFkJiZ9pQ-JDkFpohzQCgTDeb72HmfL27uCECi7SkUEDK2fCzBQ8nPd0aXuCi6W4Ym0yH-pxp-nKjZ8rFOgm0gPRx4cbfWwxDRzUm_P-glbg_tQDWmwovCCA-dIcxHSxg9ps_XsnlIyAaM947h_SRoOY_C8eX6dovdPQjFdLkasQGXDacFkcHCj8pqv2',
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuAIGeOJxPuvkr1C0x1Wo0KCQONo6MzacpFruqNofmncI-tNc2ClTFdSdnVJf3DggnDlVi6PPO_MgvxeDfHb7DX4_BBMq0FxwfMRZTzXPA1sfpE_OPrwreRF1BZCh6zY4elqcUcKucynxvcX0H7SqeNWpU-G6WKSxWUb2Qxdh6ey4dMi45YOU9oZPp9CEmCGfhObNI7ofGeYNRij7SU-4oX5Mug-KjjRTkoSTizT18tNxq0Hv79Ra5F53EC-Od-DnUJWnEuEid57irne',
+    'https://lh3.googleusercontent.com/aida-public/AB6AXuARYrVNbs0z_OfSx3fhlqvWViTLGy6iLzn1NI9Xz9m-KJdIq-Chhcv7YmkA0SS7LbUuEaVFr5U8wuXVUqnpYCch0uXtVexrzkPwxhvt0DJeH3FuBan8-JLMnpvkMliioYk5OoaL5irk1MhyanRiH7S0QmuCaOCBaQc9CbEeddJQ8xV7B2GDpxmnQaZvZ_AIYM_YFrJ-nAMqBoGSupnSx_c8GsU-k6Z_525cZBoJkCXHniFZkCxKf-1K05uIEvsGXSQsZqnBp-OMJRI8',
+  ];
+
+  private readonly defaultHighlights = [
+    'Handcrafted by master artisans using traditional techniques',
+    'Premium quality fabric with exceptional drape and texture',
+    'Timeless design that bridges heritage and contemporary style',
+    'Each piece is unique — slight variations celebrate the handmade process',
+    'Ethically sourced materials supporting local weaver communities',
+  ];
+
+  private readonly defaultCare = [
+    'Dry clean recommended for best results',
+    'Store in a cool, dry place away from direct sunlight',
+    'Use a muslin cloth when ironing on low heat',
+    'Avoid prolonged exposure to perfumes or deodorants',
+    'Handle embroidered areas with care',
+  ];
+
   constructor() {
     this.initProducts();
   }
 
   private initProducts(): void {
-    // 2. Randomly assign Sale status and calculate discounts
     this.products = this.products.map(p => {
-      // 25% chance of being on sale
       const isOnSale = Math.random() < 0.25;
-      
-      // If on sale, ensure there's an original price to calculate discount
       let originalPrice = p.originalPrice;
       if (isOnSale && !originalPrice) {
-        // Mock an original price that is 15-40% higher
         const markup = 1.15 + (Math.random() * 0.25);
         originalPrice = Math.round(p.price * markup);
       }
-
       const discount = originalPrice && originalPrice > p.price
         ? Math.round(((originalPrice - p.price) / originalPrice) * 100)
         : undefined;
 
-      return {
-        ...p,
-        isOnSale,
-        originalPrice,
-        discount
-      };
+      // Enrich with detail-page data
+      const gallery = p.gallery ?? [p.image, ...this.galleryImages.slice(0, 3)];
+      const description = p.description ??
+        `A masterpiece of tactile luxury, the ${p.productDescription} is handwoven by master artisans over many hours of dedicated craft. This exquisite piece features traditional embroidery on rich ${p.fabric || 'premium'} fabric, offering a modern interpretation of ancient regal silhouettes. Designed to be a timeless heirloom, it celebrates the art of Indian textile heritage.`;
+      const highlights = p.highlights ?? this.defaultHighlights;
+      const careInstructions = p.careInstructions ?? this.defaultCare;
+
+      return { ...p, isOnSale, originalPrice, discount, gallery, description, highlights, careInstructions };
     });
   }
 
@@ -380,12 +400,27 @@ export class ProductService {
   }
 
   getFeaturedProducts(): Observable<Product[]> {
-    // Return a dynamic subset of the shuffled master list (e.g., first 10 items)
     return of(this.products.slice(0, 10)).pipe(delay(100));
   }
 
   getProductById(productId: string): Observable<Product | undefined> {
     const product = this.products.find(p => p.productId === productId);
     return of(product).pipe(delay(80));
+  }
+
+  getRelatedProducts(productId: string, limit = 6): Observable<Product[]> {
+    const current = this.products.find(p => p.productId === productId);
+    if (!current) return of([]);
+    const related = this.products
+      .filter(p => p.productId !== productId && p.category === current.category)
+      .slice(0, limit);
+    // If not enough in same category, pad with other products
+    if (related.length < limit) {
+      const others = this.products
+        .filter(p => p.productId !== productId && !related.includes(p))
+        .slice(0, limit - related.length);
+      related.push(...others);
+    }
+    return of(related).pipe(delay(100));
   }
 }

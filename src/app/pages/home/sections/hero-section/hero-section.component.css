@@ -12,7 +12,6 @@
   align-items: center;
   justify-content: center;
   padding: 6rem 1.5rem 4rem;
-  background: var(--surface, #fff8ef);
   overflow: hidden;
 }
 
@@ -338,33 +337,107 @@
   transform: rotate(0deg);
 }
 
-/* ── Scroll Indicator ── */
+/* ── Scroll Indicator — Modern Mouse Shell ── */
 .scroll-indicator {
   position: absolute;
-  bottom: 2rem;
+  bottom: 1rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
-  animation: scrollBounce 3s ease-in-out infinite;
-}
-
-.scroll-icon {
+  z-index: 10;
+  cursor: pointer;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: var(--radius-md, 6px);
-  background: var(--surface-container, #eddfc8);
-  color: var(--secondary, #735c00);
-  font-size: 0.875rem;
-  box-shadow: var(--shadow-lift, 0px 8px 24px rgba(88, 65, 65, 0.06));
+  gap: 0.55rem;
+  animation: scrollFloat 3s ease-in-out infinite;
+  outline: none;
 }
 
+/* Mouse shell */
+.scroll-mouse {
+  width: 26px;
+  height: 42px;
+  border-radius: 13px;
+  border: 2px solid var(--secondary, #735c00);
+  background: rgba(237, 223, 200, 0.35);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding-top: 7px;
+  box-shadow:
+    0 0 0 1px rgba(201, 166, 0, 0.18),
+    0 8px 24px rgba(87, 0, 19, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Scroll dot */
+.scroll-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--secondary, #735c00);
+  animation: dotScroll 1.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  flex-shrink: 0;
+  transition: background 0.3s ease;
+}
+
+/* "Scroll" label */
+.scroll-label {
+  font-family: var(--font-body, 'Manrope', sans-serif);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--secondary, #735c00);
+  opacity: 0.8;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+/* Hover state — warm gold glow */
+.scroll-indicator:hover .scroll-mouse {
+  border-color: var(--primary, #570013);
+  box-shadow:
+    0 0 0 4px rgba(87, 0, 19, 0.08),
+    0 12px 32px rgba(87, 0, 19, 0.14);
+}
+
+.scroll-indicator:hover .scroll-dot {
+  background: var(--primary, #570013);
+}
+
+.scroll-indicator:hover .scroll-label {
+  opacity: 1;
+  color: var(--primary, #570013);
+}
+
+/* Focus-visible ring for keyboard users */
+.scroll-indicator:focus-visible .scroll-mouse {
+  outline: 2px solid var(--primary, #570013);
+  outline-offset: 4px;
+}
+
+/* Dot scrolls top → bottom and fades out */
+@keyframes dotScroll {
+  0%   { transform: translateY(0);    opacity: 1;   }
+  60%  { transform: translateY(14px); opacity: 0.2; }
+  61%  { transform: translateY(0);    opacity: 0;   }
+  100% { transform: translateY(0);    opacity: 1;   }
+}
+
+/* Outer container floats gently — no X-axis offset since transform is managed above */
+@keyframes scrollFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0);   }
+  50%       { transform: translateX(-50%) translateY(7px); }
+}
+
+/* Keep old keyframe name for reduced-motion targeting */
 @keyframes scrollBounce {
   0%, 100% { transform: translateX(-50%) translateY(0); }
   50%       { transform: translateX(-50%) translateY(8px); }
 }
+
 
 /* ── Hero Image Fallback Placeholder ── */
 .hero-img-placeholder {
@@ -413,7 +486,8 @@
 /* ── Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
   .gradient-blob,
-  .scroll-indicator { animation: none; }
+  .scroll-indicator,
+  .scroll-dot { animation: none; }
   .hero-image, .hero-image img, .hero-image-container::after { transition: none; }
   .btn { transition: none; }
   .btn-primary::after { display: none; }

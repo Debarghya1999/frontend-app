@@ -1,0 +1,453 @@
+<!-- ═══════════════════════════════════════════════════════
+     Product Details — Premium 3D Edition | The Artisan Boutique
+     3D Carousel · Thumbnail Strip · Rich Micro-interactions
+     ═══════════════════════════════════════════════════════ -->
+
+<!-- Loading Skeleton -->
+<div class="pdp-skeleton" *ngIf="isLoading()" aria-busy="true">
+  <div class="pdp-skeleton__gallery">
+    <div class="skeleton skeleton--hero"></div>
+    <div class="skeleton-thumbs">
+      <div class="skeleton skeleton--thumb" *ngFor="let i of [1,2,3,4]"></div>
+    </div>
+  </div>
+  <div class="pdp-skeleton__info">
+    <div class="skeleton skeleton--cat"></div>
+    <div class="skeleton skeleton--title"></div>
+    <div class="skeleton skeleton--price"></div>
+    <div class="skeleton skeleton--row"></div>
+    <div class="skeleton skeleton--btn"></div>
+  </div>
+</div>
+
+<!-- ═══ Main Product Content ═══ -->
+<div class="pdp" *ngIf="!isLoading() && product()" @fadeSlideIn>
+
+  <!-- Ambient Background Effects -->
+  <div class="pdp-ambient" aria-hidden="true">
+    <div class="pdp-orb pdp-orb--1"></div>
+    <div class="pdp-orb pdp-orb--2"></div>
+    <div class="pdp-orb pdp-orb--3"></div>
+    <div class="pdp-grain"></div>
+  </div>
+
+  <!-- Breadcrumb -->
+  <app-breadcrumb [items]="breadcrumbItems()"></app-breadcrumb>
+
+  <!-- ═══ Product Grid ═══ -->
+  <div class="pdp-grid">
+
+    <!-- ══════════════════════════════════════
+         LEFT — 3D Image Gallery
+         ══════════════════════════════════════ -->
+    <section class="pdp-gallery" aria-label="Product images">
+
+      <!-- 3D Carousel Stage -->
+      <div class="gallery-stage" [class.gallery-stage--zoomed]="isZoomed">
+
+        <!-- Glow effect behind image -->
+        <div class="gallery-glow" aria-hidden="true"></div>
+
+        <!-- Badges -->
+        <div class="pdp-badges">
+          <span *ngIf="product()!.isBestSeller" class="pdp-badge pdp-badge--bestseller">
+            <i class="pi pi-star-fill"></i> Best Seller
+          </span>
+          <span *ngIf="product()!.isNew" class="pdp-badge pdp-badge--new">
+            <span class="badge-dot"></span> New Arrival
+          </span>
+          <span *ngIf="product()!.discount" class="pdp-badge pdp-badge--sale">{{ product()!.discount }}% OFF</span>
+        </div>
+
+        <!-- Main Image with 3D Tilt Effect -->
+        <div class="gallery-frame"
+             (mousemove)="onImageMouseMove($event)"
+             (mouseleave)="onImageMouseLeave()"
+             (mouseenter)="onImageMouseEnter()"
+             [style.transform]="imageTiltTransform">
+          <img
+            [@carousel3D]="carouselState()"
+            (@carousel3D.done)="onCarouselDone()"
+            [src]="activeImage()"
+            [alt]="product()!.productDescription"
+            class="gallery-img"
+            (click)="openGalleria()"
+            decoding="async"
+            loading="eager" />
+
+          <!-- Zoom lens icon on hover -->
+          <div class="gallery-zoom-hint" aria-hidden="true">
+            <span class="material-symbols-outlined">zoom_in</span>
+          </div>
+        </div>
+
+        <!-- Prev / Next Arrows -->
+        <button class="gallery-arrow gallery-arrow--prev"
+          (click)="prevImage()" [disabled]="!canGoPrev()"
+          type="button" aria-label="Previous image">
+          <div class="arrow-inner">
+            <span class="material-symbols-outlined">chevron_left</span>
+          </div>
+        </button>
+        <button class="gallery-arrow gallery-arrow--next"
+          (click)="nextImage()" [disabled]="!canGoNext()"
+          type="button" aria-label="Next image">
+          <div class="arrow-inner">
+            <span class="material-symbols-outlined">chevron_right</span>
+          </div>
+        </button>
+
+        <!-- Wishlist button -->
+        <button class="gallery-wishlist"
+          [class.gallery-wishlist--active]="isWishlisted()"
+          (click)="toggleWishlist()"
+          type="button"
+          [attr.aria-label]="isWishlisted() ? 'Remove from wishlist' : 'Add to wishlist'"
+          id="wishlist-btn">
+          <i class="pi" [class.pi-heart]="!isWishlisted()" [class.pi-heart-fill]="isWishlisted()"></i>
+          <span class="wishlist-ripple" *ngIf="isWishlisted()"></span>
+        </button>
+
+        <!-- Image counter pill -->
+        <div class="gallery-counter" aria-live="polite">
+          <span>{{ activeImageIndex() + 1 }}</span>
+          <span class="gallery-counter__sep">/</span>
+          <span>{{ gallery().length }}</span>
+        </div>
+      </div>
+
+      <!-- ═══ Thumbnail Strip (Click to Change Image) ═══ -->
+      <div class="gallery-thumbs" role="tablist" aria-label="Select product image">
+        <button
+          *ngFor="let img of gallery(); let i = index"
+          class="gallery-thumb"
+          [class.gallery-thumb--active]="activeImageIndex() === i"
+          (click)="goToImage(i)"
+          role="tab"
+          [attr.aria-selected]="activeImageIndex() === i"
+          [attr.aria-label]="'View image ' + (i + 1)"
+          type="button">
+          <div class="thumb-frame">
+            <img [src]="img" [alt]="'Product view ' + (i + 1)" loading="lazy" />
+            <div class="thumb-overlay">
+              <span class="material-symbols-outlined">zoom_in</span>
+            </div>
+          </div>
+          <div class="thumb-active-bar"></div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════════
+         RIGHT — Compact Product Info
+         ══════════════════════════════════════ -->
+    <section class="pdp-info">
+
+      <!-- ── Header: Category + Title + Price + Rating ── -->
+      <div class="pdp-info__header">
+        <div class="pdp-info__top-row">
+          <span class="pdp-info__category">{{ product()!.category }}</span>
+          <div class="pdp-rating" [attr.aria-label]="product()!.rating + ' out of 5 stars'">
+            <div class="pdp-rating__stars">
+              <span *ngFor="let filled of starArray(product()!.rating)"
+                class="star" [class.star--filled]="filled" aria-hidden="true">★</span>
+            </div>
+            <span class="pdp-rating__count">({{ product()!.reviews }} reviews)</span>
+          </div>
+        </div>
+
+        <h1 class="pdp-info__title">{{ product()!.productDescription }}</h1>
+        <p class="pdp-info__subtitle" *ngIf="product()!.subtitle">{{ product()!.subtitle }}</p>
+
+        <div class="pdp-info__price-row">
+          <span class="pdp-price--current">{{ formatPrice(product()!.price) }}</span>
+          <span class="pdp-price--original" *ngIf="hasDiscount()">{{ formatPrice(product()!.originalPrice!) }}</span>
+          <span class="pdp-price--discount" *ngIf="product()!.discount">
+            <span class="material-symbols-outlined">arrow_drop_down</span>{{ product()!.discount }}% off
+          </span>
+        </div>
+      </div>
+
+      <!-- Decorative divider -->
+      <div class="pdp-divider" aria-hidden="true">
+        <span class="pdp-divider__line"></span>
+        <span class="pdp-divider__icon">✦</span>
+        <span class="pdp-divider__line"></span>
+      </div>
+
+      <!-- ── Description ── -->
+      <p class="pdp-info__desc">{{ product()!.description }}</p>
+
+      <!-- ── Color + Size Selectors ── -->
+      <div class="pdp-selectors-row">
+        <!-- Color -->
+        <div class="pdp-selector pdp-selector--color" *ngIf="product()!.colors && product()!.colors!.length > 0">
+          <span class="pdp-selector__label">Color: <strong>{{ selectedColor() }}</strong></span>
+          <div class="pdp-selector__colors">
+            <button *ngFor="let color of product()!.colors"
+              class="color-swatch"
+              [class.color-swatch--active]="selectedColor() === color"
+              [style.background-color]="getColorHex(color)"
+              [attr.aria-label]="color"
+              [attr.aria-pressed]="selectedColor() === color"
+              (click)="selectColor(color)"
+              pTooltip="{{ color }}" tooltipPosition="top">
+              <span class="color-swatch__check" *ngIf="selectedColor() === color">
+                <span class="material-symbols-outlined">check</span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Size -->
+        <div class="pdp-selector pdp-selector--size" *ngIf="product()!.sizes && product()!.sizes!.length > 0">
+          <div class="pdp-selector__header">
+            <span class="pdp-selector__label">Size</span>
+            <button class="pdp-size-guide-btn" type="button">
+              <span class="material-symbols-outlined">straighten</span> Size Guide
+            </button>
+          </div>
+          <div class="pdp-selector__sizes">
+            <button *ngFor="let size of product()!.sizes"
+              class="size-btn"
+              [class.size-btn--active]="selectedSize() === size"
+              [class.size-btn--disabled]="isSizeUnavailable(size)"
+              [disabled]="isSizeUnavailable(size)"
+              (click)="selectSize(size)"
+              [attr.aria-label]="size + (isSizeUnavailable(size) ? ' unavailable' : '')"
+              [attr.aria-pressed]="selectedSize() === size">
+              {{ size }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Quantity + CTA Row ── -->
+      <div class="pdp-action-bar">
+        <!-- Quantity -->
+        <div class="pdp-quantity">
+          <button class="qty-btn" (click)="decrementQty()" [disabled]="quantity() <= 1"
+            aria-label="Decrease quantity" type="button">
+            <span class="material-symbols-outlined">remove</span>
+          </button>
+          <span class="qty-value" aria-live="polite">{{ quantity() }}</span>
+          <button class="qty-btn" (click)="incrementQty()" [disabled]="quantity() >= 10"
+            aria-label="Increase quantity" type="button">
+            <span class="material-symbols-outlined">add</span>
+          </button>
+        </div>
+
+        <!-- Add to Bag -->
+        <button class="pdp-btn pdp-btn--primary"
+          [class.pdp-btn--added]="addedToBag()"
+          (click)="addToBag()" type="button" id="add-to-bag-btn">
+          <span *ngIf="!addedToBag()">
+            <span class="material-symbols-outlined">shopping_bag</span> Add to Bag
+          </span>
+          <span *ngIf="addedToBag()" class="pdp-btn__success">
+            <span class="material-symbols-outlined">check_circle</span> Added!
+          </span>
+        </button>
+      </div>
+
+      <!-- Buy Now (full width) -->
+      <button class="pdp-btn pdp-btn--secondary" (click)="buyNow()" type="button" id="buy-now-btn">
+        <span class="material-symbols-outlined">bolt</span> Buy Now
+      </button>
+
+      <!-- ── Trust Badges ── -->
+      <div class="pdp-trust">
+        <div class="pdp-trust__item">
+          <div class="trust-icon-wrap">
+            <span class="material-symbols-outlined">local_shipping</span>
+          </div>
+          <div class="trust-text">
+            <span class="trust-label">Free Shipping</span>
+            <span class="trust-sublabel">Orders above ₹2,000</span>
+          </div>
+        </div>
+        <div class="pdp-trust__divider"></div>
+        <div class="pdp-trust__item">
+          <div class="trust-icon-wrap">
+            <span class="material-symbols-outlined">verified</span>
+          </div>
+          <div class="trust-text">
+            <span class="trust-label">100% Authentic</span>
+            <span class="trust-sublabel">Quality Guaranteed</span>
+          </div>
+        </div>
+        <div class="pdp-trust__divider"></div>
+        <div class="pdp-trust__item">
+          <div class="trust-icon-wrap">
+            <span class="material-symbols-outlined">replay</span>
+          </div>
+          <div class="trust-text">
+            <span class="trust-label">Easy Returns</span>
+            <span class="trust-sublabel">15-day window</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Tabbed Details ── -->
+      <div class="pdp-tabs">
+        <div class="pdp-tabs__nav" role="tablist">
+          <button class="pdp-tabs__tab" [class.pdp-tabs__tab--active]="activeTab() === 'details'"
+            (click)="setTab('details')" role="tab" [attr.aria-selected]="activeTab() === 'details'" type="button">
+            Details
+          </button>
+          <button class="pdp-tabs__tab" [class.pdp-tabs__tab--active]="activeTab() === 'care'"
+            (click)="setTab('care')" role="tab" [attr.aria-selected]="activeTab() === 'care'" type="button">
+            Fabric & Care
+          </button>
+          <button class="pdp-tabs__tab" [class.pdp-tabs__tab--active]="activeTab() === 'shipping'"
+            (click)="setTab('shipping')" role="tab" [attr.aria-selected]="activeTab() === 'shipping'" type="button">
+            Shipping
+          </button>
+        </div>
+
+        <div class="pdp-tabs__panel" role="tabpanel">
+          <!-- Details -->
+          <ul class="pdp-tabs__list" *ngIf="activeTab() === 'details'" @tabSlide>
+            <li *ngFor="let hl of product()!.highlights">
+              <span class="tab-bullet"></span>{{ hl }}
+            </li>
+          </ul>
+
+          <!-- Fabric & Care -->
+          <ul class="pdp-tabs__list" *ngIf="activeTab() === 'care'" @tabSlide>
+            <li *ngIf="product()!.fabric">
+              <span class="tab-bullet"></span><strong>Fabric:</strong> {{ product()!.fabric }}
+            </li>
+            <li *ngFor="let ci of product()!.careInstructions">
+              <span class="tab-bullet"></span>{{ ci }}
+            </li>
+          </ul>
+
+          <!-- Shipping -->
+          <ul class="pdp-tabs__list" *ngIf="activeTab() === 'shipping'" @tabSlide>
+            <li><span class="tab-bullet"></span>Complimentary shipping across India on orders above ₹2,000</li>
+            <li><span class="tab-bullet"></span>International shipping available — 7–14 business days</li>
+            <li><span class="tab-bullet"></span>Hassle-free returns within 15 days of delivery</li>
+            <li><span class="tab-bullet"></span>Comes with heritage gift packaging at no extra cost</li>
+          </ul>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <!-- ═══ Customer Reviews ═══ -->
+  <section class="pdp-reviews">
+    <div class="pdp-reviews__header">
+      <div class="pdp-reviews__eyebrow">Real Experiences</div>
+      <h2 class="pdp-reviews__title">Customer Reviews</h2>
+      <div class="pdp-reviews__rule" aria-hidden="true">
+        <span></span><span class="rule-gem">◆</span><span></span>
+      </div>
+    </div>
+    
+    <div class="pdp-reviews__summary">
+      <div class="summary-score">
+        <span class="score-value">{{ product()!.rating | number:'1.1-1' }}</span>
+        <div class="score-stars" [attr.aria-label]="product()!.rating + ' out of 5 stars'">
+          <span *ngFor="let filled of starArray(product()!.rating)" class="star" [class.star--filled]="filled" aria-hidden="true">★</span>
+        </div>
+        <span class="score-count">Based on {{ product()!.reviews }} Reviews</span>
+      </div>
+      <button class="pdp-btn pdp-btn--outline" type="button">Write a Review</button>
+    </div>
+
+    <div class="pdp-reviews__list" @staggerCards>
+      <div class="review-card" *ngFor="let review of customerReviews()">
+        <div class="review-card__header">
+          <div class="review-card__user">
+            <div class="user-avatar">{{ review.userName.charAt(0) }}</div>
+            <div class="user-info">
+              <span class="user-name">{{ review.userName }}</span>
+              <span class="user-verified" *ngIf="review.verifiedPurchase">
+                <span class="material-symbols-outlined">verified</span> Verified Buyer
+              </span>
+            </div>
+          </div>
+          <div class="review-card__date">{{ review.date }}</div>
+        </div>
+        <div class="review-card__rating">
+          <span *ngFor="let filled of starArray(review.rating)" class="star" [class.star--filled]="filled" aria-hidden="true">★</span>
+        </div>
+        <h3 class="review-card__title">{{ review.title }}</h3>
+        <p class="review-card__content">{{ review.content }}</p>
+        <div class="review-card__footer">
+          <button class="helpful-btn" (click)="markHelpful(review.id)" [class.helpful-btn--active]="review.isHelpful">
+            <span class="material-symbols-outlined">thumb_up</span>
+            Helpful ({{ review.helpfulCount }})
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pdp-reviews__actions" *ngIf="customerReviews().length > 2">
+      <button class="pdp-btn pdp-btn--ghost" type="button">Load More Reviews</button>
+    </div>
+  </section>
+
+  <!-- ═══ Related Products ═══ -->
+  <section class="pdp-related" *ngIf="relatedProducts().length > 0">
+    <div class="pdp-related__header">
+      <div class="pdp-related__eyebrow">Curated For You</div>
+      <h2 class="pdp-related__title">You May Also Love</h2>
+      <div class="pdp-related__rule" aria-hidden="true">
+        <span></span><span class="rule-gem">◆</span><span></span>
+      </div>
+    </div>
+    <div class="pdp-related__grid" @staggerCards>
+      <app-product-card
+        *ngFor="let rp of relatedProducts(); trackBy: trackByProductId"
+        [product]="rp"
+        [routerLink]="['/product', rp.productId]">
+      </app-product-card>
+    </div>
+  </section>
+</div>
+
+<!-- ═══ Custom Fullscreen 3D Modal Gallery ═══ -->
+<div class="pdp-modal" *ngIf="displayGalleria()" @modalFade>
+  <!-- Background blur and overlay -->
+  <div class="pdp-modal__backdrop" (click)="closeGalleria()"></div>
+  
+  <button class="pdp-modal__close" (click)="closeGalleria()" type="button" aria-label="Close modal">
+    <span class="material-symbols-outlined">close</span>
+  </button>
+
+  <div class="pdp-modal__content">
+    <button class="pdp-modal__nav pdp-modal__nav--prev" (click)="prevModalImage()" [disabled]="!canGoPrevModal()" type="button" aria-label="Previous image">
+      <span class="material-symbols-outlined">chevron_left</span>
+    </button>
+
+    <div class="pdp-modal__stage">
+      <img
+        [@modal3D]="modalCarouselState()"
+        (@modal3D.done)="onModalCarouselDone()"
+        [src]="activeModalImage()"
+        [alt]="product()!.productDescription"
+        class="pdp-modal__img" />
+    </div>
+
+    <button class="pdp-modal__nav pdp-modal__nav--next" (click)="nextModalImage()" [disabled]="!canGoNextModal()" type="button" aria-label="Next image">
+      <span class="material-symbols-outlined">chevron_right</span>
+    </button>
+  </div>
+
+  <div class="pdp-modal__thumbs" role="tablist">
+    <button *ngFor="let img of gallery(); let i = index"
+      class="modal-thumb"
+      [class.modal-thumb--active]="modalActiveIndex() === i"
+      (click)="goToModalImage(i)" 
+      role="tab"
+      [attr.aria-selected]="modalActiveIndex() === i"
+      type="button">
+      <div class="modal-thumb-frame">
+        <img [src]="img" [alt]="'Thumbnail ' + (i + 1)" />
+      </div>
+    </button>
+  </div>
+</div>

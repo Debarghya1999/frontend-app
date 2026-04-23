@@ -6,7 +6,6 @@
 .featured-products {
   width: 100%;
   padding: var(--spacing-3xl, 64px) 0;
-  background: var(--surface-container-low, #f5ead8);
   overflow: hidden;       /* keep arrows from spilling */
 }
 
@@ -135,6 +134,7 @@ app-product-card {
   width: 280px;
   display: flex;           /* Help with internal layout stretching */
   flex-direction: column;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) {

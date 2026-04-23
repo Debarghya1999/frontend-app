@@ -13,7 +13,7 @@
   right: 0;
   display: flex;
   justify-content: center;
-  padding: 0 var(--spacing-lg);
+  /*padding: 0 var(--spacing-lg);*/
   pointer-events: none; /* Let the inner div handle events */
 }
 
@@ -23,11 +23,11 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  max-width: 1280px;
+  /*max-width: 1280px;*/
   padding: var(--spacing-md) var(--spacing-xl);
   
   /* Precision Glassomorphism */
-  background: rgba(255, 248, 239, 0.72);
+  background: rgba(235, 217, 200, 0.72);
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
   

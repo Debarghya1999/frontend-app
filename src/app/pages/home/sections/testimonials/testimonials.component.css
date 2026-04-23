@@ -5,8 +5,9 @@
 
 .testimonials {
   width: 100%;
-  padding: var(--spacing-3xl, 64px) var(--spacing-lg, 24px);
-  background: var(--surface-container-low, #f5ead8);
+  padding: var(--spacing-4xl, 96px) 0;
+  position: relative;
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {

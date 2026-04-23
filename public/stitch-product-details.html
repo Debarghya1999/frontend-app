@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Product Details - VIRAASAT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&amp;family=Noto+Serif:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb3b5",
+                        "outline-variant": "#dcc0c0",
+                        "primary-fixed-dim": "#ffb3b5",
+                        "inverse-surface": "#33302a",
+                        "primary-fixed": "#ffdada",
+                        "inverse-primary": "#ffb3b5",
+                        "on-primary-fixed-variant": "#83232f",
+                        "on-secondary": "#ffffff",
+                        "tertiary": "#300007",
+                        "on-secondary-fixed-variant": "#574500",
+                        "secondary-fixed": "#ffe088",
+                        "secondary": "#735c00",
+                        "on-tertiary-fixed": "#40000b",
+                        "on-secondary-fixed": "#241a00",
+                        "inverse-on-surface": "#f7f0e7",
+                        "surface-container-high": "#eee7de",
+                        "on-background": "#1e1b16",
+                        "outline": "#897172",
+                        "surface-dim": "#dfd9d0",
+                        "secondary-container": "#fed65b",
+                        "surface-variant": "#e8e2d9",
+                        "on-secondary-container": "#745c00",
+                        "tertiary-fixed": "#ffdada",
+                        "surface": "#fff8f0",
+                        "surface-container-highest": "#e8e2d9",
+                        "surface-container-low": "#f9f3ea",
+                        "on-tertiary-fixed-variant": "#8e0f28",
+                        "surface-tint": "#a23b45",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#40000c",
+                        "background": "#fff8f0",
+                        "on-primary-container": "#e06a72",
+                        "secondary-fixed-dim": "#e9c349",
+                        "surface-bright": "#fff8f0",
+                        "on-surface-variant": "#564242",
+                        "primary": "#300007",
+                        "on-surface": "#1e1b16",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f4ede4",
+                        "on-error": "#ffffff",
+                        "primary-container": "#570013",
+                        "tertiary-container": "#570013",
+                        "on-tertiary-container": "#f05c6a",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-padding": "2rem",
+                        "stack-sm": "1rem",
+                        "gutter": "1.5rem",
+                        "base": "4px",
+                        "section-gap": "8rem",
+                        "stack-md": "2rem"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Noto Serif"],
+                        "label-caps": ["Manrope"],
+                        "headline-md": ["Noto Serif"],
+                        "body-lg": ["Manrope"],
+                        "display-xl": ["Noto Serif"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["2.25rem", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "label-caps": ["0.75rem", { "lineHeight": "1", "letterSpacing": "0.2em", "fontWeight": "700" }],
+                        "headline-md": ["1.5rem", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "body-lg": ["1.125rem", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-xl": ["3.5rem", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["0.875rem", { "lineHeight": "1.5", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md text-body-md">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 sticky z-50 shadow-sm border-b border-stone-200/50 dark:border-stone-800/50 bg-stone-50/80 dark:bg-stone-900/80 backdrop-blur-xl hidden md:block">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-[1280px] mx-auto">
+<!-- Navigation Links -->
+<nav class="flex gap-8">
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-900 transition-colors font-serif tracking-wide uppercase hover:opacity-70 transition-opacity duration-300 ease-in-out" href="#">Collections</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-900 transition-colors font-serif tracking-wide uppercase hover:opacity-70 transition-opacity duration-300 ease-in-out" href="#">The Craft</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-900 transition-colors font-serif tracking-wide uppercase hover:opacity-70 transition-opacity duration-300 ease-in-out" href="#">Atelier</a>
+<a class="text-stone-500 dark:text-stone-400 hover:text-rose-900 transition-colors font-serif tracking-wide uppercase hover:opacity-70 transition-opacity duration-300 ease-in-out" href="#">Our Story</a>
+</nav>
+<!-- Brand Logo -->
+<div class="text-2xl font-serif tracking-[0.2em] text-rose-900 dark:text-rose-100 uppercase">The Artisan Boutique</div>
+<!-- Trailing Icons -->
+<div class="flex gap-6 text-rose-900 dark:text-rose-200">
+<button class="hover:opacity-70 transition-opacity duration-300 ease-in-out">
+<span class="material-symbols-outlined font-light">search</span>
+</button>
+<button class="hover:opacity-70 transition-opacity duration-300 ease-in-out">
+<span class="material-symbols-outlined font-light">favorite</span>
+</button>
+<button class="hover:opacity-70 transition-opacity duration-300 ease-in-out">
+<span class="material-symbols-outlined font-light">shopping_bag</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-[1280px] mx-auto px-container-padding py-16 md:py-24">
+<!-- Product Details Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Left Column: Prominent Gallery (8 columns on large screens) -->
+<div class="lg:col-span-8 flex flex-col md:flex-row-reverse gap-4">
+<!-- Main Featured Image -->
+<div class="flex-grow w-full aspect-[3/4] overflow-hidden rounded-DEFAULT bg-surface-container-high relative group">
+<img alt="Main Product View" class="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105" data-alt="high fashion editorial close up of intricate crimson velvet fabric with gold zari embroidery draping gracefully against a cream studio backdrop, dramatic soft rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZw7Tr4P7vZ6JMtCqe4qfi9DquaX9xN_FfWC57_jCZS_8ooPppLzruIwGdacp7AuKnKz1Z0k2vTokHqjPJlzHYV8sxapiaAzFCE48pQFxZIJLcFuV9R0RG2l-_afjNwPx5J6HRdNcjPHEgiAH8cfNit-RVPY1_DY1H7kuwgLWClu9Af1ad_HqPALts-Z4HMMUpahL3jBFmdf52VE1I4mLFlXjDbyTRFmkGhpykQE1DdypzTbnSEb89QgCQlPDA1X8HRCIv-mRBtnY0"/>
+</div>
+<!-- Thumbnails (Vertical on desktop, horizontal on mobile) -->
+<div class="flex md:flex-col gap-4 overflow-x-auto md:overflow-visible md:w-24 shrink-0 pb-2 md:pb-0 hide-scrollbar">
+<button class="w-20 md:w-full aspect-[3/4] shrink-0 overflow-hidden rounded-DEFAULT border-2 border-primary border-solid">
+<img alt="Thumbnail 1" class="w-full h-full object-cover" data-alt="high fashion editorial close up of intricate crimson velvet fabric with gold zari embroidery draping gracefully against a cream studio backdrop, dramatic soft rim lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyRwaKuXr-Ce7JIhNGiuZDuh_PWcXfgvD8L0PJ-O0csta4CUycMUcnsCGJD561VSvGS438Cu77Ld8aNQx7SFkJiZ9pQ-JDkFpohzQCgTDeb72HmfL27uCECi7SkUEDK2fCzBQ8nPd0aXuCi6W4Ym0yH-pxp-nKjZ8rFOgm0gPRx4cbfWwxDRzUm_P-glbg_tQDWmwovCCA-dIcxHSxg9ps_XsnlIyAaM947h_SRoOY_C8eX6dovdPQjFdLkasQGXDacFkcHCj8pqv2"/>
+</button>
+<button class="w-20 md:w-full aspect-[3/4] shrink-0 overflow-hidden rounded-DEFAULT border border-transparent hover:border-outline-variant transition-colors">
+<img alt="Thumbnail 2" class="w-full h-full object-cover" data-alt="detailed macro shot of gold thread embroidery on deep red silk fabric, showing texture and artisanal craftsmanship, soft diffused lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIGeOJxPuvkr1C0x1Wo0KCQONo6MzacpFruqNofmncI-tNc2ClTFdSdnVJf3DggnDlVi6PPO_MgvxeDfHb7DX4_BBMq0FxwfMRZTzXPA1sfpE_OPrwreRF1BZCh6zY4elqcUcKucynxvcX0H7SqeNWpU-G6WKSxWUb2Qxdh6ey4dMi45YOU9oZPp9CEmCGfhObNI7ofGeYNRij7SU-4oX5Mug-KjjRTkoSTizT18tNxq0Hv79Ra5F53EC-Od-DnUJWnEuEid57irne"/>
+</button>
+<button class="w-20 md:w-full aspect-[3/4] shrink-0 overflow-hidden rounded-DEFAULT border border-transparent hover:border-outline-variant transition-colors">
+<img alt="Thumbnail 3" class="w-full h-full object-cover" data-alt="full length shot of elegant crimson velvet dress with gold detailing worn by mannequin in a minimalist cream colored studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARYrVNbs0z_OfSx3fhlqvWViTLGy6iLzn1NI9Xz9m-KJdIq-Chhcv7YmkA0SS7LbUuEaVFr5U8wuXVUqnpYCch0uXtVexrzkPwxhvt0DJeH3FuBan8-JLMnpvkMliioYk5OoaL5irk1MhyanRiH7S0QmuCaOCBaQc9CbEeddJQ8xV7B2GDpxmnQaZvZ_AIYM_YFrJ-nAMqBoGSupnSx_c8GsU-k6Z_525cZBoJkCXHniFZkCxKf-1K05uIEvsGXSQsZqnBp-OMJRI8"/>
+</button>
+</div>
+</div>
+<!-- Right Column: Product Details (Sticky, 4 columns) -->
+<div class="lg:col-span-4 lg:sticky lg:top-32 flex flex-col gap-stack-md pt-8 lg:pt-0">
+<!-- Title & Price -->
+<div class="flex flex-col gap-2">
+<h1 class="font-headline-lg text-headline-lg text-primary">The Crimson Zari Odhni</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant font-light">$1,250 USD</p>
+</div>
+<!-- Description -->
+<div class="font-body-md text-body-md text-on-background leading-relaxed border-t border-outline-variant/30 pt-6">
+<p>A masterpiece of tactile luxury, handwoven by master artisans over 120 hours. This exquisite piece features traditional Zari embroidery on rich, pure velvet, offering a modern interpretation of ancient regal silhouettes. Designed to be a timeless heirloom.</p>
+</div>
+<!-- Colors -->
+<div class="flex flex-col gap-3">
+<h3 class="font-label-caps text-label-caps text-on-background">Color: Crimson Night</h3>
+<div class="flex gap-3">
+<button aria-label="Crimson Night" class="w-8 h-8 rounded-full bg-[#83232f] border-2 border-primary ring-2 ring-transparent ring-offset-2 ring-offset-background transition-all"></button>
+<button aria-label="Obsidian" class="w-8 h-8 rounded-full bg-[#1e1b16] border border-outline-variant hover:border-primary transition-all"></button>
+<button aria-label="Ivory Ash" class="w-8 h-8 rounded-full bg-[#f7f0e7] border border-outline-variant hover:border-primary transition-all"></button>
+</div>
+</div>
+<!-- Sizes -->
+<div class="flex flex-col gap-3">
+<div class="flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-background">Size</h3>
+<button class="text-xs font-serif underline text-on-surface-variant hover:text-primary transition-colors">Size Guide</button>
+</div>
+<div class="grid grid-cols-4 gap-2">
+<button class="py-3 border border-outline-variant rounded-DEFAULT text-center font-label-caps text-label-caps hover:border-primary transition-colors">XS</button>
+<button class="py-3 border-2 border-primary bg-surface-container rounded-DEFAULT text-center font-label-caps text-label-caps text-primary">S</button>
+<button class="py-3 border border-outline-variant rounded-DEFAULT text-center font-label-caps text-label-caps hover:border-primary transition-colors">M</button>
+<button class="py-3 border border-outline-variant rounded-DEFAULT text-center font-label-caps text-label-caps text-outline-variant cursor-not-allowed line-through">L</button>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col gap-4 mt-4">
+<div class="flex gap-4 w-full">
+<button class="flex-grow bg-primary text-on-primary py-4 px-6 rounded-DEFAULT font-label-caps text-label-caps shadow-lg shadow-primary/20 hover:bg-primary-container transition-colors uppercase tracking-widest">
+                            Add to Bag
+                        </button>
+<button aria-label="Add to Wishlist" class="w-14 h-14 shrink-0 flex items-center justify-center border border-outline-variant rounded-DEFAULT text-on-background hover:text-primary hover:border-primary transition-colors">
+<span class="material-symbols-outlined font-light">favorite</span>
+</button>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container py-4 px-6 rounded-DEFAULT font-label-caps text-label-caps hover:bg-secondary transition-colors hover:text-on-secondary uppercase tracking-widest">
+                        Buy Now
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 border-t border-stone-200 dark:border-stone-800 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] bg-stone-50 dark:bg-stone-950">
+<div class="flex justify-around items-center px-4 py-3">
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-rose-800 transition-colors scale-95 active:scale-90 font-serif text-[10px] tracking-widest uppercase">
+<span class="material-symbols-outlined font-light mb-1">home</span>
+                Home
+            </button>
+<button class="flex flex-col items-center justify-center text-rose-900 dark:text-rose-100 font-bold hover:text-rose-800 transition-colors scale-95 active:scale-90 font-serif text-[10px] tracking-widest uppercase">
+<span class="material-symbols-outlined font-light mb-1" style="font-variation-settings: 'FILL' 1;">storefront</span>
+                Shop
+            </button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-rose-800 transition-colors scale-95 active:scale-90 font-serif text-[10px] tracking-widest uppercase">
+<span class="material-symbols-outlined font-light mb-1">favorite</span>
+                Wishlist
+            </button>
+<button class="flex flex-col items-center justify-center text-stone-400 dark:text-stone-500 hover:text-rose-800 transition-colors scale-95 active:scale-90 font-serif text-[10px] tracking-widest uppercase">
+<span class="material-symbols-outlined font-light mb-1">person</span>
+                Account
+            </button>
+</div>
+</nav>
+<!-- Footer -->
+<footer class="bg-primary text-on-primary w-full pt-20 pb-10 px-8">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-16 items-start max-w-[1280px] mx-auto pb-16 border-b border-on-primary/10">
+<div class="md:col-span-1">
+<div class="font-headline-lg text-2xl font-bold text-secondary-fixed mb-8">The Artisan Boutique</div>
+<p class="text-on-primary/60 text-sm font-medium leading-relaxed max-w-xs font-body-md">
+                Honoring the timeless traditions of Indian weavers. We blend centuries-old techniques with modern silhouettes to create masterpieces that tell a story.
+            </p>
+</div>
+<div>
+<h4 class="font-headline-lg text-sm font-bold text-on-primary mb-8 uppercase tracking-widest">Client Service</h4>
+<div class="space-y-4">
+<a class="block font-body-md text-xs tracking-[0.2em] uppercase text-on-primary/60 hover:text-secondary-fixed transition-colors" href="#">Contact Us</a>
+<a class="block font-body-md text-xs tracking-[0.2em] uppercase text-on-primary/60 hover:text-secondary-fixed transition-colors" href="#">Shipping &amp; Returns</a>
+<a class="block font-body-md text-xs tracking-[0.2em] uppercase text-on-primary/60 hover:text-secondary-fixed transition-colors" href="#">Order Tracking</a>
+<a class="block font-body-md text-xs tracking-[0.2em] uppercase text-on-primary/60 hover:text-secondary-fixed transition-colors" href="#">Size Guide</a>
+</div>
+</div>
+<div>
+<h4 class="font-headline-lg text-sm font-bold text-on-primary mb-8 uppercase tracking-widest">Explore</h4>
+<div class="space-y-4">
+<a class="block font-body-md text-xs tracking-[0.2em] uppercase text-on-primary/60 hover:text-secondary-fixed transition-colors" href="#">Our Story</a>
+<a class="block font-body-md text-xs tracking-[0.2em] uppercase text-on-primary/60 hover:text-secondary-fixed transition-colors" href="#">The Loom Project</a>
+<a class="block font-body-md text-xs tracking-[0.2em] uppercase text-on-primary/60 hover:text-secondary-fixed transition-colors" href="#">Sustainability</a>
+<a class="block font-body-md text-xs tracking-[0.2em] uppercase text-on-primary/60 hover:text-secondary-fixed transition-colors" href="#">Store Locator</a>
+</div>
+</div>
+<div class="md:text-right">
+<h4 class="font-headline-lg text-lg mb-8 italic text-secondary-fixed">Join the Atelier Circle</h4>
+<div class="flex md:justify-end mb-8">
+<div class="relative w-full max-w-[320px]">
+<input class="bg-transparent border-b-2 border-on-primary/20 text-xs py-3 w-full focus:border-secondary-fixed transition-all focus:ring-0 placeholder:text-on-primary/30 uppercase tracking-widest outline-none" placeholder="YOUR EMAIL ADDRESS" type="email"/>
+<button class="absolute right-0 bottom-3 text-secondary-fixed hover:text-on-primary transition-colors">
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="flex md:justify-end gap-6">
+<a class="text-on-primary/40 hover:text-secondary-fixed transition-colors" href="#"><span class="material-symbols-outlined text-lg">public</span></a>
+<a class="text-on-primary/40 hover:text-secondary-fixed transition-colors" href="#"><span class="material-symbols-outlined text-lg">camera</span></a>
+<a class="text-on-primary/40 hover:text-secondary-fixed transition-colors" href="#"><span class="material-symbols-outlined text-lg">chat</span></a>
+</div>
+</div>
+</div>
+<div class="mt-10 flex flex-col md:flex-row justify-between items-center gap-6 max-w-[1280px] mx-auto">
+<div class="text-on-primary/40 font-body-md text-[10px] tracking-[0.3em] uppercase">
+            © 2024 The Artisan Boutique. All Rights Reserved.
+        </div>
+<div class="flex gap-10 text-on-primary/40 font-body-md text-[10px] tracking-[0.3em] uppercase">
+<a class="hover:text-on-primary transition-colors" href="#">Privacy</a>
+<a class="hover:text-on-primary transition-colors" href="#">Terms</a>
+<a class="hover:text-on-primary transition-colors" href="#">Accessibility</a>
+</div>
+</div>
+</footer>
+</body></html>

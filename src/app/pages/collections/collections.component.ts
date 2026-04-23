@@ -18,6 +18,7 @@ import { ProductService } from '../../core/services/product.service';
 import { Product } from '../../core/models/product.model';
 import { FilterSidebarComponent } from '../../shared/components/filter-sidebar/filter-sidebar.component';
 import { ProductCardComponent } from '../../shared/components/product-card/product-card.component';
+import { BreadcrumbComponent, BreadcrumbItem } from '../../shared/components/breadcrumb/breadcrumb.component';
 import { FilterState, getInitialFilterState } from '../../core/models/filter.model';
 
 declare const gsap: any;
@@ -26,7 +27,7 @@ declare const ScrollTrigger: any;
 @Component({
   selector: 'app-collections',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, FilterSidebarComponent, ProductCardComponent],
+  imports: [CommonModule, RouterModule, FormsModule, FilterSidebarComponent, ProductCardComponent, BreadcrumbComponent],
   templateUrl: './collections.component.html',
   styleUrl: './collections.component.css',
   changeDetection: ChangeDetectionStrategy.Default,
@@ -43,6 +44,11 @@ export class CollectionsComponent implements OnInit, AfterViewInit, OnDestroy {
   // ── Active Filter State ────────────────────────────────────────────────
   activeFilters: FilterState = getInitialFilterState();
   sortBy = 'newest';
+
+  breadcrumbItems: BreadcrumbItem[] = [
+    { label: 'Home', url: '/home' },
+    { label: 'Collections' }
+  ];
 
   // ── Pagination ─────────────────────────────────────────────────────────
   currentPage    = 0;
@@ -182,7 +188,7 @@ export class CollectionsComponent implements OnInit, AfterViewInit, OnDestroy {
 
         // ① Header sequence
         gsap.timeline({ defaults: { ease } })
-          .from('.collections-breadcrumb', { opacity: 0, y: -14, duration: 0.5 })
+          .from('app-breadcrumb', { opacity: 0, y: -14, duration: 0.5 })
           .from('.collections-headline',   { opacity: 0, y: 36, duration: 0.75 }, '-=0.2')
           .from('.collections-meta',       { opacity: 0, y: 16, duration: 0.45 }, '-=0.3');
 

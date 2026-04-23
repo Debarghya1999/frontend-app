@@ -1,0 +1,83 @@
+/* Refined Ultra-Minimalist Breadcrumb Styling */
+.modern-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: var(--spacing-md, 24px);
+  position: relative;
+  z-index: 1;
+}
+
+.breadcrumb-list {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.breadcrumb-link {
+  font-family: var(--font-body, inherit);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant, #8a7f72);
+  text-decoration: none;
+  transition: color 300ms ease, opacity 300ms ease;
+  opacity: 0.8;
+  position: relative;
+  padding: 0.2rem 0;
+}
+
+.breadcrumb-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--primary, #570013);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.breadcrumb-link:hover {
+  color: var(--primary, #570013);
+  opacity: 1;
+}
+
+.breadcrumb-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.breadcrumb-separator {
+  display: flex;
+  align-items: center;
+  color: var(--on-surface-variant, #b5aa9d);
+  opacity: 0.6;
+}
+
+.breadcrumb-separator .material-symbols-outlined {
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.breadcrumb-current {
+  font-family: var(--font-body, inherit);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--on-surface, #2c251d);
+  opacity: 0.9;
+  padding: 0.2rem 0;
+}

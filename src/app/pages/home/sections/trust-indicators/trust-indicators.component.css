@@ -6,7 +6,6 @@
 .trust-indicators {
   width: 100%;
   padding: var(--spacing-3xl, 64px) var(--spacing-lg, 24px);
-  background: var(--surface, #fff8ef);
 }
 
 @media (min-width: 768px) {

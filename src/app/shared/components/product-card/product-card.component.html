@@ -1,3 +1,4 @@
+<a [routerLink]="['/product', product.productId]" class="product-card-link" [attr.aria-label]="'View ' + product.productDescription">
 <article class="product-card" [attr.aria-label]="product.productDescription + ', ' + formatPrice(product.price)">
   <!-- ── Image Container ── -->
   <div class="card-image-wrap">
@@ -62,3 +63,5 @@
     </div>
   </div>
 </article>
+</a>
+

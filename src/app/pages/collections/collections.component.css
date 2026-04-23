@@ -5,7 +5,6 @@
 /* ── Page Shell ── */
 .collections-page {
   min-height: 100vh;
-  background: var(--background, #fff8ef);
   padding: 0 0 var(--spacing-4xl, 96px);
   position: relative;
   overflow-x: hidden;
@@ -63,34 +62,7 @@
   border-bottom: 1px solid rgba(74, 63, 48, 0.1);
 }
 
-/* Breadcrumb */
-.collections-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: var(--spacing-md, 16px);
-}
-.bc-link {
-  font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--on-surface-variant, #4a3f30);
-  text-decoration: none;
-  opacity: 0.45;
-  transition: opacity 200ms, color 200ms;
-}
-.bc-link:hover { opacity: 1; color: var(--secondary, #735c00); }
-.bc-sep { opacity: 0.25; font-size: 0.65rem; }
-.bc-current {
-  font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--secondary, #735c00);
-}
+
 
 /* Headline */
 .collections-headline-block {

@@ -5,7 +5,6 @@
 /* ── Page Shell & Ambient Logic ── */
 .collections-page {
   min-height: 100vh;
-  background: var(--background, #fff8ef);
   padding: 0 0 var(--spacing-4xl, 96px);
   position: relative;
   overflow-x: hidden;
@@ -59,24 +58,6 @@
   margin: 0 auto;
   border-bottom: 1px solid rgba(74, 63, 48, 0.1);
 }
-
-.collections-breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: var(--spacing-md, 16px);
-}
-.bc-link, .bc-current, .bc-sep {
-  font-family: var(--font-body);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.bc-link { color: var(--on-surface-variant, #4a3f30); opacity: 0.45; text-decoration: none; transition: 0.2s; }
-.bc-link:hover { opacity: 1; color: var(--secondary, #735c00); }
-.bc-current { color: var(--secondary, #735c00); font-weight: 800; }
-.bc-sep { opacity: 0.25; }
 
 .collections-headline-block {
   display: flex;

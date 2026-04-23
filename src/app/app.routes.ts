@@ -32,6 +32,14 @@ export const routes: Routes = [
     },
   },
   {
+    path: 'product/:productId',
+    loadComponent: () => import('./pages/product-details/product-details.component').then(m => m.ProductDetailsComponent),
+    data: {
+      title: 'Product Details | The Artisan Boutique',
+      description: 'Explore our handcrafted heritage pieces — detailed product information, artisan story, and seamless shopping.',
+    },
+  },
+  {
     path: 'home',
     component: HomeComponent,
     data: {

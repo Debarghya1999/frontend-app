@@ -177,19 +177,27 @@ export class FeaturedProductsComponent implements OnInit, AfterViewInit {
 
     const onPointerDown = (e: PointerEvent) => {
       if (e.button !== 0) return;
-      this.isDragging = true;
       startClientX = e.clientX;
       startScrollLeft = track.scrollLeft;
       lastClientX = e.clientX;
       lastTime = performance.now();
       velX = 0;
-      track.setPointerCapture(e.pointerId);
-      track.classList.add('is-dragging');
+      // We don't capture yet; wait for move to distinguish from click
       if (this.momentumTween) this.momentumTween.kill();
     };
 
     const onPointerMove = (e: PointerEvent) => {
+      const walk = e.clientX - startClientX;
+      
+      // If not dragging yet, check if we've moved enough to start
+      if (!this.isDragging && Math.abs(walk) > 5) {
+        this.isDragging = true;
+        track.setPointerCapture(e.pointerId);
+        track.classList.add('is-dragging');
+      }
+
       if (!this.isDragging) return;
+
       const now = performance.now();
       const dt = now - lastTime;
       // Smooth rolling velocity (px / ms)
@@ -200,7 +208,6 @@ export class FeaturedProductsComponent implements OnInit, AfterViewInit {
       lastClientX = e.clientX;
       lastTime = now;
 
-      const walk = e.clientX - startClientX;
       track.scrollLeft = startScrollLeft - walk;
       this.updateProgress();
     };

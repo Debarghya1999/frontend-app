@@ -19,23 +19,23 @@
   --on-secondary:             #ffffff;
   --on-secondary-container:   #2b2000;
 
-  /* — Surface — Warm Cream Canvas — */
-  --surface:                  #fff8ef;
-  --surface-variant:          #f0e6d6;
-  --surface-container-lowest: #fdf4e8;
-  --surface-container-low:    #f5ead8;
-  --surface-container:        #eddfc8;
-  --surface-container-high:   #e5d4b8;
-  --on-surface:               #1e1b13;
-  --on-surface-variant:       #4a3f30;
+  /* — Surface — Rich Cashmere — */
+  --surface:                  #ebd9c8;
+  --surface-variant:          #dfcec0;
+  --surface-container-lowest: #f5f0eb;
+  --surface-container-low:    #efe5d8;
+  --surface-container:        #ebd9c8;
+  --surface-container-high:   #e0cdbc;
+  --on-surface:               #2d241d;
+  --on-surface-variant:       #544537;
 
   /* — Outline — Ghost Tones Only — */
-  --outline:                  rgba(74, 63, 48, 0.20);
-  --outline-variant:          rgba(74, 63, 48, 0.05);
+  --outline:                  rgba(84, 69, 55, 0.20);
+  --outline-variant:          rgba(84, 69, 55, 0.05);
 
   /* — Background — */
-  --background:               #fff8ef;
-  --on-background:            #1e1b13;
+  --background:               #ebd9c8;
+  --on-background:            #2d241d;
 
   /* — Status — Heritage-tinted — */
   --color-success:            #2d6a4f;
@@ -45,7 +45,7 @@
 
   /* — Gradients — */
   --gradient-primary-silk:    linear-gradient(135deg, #570013 0%, #800020 100%);
-  --gradient-surface-warm:    linear-gradient(135deg, #fff8ef 0%, #f5ead8 100%);
+  --gradient-surface-warm:    linear-gradient(135deg, #ebd9c8 0%, #dfcec0 100%);
 
   /* — Typography — */
   --font-display:             'Noto Serif', 'Georgia', serif;
@@ -135,7 +135,7 @@ body {
   font-size: var(--text-body-lg);
   line-height: 1.6;
   color: var(--on-background);       /* Warm near-black — NEVER #000 */
-  background-color: var(--surface);  /* Cream canvas — NEVER #fff */
+  background-color: var(--surface);  /* Cashmere canvas — NEVER #fff */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;         /* Prevent rubber-band fighting GSAP ScrollTrigger */
